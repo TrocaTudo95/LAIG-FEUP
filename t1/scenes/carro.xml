@@ -60,29 +60,16 @@
 
     <TEXTURE id="grill">
         <file path="images/grill.jpg" />
-        <amplif_factor s="1" t="1" />
+        <amplif_factor s="2" t="2" />
     </TEXTURE>
 
-    <TEXTURE id="red">
-        <file path="images/red.jpg" />
-        <amplif_factor s="1" t="1" />
-    </TEXTURE>
 
     <TEXTURE id="road">
         <file path="images/road.jpg" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
-    <TEXTURE id="white">
-        <file path="images/white.jpg" />
-        <amplif_factor s="1" t="1" />
-    </TEXTURE>
 
-
-    <TEXTURE id="black">
-        <file path="images/black.jpg" />
-        <amplif_factor s="1" t="1" />
-    </TEXTURE>
 
 </TEXTURES>
 
@@ -105,6 +92,14 @@
             <ambient r="0.1" g="0.1" b="0.1" a="1" />
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
+
+        <MATERIAL id="WhiteMaterial">
+          <shininess value="1" />
+          <specular r="0.3" g="0.3" b="0.3" a="1" />
+          <diffuse r="1.0" g="1.0" b="1.0" a="1" />
+          <ambient r="0.3" g="0.3" b="0.3" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+       </MATERIAL>
 
     <!-- A default material -->
       <MATERIAL id="defaultMaterial">
@@ -143,7 +138,7 @@
     </NODE>
 
      <NODE id="chao">
-        <MATERIAL id="defaultMaterial" />
+        <MATERIAL id="null" />
         <TEXTURE id="road" />
 
         <SCALE sx="2.3" sy="1" sz="4" />
@@ -158,8 +153,8 @@
 
 
     <NODE id="car">
-        <MATERIAL id="CarMaterial" />
-        <TEXTURE id="null" />
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="clear" />
 
         <DESCENDANTS>
        		<NODEREF id="rodas" />
@@ -173,7 +168,7 @@
     <!-- Wheels -->
     <NODE id="rodas">
         <MATERIAL id="WheelMaterial" />
-        <TEXTURE id="black" />
+        <TEXTURE id="null" />
 
         <DESCENDANTS>
             <NODEREF id="roda1" />
@@ -268,7 +263,7 @@
     </NODE>
 
   <NODE id="cilindroNariz">
-  <TEXTURE id="red" />
+  <TEXTURE id="null" />
   <MATERIAL id="null"/>
 
         <TRANSLATION x="3.2" y="1.0" z="12.0" />
@@ -281,7 +276,7 @@
     </NODE>
 
   <NODE id="cubo1">
-  <TEXTURE id="red" />
+  <TEXTURE id="null" />
   <MATERIAL id="null"/>
 
         <TRANSLATION x="3.5" y="-1.5" z="3" />
@@ -293,7 +288,7 @@
     </NODE>
 
   <NODE id="cubo2">
-  <TEXTURE id="red" />
+  <TEXTURE id="null" />
   <MATERIAL id="null"/>
 
         <TRANSLATION x="-1.4" y="0" z="13.5" />
@@ -306,7 +301,7 @@
     </NODE>
 <NODE id="corpo">
         <TEXTURE id="null" />
-        <MATERIAL id="CarMaterial"/>
+        <MATERIAL id="null"/>
 
         <DESCENDANTS>
             <NODEREF id="cubo3" />
@@ -319,8 +314,8 @@
     </NODE>
 
 	<NODE id="cubo3">
-        <TEXTURE id="red" />
-        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+        <MATERIAL id="CarMaterial"/>
 
         <TRANSLATION x="0.5" y="-1.9" z="-4" />
         <SCALE sx="1" sy="0.5" sz="1.6" />
@@ -332,8 +327,8 @@
     </NODE>
 
 	<NODE id="piramide1">
-        <MATERIAL id="CarMaterial"/>
-        <TEXTURE id="white" />
+        <MATERIAL id="WhiteMaterial"/>
+        <TEXTURE id="null" />
 
         <TRANSLATION x="1" y="-1.9" z="4" />
         <ROTATION axis="x" angle="-90" />
@@ -345,8 +340,8 @@
 
     </NODE>
     	<NODE id="cockpit">
-        <TEXTURE id="black" />
-        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+        <MATERIAL id="WheelMaterial"/>
 
         <TRANSLATION x="4.5" y="2.1" z="7" />
         <ROTATION axis="x" angle="-90" />
@@ -368,7 +363,7 @@
     </NODE>
 
     <NODE id="grill1">
-        <TEXTURE id="grill" />
+        <TEXTURE id="null" />
         <MATERIAL id="null"/>
 
         <TRANSLATION x="3.2" y="0.5" z="8" />
@@ -380,7 +375,7 @@
     </NODE>
 
         <NODE id="grill2">
-        <TEXTURE id="grill" />
+        <TEXTURE id="null" />
         <MATERIAL id="null"/>
 
         <TRANSLATION x="6.8" y="0.5" z="8" />
@@ -392,7 +387,7 @@
     </NODE>
 
     <NODE id="spoiler">
-        <TEXTURE id="null" />
+        <TEXTURE id="clear" />
         <MATERIAL id="null"/>
 
         <DESCENDANTS>
@@ -404,8 +399,8 @@
     </NODE>
 
     	<NODE id="cubo4">
-        <TEXTURE id="red" />
-        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+        <MATERIAL id="CarMaterial"/>
 
         <TRANSLATION x="2" y="2.5" z="-0.5" />
         <SCALE sx="0.7" sy="0.1" sz="0.2" />
@@ -417,8 +412,8 @@
     </NODE>
 
     	<NODE id="cubo5">
-        <TEXTURE id="black" />
-        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+        <MATERIAL id="WheelMaterial"/>
 
         <TRANSLATION x="4" y="0.8" z="0.2" />
         <SCALE sx="0.05" sy="0.3" sz="0.05" />
@@ -430,8 +425,8 @@
     </NODE>
 
     	<NODE id="cubo6">
-        <TEXTURE id="black" />
-        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+        <MATERIAL id="WheelMaterial"/>
 
         <TRANSLATION x="6.5" y="0.8" z="0.2" />
         <SCALE sx="0.05" sy="0.3" sz="0.05" />
@@ -448,8 +443,8 @@
     <!-- Cilindro -->
 
     <NODE id="cilindro">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="clear" />
 
         <DESCENDANTS>
 					<LEAF id="cylinder1" type="cylinder" args="4 1 1 20 20 1 1" />
@@ -459,8 +454,8 @@
 
 
   <NODE id="cubo">
-  <TEXTURE id="null" />
-  <MATERIAL id="null"/>
+  <TEXTURE id="clear" />
+  <MATERIAL id="defaultMaterial"/>
 
         <DESCENDANTS>
             <NODEREF id="faceCubo1" />
@@ -561,8 +556,8 @@
       <!-- A pyramid -->
     <NODE id="piramide">
 
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="clear" />
 
         <TRANSLATION x="12" y="5.8" z="4.75" />
         <SCALE sx="0.4" sy="2" sz="0.4" />
