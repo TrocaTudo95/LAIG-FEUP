@@ -24,7 +24,7 @@
 	<LIGHT id="light0">
         <enable value ="1" />
         <position  x="0" y="10" z="0" w="1" />
-        <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
     </LIGHT>
@@ -32,7 +32,7 @@
 	<LIGHT id="light1">
         <enable value ="1" />
         <position x="10" y="10" z="0" w="1" />
-        <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
     </LIGHT>
@@ -40,7 +40,7 @@
 	<LIGHT id="light2">
         <enable value ="1" />
         <position x="0" y="10" z="20" w="1" />
-        <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
     </LIGHT>
@@ -48,7 +48,7 @@
     <LIGHT id="light3">
         <enable value ="1" />
         <position x="10" y="10" z="20" w="1" />
-        <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
         <specular r="0.6" g="0.6" b="0.6" a="1.0" />
     </LIGHT>
@@ -60,7 +60,7 @@
 
     <TEXTURE id="grill">
         <file path="images/grill.jpg" />
-        <amplif_factor s="2" t="2" />
+        <amplif_factor s="1" t="1" />
     </TEXTURE>
 
 
@@ -78,18 +78,18 @@
 	<!-- Car Material -->
    <MATERIAL id="CarMaterial">
      <shininess value="1" />
-     <specular r="0.3" g="0.3" b="0.3" a="1" />
+     <specular r="0" g="0" b="0" a="1" />
      <diffuse r="1.0" g="0.15" b="0.0" a="1" />
-     <ambient r="0.3" g="0.3" b="0.3" a="1" />
+     <ambient r="0" g="0" b="0" a="1" />
      <emission r="0.0" g="0.0" b="0.0" a="1" />
   </MATERIAL>
 
     	<!-- Wheel material -->
     	 <MATERIAL id="WheelMaterial">
             <shininess value="1" />
-            <specular r="0.2" g="0.2" b="0.2" a="1" />
+            <specular r="0.1" g="0.1" b="0.1" a="1" />
             <diffuse r="0.0" g="0.0" b="0.0" a="1" />
-            <ambient r="0.1" g="0.1" b="0.1" a="1" />
+            <ambient r="0" g="0" b="0" a="1" />
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
 
@@ -97,7 +97,7 @@
           <shininess value="1" />
           <specular r="0.3" g="0.3" b="0.3" a="1" />
           <diffuse r="1.0" g="1.0" b="1.0" a="1" />
-          <ambient r="0.3" g="0.3" b="0.3" a="1" />
+          <ambient r="1" g="1" b="1" a="1" />
           <emission r="0.0" g="0.0" b="0.0" a="1" />
        </MATERIAL>
 
@@ -154,7 +154,7 @@
 
     <NODE id="car">
         <MATERIAL id="defaultMaterial" />
-        <TEXTURE id="clear" />
+        <TEXTURE id="null" />
 
         <DESCENDANTS>
        		<NODEREF id="rodas" />
@@ -198,7 +198,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="2.3" y="1" z="12" />
+        <TRANSLATION x="2.4" y="1" z="12" />
 
         <DESCENDANTS>
             <NODEREF id="roda" />
@@ -343,7 +343,7 @@
         <TEXTURE id="null" />
         <MATERIAL id="WheelMaterial"/>
 
-        <TRANSLATION x="4.5" y="2.1" z="7" />
+        <TRANSLATION x="4.55" y="2.15" z="7" />
         <ROTATION axis="x" angle="-90" />
         <DESCENDANTS>
             <LEAF  type="rectangle" args="0 3 2 0" />
@@ -366,7 +366,7 @@
         <TEXTURE id="null" />
         <MATERIAL id="null"/>
 
-        <TRANSLATION x="3.2" y="0.5" z="8" />
+        <TRANSLATION x="3.2" y="0.5" z="8.01" />
 
         <DESCENDANTS>
             <LEAF  type="rectangle" args="0 1 1 0" />
@@ -378,7 +378,7 @@
         <TEXTURE id="null" />
         <MATERIAL id="null"/>
 
-        <TRANSLATION x="6.8" y="0.5" z="8" />
+        <TRANSLATION x="6.8" y="0.5" z="8.01" />
 
         <DESCENDANTS>
             <LEAF  type="rectangle" args="0 1 1 0" />
@@ -387,7 +387,7 @@
     </NODE>
 
     <NODE id="spoiler">
-        <TEXTURE id="clear" />
+        <TEXTURE id="null" />
         <MATERIAL id="null"/>
 
         <DESCENDANTS>
@@ -443,8 +443,8 @@
     <!-- Cilindro -->
 
     <NODE id="cilindro">
-        <MATERIAL id="defaultMaterial" />
-        <TEXTURE id="clear" />
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
         <DESCENDANTS>
 					<LEAF id="cylinder1" type="cylinder" args="4 1 1 20 20 1 1" />
@@ -454,8 +454,8 @@
 
 
   <NODE id="cubo">
-  <TEXTURE id="clear" />
-  <MATERIAL id="defaultMaterial"/>
+  <TEXTURE id="null" />
+  <MATERIAL id="null"/>
 
         <DESCENDANTS>
             <NODEREF id="faceCubo1" />
@@ -556,8 +556,8 @@
       <!-- A pyramid -->
     <NODE id="piramide">
 
-        <MATERIAL id="defaultMaterial" />
-        <TEXTURE id="clear" />
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
         <TRANSLATION x="12" y="5.8" z="4.75" />
         <SCALE sx="0.4" sy="2" sz="0.4" />
