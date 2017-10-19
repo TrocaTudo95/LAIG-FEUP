@@ -12,10 +12,13 @@ function MyGraphLeaf(graph, type,args) {
         this.object = new MyTriangle(graph.scene,args);
         break;
         case 'sphere':
-        this.object= new MySphere(graph.scene,args);
+        this.object= new MyEsfera(graph.scene,args);
         break;
         case 'cylinder':
         this.object= new MyCylinder(graph.scene, args);
+        break;
+        case 'patch':
+        this.object = new MyPatch(graph.scene,args);
         break;
 
       default:
@@ -28,3 +31,18 @@ MyGraphLeaf.prototype.display= function(){
 this.object.display();
 
 }
+
+
+MyGraphLeaf.prototype.scaleTexCoords = function(ampS, ampT) {
+      
+
+  this.originalTexCoords=this.object.texCoords.slice();
+  
+    for (var i = 0; i < this.object.texCoords.length; i += 2) {
+        this.object.texCoords[i] = this.originalTexCoords[i] / ampS;
+        this.object.texCoords[i + 1] = this.originalTexCoords[i + 1] / ampT;
+        }
+    this.object.updateTexCoordsGLBuffers();
+    this.object.texCoords=this.originalTexCoords.slice();
+
+    }

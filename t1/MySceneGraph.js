@@ -1343,9 +1343,8 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 else
 					if (descendants[j].nodeName == "LEAF")
 					{
-					var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
-
-						if (type != null){
+					var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
+						if (type != null && type != 'patch'){
                         var s_args= this.reader.getString(descendants[j],'args');
                        // console.log(s_args);
 						var args=s_args.split(" ");
@@ -1353,8 +1352,38 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                         this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,type,args));
 							this.log("   Leaf: "+ type);
             }
+            if (type=='patch'){
+                var s_args= this.reader.getString(descendants[j],'args');
+                       // console.log(s_args);
+				var args=s_args.split(" ");
+				let div_u = parseInt(args[0]);
+				let div_v = parseInt(args[1]);
+				let deg_u = descendants[j].children.length -1;
+				let deg_v = descendants[j].children[0].children.length -1;
+				args[2] = deg_u;
+				args[3] = deg_v;
+				args[4] = new Array();
+				for(let nu = 0;nu <= deg_u;nu++){
+				    let ctr_pt_ln = new Array();
+				    for(let nv = 0;nv <= deg_v;nv++){
+				        let ctr_pt = new Array();
+				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'xx'));
+				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'yy'));
+				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'zz'));
+				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'ww'));
+				        ctr_pt_ln.push(ctr_pt);
+				    }
+				    args[4].push(ctr_pt_ln);
+				}
+		  
+				this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,type,args));
+				this.log("   Leaf: "+ type);
+            }
+
+
+
 						else
-							this.warn("Error in leaf");
+							console.log("error in leaf");
 
 						//parse leaf
 
@@ -1379,6 +1408,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
     this.stackTextures.push("clear");
     this.stackMaterials.push(this.defaultMaterialID);
     console.log("Parsed nodes");
+    //this.updateTexCoords();
     return null ;
 }
 
@@ -1438,8 +1468,24 @@ MySceneGraph.generateRandomString = function(length) {
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.displayScene = function() {
+
  	let rootNode = this.nodes[this.idRoot];
  	this.displayNode(rootNode, "null", "null", false);
+ }
+
+ MySceneGraph.prototype.updateTexCoords=function() {
+     for(let j=0; j< this.nodes.length;j++){
+         let node= this.nodes[i];
+     for (let i = 0; i < node.leaves.length; i++) {
+
+        let leaf=node.leaves[i];
+        if((leaf.object instanceof MyTriangle || leaf.object instanceof MyRectangle ) && this.textures[tID]!="clear"){
+            console.log("ola");
+        leaf.scaleTexCoords(this.textures[tID][1],this.textures[tID][2]);
+
+        }
+    }
+     }
  }
 
  MySceneGraph.prototype.displayNode = function(node) {
@@ -1468,6 +1514,8 @@ MySceneGraph.prototype.displayScene = function() {
     for (let i = 0; i < node.children.length; i++) { //missing transformations
         let childName = node.children[i];
         let child = this.nodes[childName];
+        //  console.log(tID);
+
         this.displayNode(child);
     }
 
@@ -1490,6 +1538,7 @@ MySceneGraph.prototype.displayScene = function() {
 
     for (let i = 0; i < node.leaves.length; i++) {
         node.leaves[i].display();
+
     }
 
     //if(tID != "clear")
