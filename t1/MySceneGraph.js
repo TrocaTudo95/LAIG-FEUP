@@ -1,4 +1,4 @@
-var DEGREE_TO_RAD = Math.PI / 180;
+var degToRad = Math.PI / 180;
 
 // Order of the groups in the XML document.
 var INITIALS_INDEX = 0;
@@ -1375,7 +1375,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 				    }
 				    args[4].push(ctr_pt_ln);
 				}
-		  
+
 				this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,type,args));
 				this.log("   Leaf: "+ type);
             }
@@ -1391,7 +1391,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
 
 
-						
+
                         sizeChildren++;
 					}
 					else
@@ -1404,7 +1404,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
         else
             this.onXMLMinorError("unknown tag name <" + nodeName);
     }
-    
+
     this.stackTextures.push("clear");
     this.stackMaterials.push(this.defaultMaterialID);
     console.log("Parsed nodes");
@@ -1529,7 +1529,7 @@ MySceneGraph.prototype.displayScene = function() {
     }
 
     else if( tID == "clear"){
-    
+
       this.materials[mID].setTexture(null);
     }
 
