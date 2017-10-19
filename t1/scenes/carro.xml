@@ -131,17 +131,46 @@
         <TEXTURE id="null" />
 
         <DESCENDANTS>
+            <NODEREF id="lomba"/>
             <NODEREF id="chao"/>
-       		<NODEREF id="car" />
+       		  <NODEREF id="car" />
         </DESCENDANTS>
 
     </NODE>
+
+    <NODE id="lomba">
+          <MATERIAL id="null" />
+          <TEXTURE id="road" />
+
+          <TRANSLATION x="5.8" y="0" z="20" />
+          <ROTATION axis="y" angle="90" />
+          <ROTATION axis="x" angle="-90" />
+          <SCALE sx="2" sy="3.8" sz="1" />
+
+          <DESCENDANTS>
+            <LEAF id="lomba" type="patch" args="30 30" >
+              <CPLINE>
+                <CPOINT xx="-1.5" yy="-1.5" zz="0" ww="1"/>
+                <CPOINT xx="-1.5" yy="1.5" zz="0" ww="1"/>
+              </CPLINE>
+              <CPLINE>
+                <CPOINT xx="0" yy="-1.5" zz="3" ww="0.2"/>
+                <CPOINT xx="0" yy="1.5" zz="3" ww="0.2"/>
+              </CPLINE>
+              <CPLINE>
+                <CPOINT xx="1.5" yy="-1.5" zz="0" ww="0.2"/>
+                <CPOINT xx="1.5" yy="1.5" zz="0" ww="0.2"/>
+              </CPLINE>
+            </LEAF>
+          </DESCENDANTS>
+        </NODE>
+
 
      <NODE id="chao">
         <MATERIAL id="null" />
         <TEXTURE id="road" />
 
-        <SCALE sx="2.3" sy="1" sz="4" />
+        <SCALE sx="2.3" sy="1" sz="4.25" />
         <TRANSLATION x="0" y="0" z="4" />
         <ROTATION axis="x" angle="-90" />
 
