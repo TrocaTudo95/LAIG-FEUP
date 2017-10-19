@@ -12,7 +12,7 @@
   this.bottomRadius=parseFloat(args[1]);
   this.topRadius=parseFloat(args[2]);
   this.stacks = parseFloat(args[3]);
-	this.slices = parseFloat(args[4]);
+  this.slices = parseFloat(args[4]);
 
 
 

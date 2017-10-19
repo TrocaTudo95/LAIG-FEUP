@@ -5,11 +5,18 @@
 
 
  function MyCylinder(scene, args) {
+
+
  	CGFobject.call(this,scene);
+ 	this.bottomRadius=parseFloat(args[1]);
+  this.topRadius=parseFloat(args[2]);
     this.topCap=parseFloat(args[5]);
     this.bottomCap=parseFloat(args[6]);
+    this.height=args[0];
+    this.slices = parseFloat(args[4]);
     this.scene=scene;
-     this.cylinder = new MyCylinderNoTops(scene, args);
+    this.cylinder = new MyCylinderNoTops(scene, args);
+    console.log(this.slices);
 
   if (this.topCap == 1) 
         this.topCircle = new Circle(this.scene, this.slices);
@@ -29,7 +36,7 @@ MyCylinder.prototype.constructor = MyCylinder;
 
 
   this.scene.pushMatrix();
-  this.scene.scale(1, 1, this.height);
+  this.scene.scale(1, 1, 1);
   this.cylinder.display();
   this.scene.popMatrix();
 

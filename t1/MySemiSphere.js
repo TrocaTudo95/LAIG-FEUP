@@ -2,11 +2,13 @@
  * MySemiSphere
  * @constructor
  */
- function MySemiSphere(scene, slices, stacks) {
+ function MySemiSphere(scene,args) {
  	CGFobject.call(this,scene);
 
-	this.slices = slices;
-	this.stacks = stacks;
+	this.slices = parseInt(args[2]);
+	this.stacks = parseInt(args[1]); 
+    this.radius = parseInt(args[0]);
+     
 
  	this.initBuffers();
  };
@@ -25,9 +27,9 @@
  	for(var j=0;j<=this.stacks;j++){
  		for(var i=0;i<this.slices;i++){
  		    var k=Math.sqrt(1-Math.pow(j/this.stacks,2));
- 			this.vertices.push(k*Math.cos(i*teta));
- 			this.vertices.push(k*Math.sin(i*teta));
- 			this.vertices.push(Math.sqrt(1-k*k));
+ 			this.vertices.push(k*Math.cos(i*teta)*this.radius);
+ 			this.vertices.push(k*Math.sin(i*teta)*this.radius);
+ 			this.vertices.push(Math.sqrt(1-k*k)*this.radius);
  			this.normals.push(k*Math.cos(i*teta));
  			this.normals.push(k*Math.sin(i*teta));
  			this.normals.push(Math.sqrt(1-k*k));
