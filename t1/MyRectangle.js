@@ -38,6 +38,7 @@ MyRectangle.prototype.initBuffers = function () {
 		(this.maxX-this.minX), (1-(this.maxY-this.minY)),
 		(this.maxX-this.minX), 1
 			];
+			this.originalTexCoords=this.texCoords.slice();
 
 
 	this.primitiveType=this.scene.gl.TRIANGLES;
@@ -48,6 +49,6 @@ MyRectangle.prototype.initBuffers = function () {
 			0, 0, 1,
         ];
 
-
+	
 	this.initGLBuffers();
 };

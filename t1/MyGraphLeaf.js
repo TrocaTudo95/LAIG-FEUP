@@ -36,13 +36,13 @@ this.object.display();
 MyGraphLeaf.prototype.scaleTexCoords = function(ampS, ampT) {
       
 
-  this.originalTexCoords=this.object.texCoords.slice();
+
   
     for (var i = 0; i < this.object.texCoords.length; i += 2) {
-        this.object.texCoords[i] = this.originalTexCoords[i] / ampS;
-        this.object.texCoords[i + 1] = this.originalTexCoords[i + 1] / ampT;
+        this.object.texCoords[i] = this.object.originalTexCoords[i] / ampS;
+        this.object.texCoords[i + 1] = this.object.originalTexCoords[i + 1] / ampT;
         }
     this.object.updateTexCoordsGLBuffers();
-    this.object.texCoords=this.originalTexCoords.slice();
+    
 
     }

@@ -48,16 +48,23 @@ MyTriangle.prototype.initBuffers = function () {
           x3,y3,z3
     		];
 
+    		 let a = Math.sqrt(Math.pow(x1 - x3,2)  +Math.pow(y1 - y3,2)+ Math.pow(z1 - z3,2));
+			 let b = Math.sqrt(Math.pow(x2 - x1,2)  +Math.pow(y2 - y1,2)+ Math.pow(z2 - z1,2));
+			 let c= Math.sqrt(Math.pow(x3 - x2,2)  +Math.pow(y3 - y2,2)+ Math.pow(z3 - z2,2));
+
+			 let cosBeta = (Math.pow(a, 2) - Math.pow(b, 2) + Math.pow(c, 2)) / (2 * a * c);
+
+    		 let beta = Math.acos(cosBeta);
+    			
     	this.texCoords = [
     			0, 0,
-    			0.5, 0,
-    			0.5, 1,
-    			0, 0,
-    			0.5, 0,
-    			0.5, 1,
+        c, 0,
+        c - a * cosBeta, a * Math.sin(beta)
     	];
-
+    	
+		this.originalTexCoords=this.texCoords.slice();
     	this.primitiveType=this.scene.gl.TRIANGLES;
+
     	this.initGLBuffers();
 
 };

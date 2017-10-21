@@ -9,13 +9,14 @@ var MATERIALS_INDEX = 4;
 var LEAVES_INDEX = 5;
 var NODES_INDEX = 6;
 
+
 /**
  * MySceneGraph class, representing the scene graph.
  * @constructor
  */
 function MySceneGraph(filename, scene) {
     this.loadedOk = null ;
-
+    
     // Establish bidirectional references between scene and graph.
     this.scene = scene;
     scene.graph = this;
@@ -1524,11 +1525,13 @@ MySceneGraph.prototype.displayScene = function() {
     this.materials[mID].apply();
 
     for (let i = 0; i < node.leaves.length; i++) {
-        if(node.leaves[i] instanceof MyTriangle ||node.leaves[i] instanceof MyRectangle)
-        node.leaves[i].scaleTexCoords(this.textures[tID][1],this.textures[tID][2]);
+        let leaf=node.leaves[i];
+        if((leaf.object instanceof MyTriangle || leaf.object instanceof MyRectangle ) && this.textures[tID]!="clear"){
+        leaf.scaleTexCoords(this.textures[tID][1],this.textures[tID][2]);
+        }
+
         node.leaves[i].display();
-        if(node.leaves[i] instanceof MyEsfera)
-        node.leaves[i].object.first_representation=false;
+     
 
     }
 
@@ -1538,4 +1541,5 @@ MySceneGraph.prototype.displayScene = function() {
     this.stackMaterials.pop();
     this.stackTextures.pop();
     this.scene.popMatrix()
+    first_run=true;
 }
