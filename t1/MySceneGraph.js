@@ -1473,20 +1473,7 @@ MySceneGraph.prototype.displayScene = function() {
  	this.displayNode(rootNode, "null", "null", false);
  }
 
- MySceneGraph.prototype.updateTexCoords=function() {
-     for(let j=0; j< this.nodes.length;j++){
-         let node= this.nodes[i];
-     for (let i = 0; i < node.leaves.length; i++) {
 
-        let leaf=node.leaves[i];
-        if((leaf.object instanceof MyTriangle || leaf.object instanceof MyRectangle ) && this.textures[tID]!="clear"){
-            console.log("ola");
-        leaf.scaleTexCoords(this.textures[tID][1],this.textures[tID][2]);
-
-        }
-    }
-     }
- }
 
  MySceneGraph.prototype.displayNode = function(node) {
     let tID;
@@ -1537,7 +1524,11 @@ MySceneGraph.prototype.displayScene = function() {
     this.materials[mID].apply();
 
     for (let i = 0; i < node.leaves.length; i++) {
+        if(node.leaves[i] instanceof MyTriangle ||node.leaves[i] instanceof MyRectangle)
+        node.leaves[i].scaleTexCoords(this.textures[tID][1],this.textures[tID][2]);
         node.leaves[i].display();
+        if(node.leaves[i] instanceof MyEsfera)
+        node.leaves[i].object.first_representation=false;
 
     }
 
