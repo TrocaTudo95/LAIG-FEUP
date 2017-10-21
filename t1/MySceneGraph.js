@@ -1526,8 +1526,9 @@ MySceneGraph.prototype.displayScene = function() {
 
     for (let i = 0; i < node.leaves.length; i++) {
         let leaf=node.leaves[i];
-        if((leaf.object instanceof MyTriangle || leaf.object instanceof MyRectangle ) && this.textures[tID]!="clear"){
-        leaf.scaleTexCoords(this.textures[tID][1],this.textures[tID][2]);
+        if((leaf.object instanceof MyTriangle || leaf.object instanceof MyRectangle ) && tID!="clear"){
+           // console.log(this.textures[tID]);
+           leaf.scaleTexCoords(this.textures[tID][1],this.textures[tID][2]);
         }
 
         node.leaves[i].display();
