@@ -71,6 +71,9 @@
 
 
 
+
+
+
 </TEXTURES>
 
 
@@ -370,6 +373,17 @@
     </NODE>
     	<NODE id="cockpit">
         <TEXTURE id="null" />
+        <MATERIAL id="null"/>
+
+        <DESCENDANTS>
+            <NODEREF id="plan" />
+            <NODEREF id="pilot" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    	<NODE id="plan">
+        <TEXTURE id="null" />
         <MATERIAL id="WheelMaterial"/>
 
         <TRANSLATION x="4.55" y="2.15" z="7" />
@@ -379,6 +393,57 @@
         </DESCENDANTS>
 
     </NODE>
+
+    <NODE id="pilot">
+        <TEXTURE id="null" />
+        <MATERIAL id="null"/>
+
+
+        <DESCENDANTS>
+            <NODEREF id="pilot_helmet" />
+            <NODEREF id="pilot_visor" /> 
+        </DESCENDANTS>
+
+    </NODE>
+
+     <NODE id="pilot_helmet">
+        <TEXTURE id="null" />
+        <MATERIAL id="CarMaterial"/>
+
+        <TRANSLATION x="5.5" y="2.2" z="5.5" />
+ 		 <SCALE sx="0.4" sy="0.4" sz="0.4" />
+        
+        <DESCENDANTS>
+            <LEAF  type="sphere" args="2 20 20" />  
+        </DESCENDANTS>
+
+    </NODE>
+     <NODE id="pilot_visor">
+        <TEXTURE id="null" />
+        <MATERIAL id="WheelMaterial"/>
+
+        <TRANSLATION x="5.5" y="2" z="5.85" />
+ 		<SCALE sx="0.5" sy="0.3" sz="0.4" />
+        
+        <DESCENDANTS>
+            <LEAF id="visor" type="patch" args="30 30" >
+              <CPLINE>
+                <CPOINT xx="-1.5" yy="-1.5" zz="0" ww="1"/>
+                <CPOINT xx="-1.5" yy="1.5" zz="0" ww="1"/>
+              </CPLINE>
+              <CPLINE>
+                <CPOINT xx="0" yy="-1.5" zz="3" ww="1"/>
+                <CPOINT xx="0" yy="1.5" zz="3" ww="1"/>
+              </CPLINE>
+              <CPLINE>
+                <CPOINT xx="1.5" yy="-1.5" zz="0" ww="1"/>
+                <CPOINT xx="1.5" yy="1.5" zz="0" ww="1"/>
+              </CPLINE>
+            </LEAF> 
+        </DESCENDANTS>
+
+    </NODE>
+
 
     <NODE id="Grill">
         <TEXTURE id="grill" />

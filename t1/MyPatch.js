@@ -1,6 +1,11 @@
+/**
+ * MyPatch
+ * @constructor
+ */
+
 function MyPatch(scene,args) {
 
- 
+ //gets the arguments needed
     this.scene=scene;
     this.partsU = parseInt(args[0]);
     this.partsV = parseInt(args[1]);
@@ -13,7 +18,7 @@ function MyPatch(scene,args) {
 
 
     var nurbsSurface = new CGFnurbsSurface(this.degree1, this.degree2, knots1, knots2, this.controlPoints);
-  
+
     getSurfacePoint = function(u, v) {
 
         return nurbsSurface.getPoint(u, v);
@@ -22,12 +27,14 @@ function MyPatch(scene,args) {
 
 this.obj = new CGFnurbsObject(scene,getSurfacePoint,this.partsU,this.partsV);
 
-    
+
 }
 
 MyPatch.prototype = Object.create(CGFobject.prototype);
 MyPatch.prototype.constructor = MyPatch;
-
+/**
+* getKnotsVector Get the Knots Vector with the degree of the patch (function provided)
+*/
 MyPatch.prototype.getKnotsVector = function(degree) {
 
     var v = new Array();
@@ -41,8 +48,9 @@ MyPatch.prototype.getKnotsVector = function(degree) {
 };
 
 
-
-
+/**
+* Display the patch 
+*/
 MyPatch.prototype.display = function() {
     this.scene.pushMatrix();
     this.obj.display(this);

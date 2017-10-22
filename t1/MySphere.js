@@ -1,65 +1,57 @@
 /**
  * MySphere
- * @param scene CGFscene where the Sphere will be displayed
- * @param reader CGFXMLreader
- * @param newElement tag MySphere to be read
  * @constructor
  */
 function MySphere(scene, args) {
-      CGFobject.call(this, scene);
+    CGFobject.call(this, scene);
 
-      this.sceneGraph = scene;
-      this.args=args;
-      this.initBuffers();
-  
-  };
+    this.radius = parseFloat(args[0]);
+    this.slices = parseInt(args[1]);
+	this.stacks = parseInt(args[2]);
 
-  MySphere.prototype = Object.create(CGFobject.prototype);
-  MySphere.prototype.constructor = MySphere;
+    this.initBuffers();
+};
 
-  /**
-   * Initializes the Sphere buffers (vertices, indices, normals and texCoords)
-   */
-  MySphere.prototype.initBuffers = function() {
-     
-      var stacks = parseInt(this.args[1]);
-      var radius = parseInt(this.args[0]);
-      var slices = parseInt(this.args[2]);
+MySphere.prototype = Object.create(CGFobject.prototype);
+MySphere.prototype.constructor = MySphere;
+/**
+*Init Buffers
+*/
+MySphere.prototype.initBuffers = function() {
 
+    this.vertices = [];
+    this.normals = [];
+    this.indices = [];
+    this.originalTexCoords = [];
 
-      this.vertices = [];
-      this.normals = [];
-      this.indices = [];
-      this.TexCoords = [];
-
-      var ang_slices = (2 * Math.PI) / slices;
-      var ang_stacks = Math.PI / stacks;
+    var theta = (2 * Math.PI) / this.slices; // 0-360 deg -- longitude
+    var phi = (Math.PI) / this.stacks; // 0-180 deg -- latitude
+    var n_verts = 0;
 
 
+    for (var i = 0; i <= this.slices; i++) {
+        for (var j = 0; j <= this.stacks; j++) {
 
-      for (let i = 0; i <= stacks; i++) {
-          for (let j = 0; j <= slices; j++) {
-              let x = radius * Math.cos(ang_slices * j) * Math.sin(ang_stacks * i);
-              let y = radius * Math.sin(ang_slices * j) * Math.sin(ang_stacks * i);
-              let z = radius * Math.cos(ang_stacks * i);
+            let x = Math.cos(theta * i) * Math.sin(phi * j);   
+            let y = Math.sin(theta * i) * Math.sin(phi * j);
+            let z = Math.cos(phi * j);
 
-              this.vertices.push(x, y, z);
-              this.normals.push(x, y, z);
-              this.TexCoords.push(j / slices, 1 - i / stacks);
-          }
-      }
+            this.vertices.push(this.radius * x, this.radius * y, this.radius * z);
+            n_verts++;
 
+            this.normals.push(x, y, z);
 
-      for (let i = 0; i < stacks; i++) {
-          for (let j = 0; j < slices; j++) {
-              this.indices.push(i * (slices + 1) + j, (i + 1) * (slices + 1) + j, (i + 1) * (slices + 1) + j + 1);
-              this.indices.push(i * (slices + 1) + j, (i + 1) * (slices + 1) + j + 1, i * (slices + 1) + j + 1);
-          }
-      }
+            if (i > 0 && j > 0) {
+                this.indices.push(n_verts - this.stacks - 1, n_verts - 1, n_verts - this.stacks - 2);
+                this.indices.push(n_verts - 1, n_verts - 2, n_verts - this.stacks - 2);
+            }
 
+            this.originalTexCoords.push(0.5 * x + 0.5, 0.5 - 0.5 * y);
+        }
 
+    }
 
-
-      this.primitiveType = this.scene.gl.TRIANGLES;
-      this.initGLBuffers();
-  }
+    this.texCoords = this.originalTexCoords.slice();
+    this.primitiveType = this.scene.gl.TRIANGLES;
+    this.initGLBuffers();
+};

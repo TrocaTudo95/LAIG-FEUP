@@ -12,7 +12,9 @@
 
  Circle.prototype = Object.create(CGFobject.prototype);
  Circle.prototype.constructor = Circle;
-
+/**
+* Init Buffers
+*/
  Circle.prototype.initBuffers = function() {
 
 	this.texCoords = [];

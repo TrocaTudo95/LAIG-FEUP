@@ -16,7 +16,7 @@ var NODES_INDEX = 6;
  */
 function MySceneGraph(filename, scene) {
     this.loadedOk = null ;
-    
+
     // Establish bidirectional references between scene and graph.
     this.scene = scene;
     scene.graph = this;
@@ -1363,11 +1363,11 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 				let deg_v = descendants[j].children[0].children.length -1;
 				args[2] = deg_u;
 				args[3] = deg_v;
-				args[4] = new Array();
+				args[4] = new Array();      //gets the arguments needed to build the patch
 				for(let nu = 0;nu <= deg_u;nu++){
 				    let ctr_pt_ln = new Array();
 				    for(let nv = 0;nv <= deg_v;nv++){
-				        let ctr_pt = new Array();
+				        let ctr_pt = new Array();   //gets point by point and line by line
 				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'xx'));
 				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'yy'));
 				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'zz'));
@@ -1384,7 +1384,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
 
 						else if (type == null)
-							console.log("error in leaf");
+							console.log("Error in this leaf");
 
 						//parse leaf
 
@@ -1474,8 +1474,9 @@ MySceneGraph.prototype.displayScene = function() {
  	this.displayNode(rootNode, "null", "null", false);
  }
 
-
-
+ /**
+  * Displays the node,processing his texture and material 
+  */
  MySceneGraph.prototype.displayNode = function(node) {
     let tID;
     let mID;
@@ -1502,18 +1503,13 @@ MySceneGraph.prototype.displayScene = function() {
     for (let i = 0; i < node.children.length; i++) { //missing transformations
         let childName = node.children[i];
         let child = this.nodes[childName];
-        //  console.log(tID);
 
         this.displayNode(child);
     }
 
-  //  if(tID != "clear")
-    //  this.materials[mID].setTexture(this.textures[tID][0]);
     if(tID != "clear")
     {
       this.materials[mID].setTexture(this.textures[tID][0])
-      //let aux = this.textures[tID][0].bind();
-      //console.log(aux);
     }
 
     else if( tID == "clear"){
@@ -1532,7 +1528,7 @@ MySceneGraph.prototype.displayScene = function() {
         }
 
         node.leaves[i].display();
-     
+
 
     }
 

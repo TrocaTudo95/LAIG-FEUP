@@ -1,9 +1,10 @@
 /**
  * MyCylinder
  * @constructor
+ *
+ * @param scene Scene
+ * @param args Arguments to build the Cylinder
  */
-
-
  function MyCylinder(scene, args) {
 
 
@@ -15,10 +16,10 @@
     this.height=args[0];
     this.slices = parseFloat(args[4]);
     this.scene=scene;
-    this.cylinder = new MyCylinderNoTops(scene, args);
+    this.cylinder = new MyCylinderNoTops(scene, args); //make the cylinder with or without tops 
     console.log(this.slices);
 
-  if (this.topCap == 1) 
+  if (this.topCap == 1)
         this.topCircle = new Circle(this.scene, this.slices);
 
   if (this.bottomCap == 1)
@@ -27,11 +28,13 @@
 
 
  }
- 
+
 MyCylinder.prototype = Object.create(CGFobject.prototype);
 MyCylinder.prototype.constructor = MyCylinder;
 
-
+/**
+* Displays the cylinder
+*/
  MyCylinder.prototype.display = function() {
 
 
