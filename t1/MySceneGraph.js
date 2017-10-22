@@ -1352,8 +1352,8 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 						//console.log(args);
                         this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,type,args));
 							this.log("   Leaf: "+ type);
-            }
-            if (type=='patch'){
+                         }
+            else if (type =='patch'){
                 var s_args= this.reader.getString(descendants[j],'args');
                        // console.log(s_args);
 				var args=s_args.split(" ");
@@ -1383,7 +1383,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
 
 
-						else
+						else if (type == null)
 							console.log("error in leaf");
 
 						//parse leaf
