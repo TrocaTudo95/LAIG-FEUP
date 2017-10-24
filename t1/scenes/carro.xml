@@ -401,7 +401,7 @@
 
         <DESCENDANTS>
             <NODEREF id="pilot_helmet" />
-            <NODEREF id="pilot_visor" /> 
+            <NODEREF id="pilot_visor" />
         </DESCENDANTS>
 
     </NODE>
@@ -412,9 +412,9 @@
 
         <TRANSLATION x="5.5" y="2.2" z="5.5" />
  		 <SCALE sx="0.4" sy="0.4" sz="0.4" />
-        
+
         <DESCENDANTS>
-            <LEAF  type="sphere" args="2 20 20" />  
+            <LEAF  type="sphere" args="2 20 20" />
         </DESCENDANTS>
 
     </NODE>
@@ -424,7 +424,7 @@
 
         <TRANSLATION x="5.5" y="2" z="5.85" />
  		<SCALE sx="0.5" sy="0.3" sz="0.4" />
-        
+
         <DESCENDANTS>
             <LEAF id="visor" type="patch" args="30 30" >
               <CPLINE>
@@ -439,7 +439,7 @@
                 <CPOINT xx="1.5" yy="-1.5" zz="0" ww="1"/>
                 <CPOINT xx="1.5" yy="1.5" zz="0" ww="1"/>
               </CPLINE>
-            </LEAF> 
+            </LEAF>
         </DESCENDANTS>
 
     </NODE>
