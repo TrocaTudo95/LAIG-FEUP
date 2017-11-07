@@ -33,8 +33,8 @@ function MySceneGraph(filename, scene) {
     // File reading
     this.reader = new CGFXMLreader();
 
-     this.stackTextures = new Array();
-  this.stackMaterials = new Array();
+     this.textures_stack = new Array();
+  this.materials_stack = new Array();
 
     /*
 	 * Read the contents of the xml file, and refer to this class for loading and error handlers.
@@ -1406,8 +1406,8 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             this.onXMLMinorError("unknown tag name <" + nodeName);
     }
 
-    this.stackTextures.push("clear");
-    this.stackMaterials.push(this.defaultMaterialID);
+    this.textures_stack.push("clear");
+    this.materials_stack.push(this.defaultMaterialID);
     console.log("Parsed nodes");
     //this.updateTexCoords();
     return null ;
@@ -1475,20 +1475,20 @@ MySceneGraph.prototype.displayScene = function() {
  }
 
  /**
-  * Displays the node,processing his texture and material 
+  * Displays the node,processing his texture and material
   */
  MySceneGraph.prototype.displayNode = function(node) {
     let tID;
     let mID;
 
     if(node.materialID == "null"){
-      mID = this.stackMaterials[this.stackMaterials.length-1];
+      mID = this.materials_stack[this.materials_stack.length-1];
     }
     else{
       mID = node.materialID;
     }
     if(node.textureID == "null"){
-      tID = this.stackTextures[this.stackTextures.length - 1];
+      tID = this.textures_stack[this.textures_stack.length - 1];
 
     }
     else{
@@ -1497,10 +1497,10 @@ MySceneGraph.prototype.displayScene = function() {
 
     this.scene.pushMatrix();
     this.scene.multMatrix(node.transformMatrix);
-    this.stackMaterials.push(mID);
-    this.stackTextures.push(tID);
+    this.materials_stack.push(mID);
+    this.textures_stack.push(tID);
 
-    for (let i = 0; i < node.children.length; i++) { //missing transformations
+    for (let i = 0; i < node.children.length; i++) { 
         let childName = node.children[i];
         let child = this.nodes[childName];
 
@@ -1523,7 +1523,6 @@ MySceneGraph.prototype.displayScene = function() {
     for (let i = 0; i < node.leaves.length; i++) {
         let leaf=node.leaves[i];
         if((leaf.object instanceof MyTriangle || leaf.object instanceof MyRectangle ) && tID!="clear"){
-           // console.log(this.textures[tID]);
            leaf.scaleTexCoords(this.textures[tID][1],this.textures[tID][2]);
         }
 
@@ -1532,11 +1531,9 @@ MySceneGraph.prototype.displayScene = function() {
 
     }
 
-    //if(tID != "clear")
-      //this.textures[tID][0].unbind();
 
-    this.stackMaterials.pop();
-    this.stackTextures.pop();
+    this.materials_stack.pop();
+    this.textures_stack.pop();
     this.scene.popMatrix()
-    first_run=true;
+
 }
