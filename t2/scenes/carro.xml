@@ -135,47 +135,18 @@
         <TEXTURE id="null" />
 
         <DESCENDANTS>
-            <NODEREF id="lomba"/>
-            <NODEREF id="chao"/>
+            <NODEREF id="pista"/>
        		  <NODEREF id="car" />
         </DESCENDANTS>
 
     </NODE>
 
 
-    <NODE id="lomba">
-          <MATERIAL id="null" />
-          <TEXTURE id="road" />
-
-          <TRANSLATION x="5.8" y="0" z="20" />
-          <ROTATION axis="y" angle="90" />
-          <ROTATION axis="x" angle="-90" />
-          <SCALE sx="2" sy="3.8" sz="1" />
-
-          <DESCENDANTS>
-            <LEAF id="lomba" type="patch" args="30 30" >
-              <CPLINE>
-                <CPOINT xx="-1.5" yy="-1.5" zz="0" ww="1"/>
-                <CPOINT xx="-1.5" yy="1.5" zz="0" ww="1"/>
-              </CPLINE>
-              <CPLINE>
-                <CPOINT xx="0" yy="-1.5" zz="3" ww="0.2"/>
-                <CPOINT xx="0" yy="1.5" zz="3" ww="0.2"/>
-              </CPLINE>
-              <CPLINE>
-                <CPOINT xx="1.5" yy="-1.5" zz="0" ww="0.2"/>
-                <CPOINT xx="1.5" yy="1.5" zz="0" ww="0.2"/>
-              </CPLINE>
-            </LEAF>
-          </DESCENDANTS>
-        </NODE>
-
-
-     <NODE id="chao">
+     <NODE id="pista">
         <MATERIAL id="null" />
         <TEXTURE id="road" />
 
-        <SCALE sx="2.3" sy="1" sz="4.25" />
+        <SCALE sx="3" sy="1" sz="8.0" />
         <TRANSLATION x="0" y="0" z="4" />
         <ROTATION axis="x" angle="-90" />
 
@@ -189,6 +160,8 @@
     <NODE id="car">
         <MATERIAL id="defaultMaterial" />
         <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0.2" z="0" />
 
         <DESCENDANTS>
        		<NODEREF id="rodas" />
@@ -219,7 +192,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="8" y="1" z="12" />
+        <TRANSLATION x="8" y="0.8" z="12" />
 
         <DESCENDANTS>
             <NODEREF id="roda" />
@@ -232,7 +205,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="2.4" y="1" z="12" />
+        <TRANSLATION x="2.4" y="0.8" z="12" />
 
         <DESCENDANTS>
             <NODEREF id="roda" />
@@ -245,7 +218,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="8" y="1" z="2" />
+        <TRANSLATION x="8" y="0.8" z="1.5" />
 
         <DESCENDANTS>
             <NODEREF id="roda" />
@@ -258,7 +231,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="2.3" y="1" z="2" />
+        <TRANSLATION x="2.3" y="0.8" z="1.5" />
 
         <DESCENDANTS>
             <NODEREF id="roda" />
@@ -290,7 +263,10 @@
         <DESCENDANTS>
             <NODEREF id="cubo1" />
             <NODEREF id="cubo2" />
+            <NODEREF id="cubo7" />
+            <NODEREF id="cubo8" />
             <NODEREF id="cilindroNariz" />
+            <NODEREF id="cilindroBico" />
 
         </DESCENDANTS>
 
@@ -300,7 +276,7 @@
   <TEXTURE id="null" />
   <MATERIAL id="null"/>
 
-        <TRANSLATION x="3.2" y="1.0" z="12.0" />
+        <TRANSLATION x="3.2" y="0.8" z="12.0" />
         <ROTATION axis="y" angle="90" />
         <SCALE sx="0.3" sy="0.3" sz="1.2" />
         <DESCENDANTS>
@@ -313,8 +289,8 @@
   <TEXTURE id="null" />
   <MATERIAL id="null"/>
 
-        <TRANSLATION x="3.5" y="-1.5" z="3" />
-        <SCALE sx="0.4" sy="0.4" sz="1.6" />
+        <TRANSLATION x="3.5" y="-1.9" z="4.5" />
+        <SCALE sx="0.4" sy="0.5" sz="1.2" />
         <DESCENDANTS>
             <NODEREF id="cubo" />
         </DESCENDANTS>
@@ -325,23 +301,65 @@
   <TEXTURE id="null" />
   <MATERIAL id="null"/>
 
-        <TRANSLATION x="-1.4" y="0" z="13.5" />
-        <SCALE sx="1.4" sy="0.15" sz="0.15" />
+        <TRANSLATION x="-1.4" y="0.4" z="13.5" />
+        <SCALE sx="1.4" sy="0.08" sz="0.15" />
 
         <DESCENDANTS>
             <NODEREF id="cubo" />
         </DESCENDANTS>
 
     </NODE>
-<NODE id="corpo">
+<NODE id="cubo7">
+  <TEXTURE id="null" />
+  <MATERIAL id="null"/>
+
+        <TRANSLATION x="1.85" y="0.4" z="12.8" />
+        <SCALE sx="0.1" sy="0.15" sz="0.25" />
+
+        <DESCENDANTS>
+            <NODEREF id="cubo" />
+        </DESCENDANTS>
+
+    </NODE>
+    <NODE id="cubo8">
+  <TEXTURE id="null" />
+  <MATERIAL id="null"/>
+
+        <TRANSLATION x="8.35" y="0.4" z="12.8" />
+        <SCALE sx="0.1" sy="0.15" sz="0.25" />
+
+        <DESCENDANTS>
+            <NODEREF id="cubo" />
+        </DESCENDANTS>
+
+    </NODE>
+
+
+     <NODE id="cilindroBico">
+  <TEXTURE id="null" />
+  <MATERIAL id="null"/>
+
+        <TRANSLATION x="5.5" y="1.13" z="15.5" />
+        <ROTATION axis="x" angle="180" />
+        <ROTATION axis="z" angle="-45" />
+        <SCALE sx="0.7" sy="0.7" sz="1" />
+
+        <DESCENDANTS>
+            <LEAF id="cylinder2" type="cylinder" args="2 1 2 20 4 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+	<NODE id="corpo">
         <TEXTURE id="null" />
         <MATERIAL id="null"/>
 
         <DESCENDANTS>
             <NODEREF id="cubo3" />
+            <NODEREF id="cubo9" />
             <NODEREF id="piramide1" />
             <NODEREF id="cockpit" />
             <NODEREF id="Grill" />
+            <NODEREF id="CilindroCarro" />
 
         </DESCENDANTS>
 
@@ -351,8 +369,20 @@
         <TEXTURE id="null" />
         <MATERIAL id="CarMaterial"/>
 
-        <TRANSLATION x="0.5" y="-1.9" z="-4" />
-        <SCALE sx="1" sy="0.5" sz="1.6" />
+        <TRANSLATION x="0.5" y="-2.3" z="-0.8" />
+        <SCALE sx="1" sy="0.6" sz="1.3" />
+
+        <DESCENDANTS>
+            <NODEREF id="cubo" />
+        </DESCENDANTS>
+
+    </NODE>
+    	<NODE id="cubo9">
+        <TEXTURE id="null" />
+        <MATERIAL id="CarMaterial"/>
+
+        <TRANSLATION x="2" y="-2.3" z="-0.8" />
+        <SCALE sx="0.7" sy="0.6" sz="0.5" />
 
         <DESCENDANTS>
             <NODEREF id="cubo" />
@@ -364,7 +394,7 @@
         <MATERIAL id="WhiteMaterial"/>
         <TEXTURE id="null" />
 
-        <TRANSLATION x="1" y="-1.9" z="4" />
+        <TRANSLATION x="1" y="-1.5" z="4.5" />
         <ROTATION axis="x" angle="-90" />
         <SCALE sx="0.3" sy="0.2" sz="0.4" />
 
@@ -388,7 +418,7 @@
         <TEXTURE id="null" />
         <MATERIAL id="WheelMaterial"/>
 
-        <TRANSLATION x="4.55" y="2.15" z="7" />
+        <TRANSLATION x="4.55" y="2.51" z="7.5" />
         <ROTATION axis="x" angle="-90" />
         <DESCENDANTS>
             <LEAF  type="rectangle" args="0 3 2 0" />
@@ -399,7 +429,6 @@
     <NODE id="pilot">
         <TEXTURE id="null" />
         <MATERIAL id="null"/>
-
 
         <DESCENDANTS>
             <NODEREF id="pilot_helmet" />
@@ -412,7 +441,7 @@
         <TEXTURE id="null" />
         <MATERIAL id="CarMaterial"/>
 
-        <TRANSLATION x="5.5" y="2.2" z="5.5" />
+        <TRANSLATION x="5.5" y="2.5" z="5.5" />
  		 <SCALE sx="0.4" sy="0.4" sz="0.4" />
         
         <DESCENDANTS>
@@ -424,7 +453,7 @@
         <TEXTURE id="null" />
         <MATERIAL id="WheelMaterial"/>
 
-        <TRANSLATION x="5.5" y="2" z="5.85" />
+        <TRANSLATION x="5.5" y="2.4" z="5.85" />
  		<SCALE sx="0.5" sy="0.3" sz="0.4" />
         
         <DESCENDANTS>
@@ -462,7 +491,9 @@
         <TEXTURE id="null" />
         <MATERIAL id="null"/>
 
-        <TRANSLATION x="3.2" y="0.5" z="8.01" />
+        <TRANSLATION x="3.2" y="0.5" z="9.01" />
+        <SCALE sx="1" sy="1.3" sz="1" />
+
 
         <DESCENDANTS>
             <LEAF  type="rectangle" args="0 1 1 0" />
@@ -474,7 +505,8 @@
         <TEXTURE id="null" />
         <MATERIAL id="null"/>
 
-        <TRANSLATION x="6.8" y="0.5" z="8.01" />
+        <TRANSLATION x="6.8" y="0.5" z="9.01" />
+        <SCALE sx="1" sy="1.3" sz="1" />
 
         <DESCENDANTS>
             <LEAF  type="rectangle" args="0 1 1 0" />
@@ -498,7 +530,7 @@
         <TEXTURE id="null" />
         <MATERIAL id="CarMaterial"/>
 
-        <TRANSLATION x="2" y="2.5" z="-0.5" />
+        <TRANSLATION x="2" y="2.8" z="0" />
         <SCALE sx="0.7" sy="0.1" sz="0.2" />
 
         <DESCENDANTS>
@@ -511,7 +543,7 @@
         <TEXTURE id="null" />
         <MATERIAL id="WheelMaterial"/>
 
-        <TRANSLATION x="4" y="0.8" z="0.2" />
+        <TRANSLATION x="4" y="0.9" z="0.7" />
         <SCALE sx="0.05" sy="0.3" sz="0.05" />
 
         <DESCENDANTS>
@@ -524,11 +556,24 @@
         <TEXTURE id="null" />
         <MATERIAL id="WheelMaterial"/>
 
-        <TRANSLATION x="6.5" y="0.8" z="0.2" />
+        <TRANSLATION x="6.5" y="0.9" z="0.7" />
         <SCALE sx="0.05" sy="0.3" sz="0.05" />
 
         <DESCENDANTS>
             <NODEREF id="cubo" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="CilindroCarro">
+ 		 <TEXTURE id="null" />
+ 		 <MATERIAL id="CarMaterial"/>
+
+        <TRANSLATION x="3.2" y="0.8" z="1.5" />
+        <ROTATION axis="y" angle="90" />
+        <SCALE sx="0.3" sy="0.3" sz="1.2" />
+        <DESCENDANTS>
+            <NODEREF id="cilindro" />
         </DESCENDANTS>
 
     </NODE>
