@@ -3,10 +3,10 @@
 <!-- Initial values -->
 <INITIALS>
     <frustum near="0.1" far="500"/>
-    <translation x="-1" y="1" z="0" />
-    <rotation axis="x" angle="0" />
-    <rotation axis="y" angle="0" />
-    <rotation axis="z" angle="0" />
+    <translation x="-50" y="-50" z="-30" />
+    <rotation axis="x" angle="-30" />
+    <rotation axis="y" angle="45" />
+    <rotation axis="z" angle="30" />
     <scale sx="0.25" sy="0.25" sz="0.25" />
     <reference length="5" />
 </INITIALS>
@@ -23,7 +23,7 @@
 <LIGHTS>
 	<LIGHT id="light0">
         <enable value ="1" />
-        <position  x="0" y="10" z="0" w="1" />
+        <position  x="90" y="0" z="140" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -31,7 +31,7 @@
 
 	<LIGHT id="light1">
         <enable value ="1" />
-        <position x="10" y="10" z="0" w="1" />
+        <position x="90" y="0" z="0" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -39,7 +39,7 @@
 
 	<LIGHT id="light2">
         <enable value ="1" />
-        <position x="0" y="10" z="20" w="1" />
+        <position x="0" y="10" z="40" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -47,7 +47,15 @@
 
     <LIGHT id="light3">
         <enable value ="1" />
-        <position x="10" y="10" z="20" w="1" />
+        <position x="-90" y="0" z="0" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+        <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light4">
+        <enable value ="1" />
+        <position x="-90" y="0" z="140" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
         <specular r="0.6" g="0.6" b="0.6" a="1.0" />
@@ -66,12 +74,12 @@
 
     <TEXTURE id="road">
         <file path="images/road.jpg" />
-        <amplif_factor s="1" t="1" />
+        <amplif_factor s="3" t="2" />
     </TEXTURE>
 
     <TEXTURE id="relva">
         <file path="images/relva.jpg" />
-        <amplif_factor s="1" t="1" />
+        <amplif_factor s="0.5" t="0.5" />
     </TEXTURE>
 
     <TEXTURE id="cimento">
@@ -81,7 +89,51 @@
 
     <TEXTURE id="crowd">
         <file path="images/crowd.jpg" />
-        <amplif_factor s="10" t="10" />
+        <amplif_factor s="24" t="24" />
+    </TEXTURE>
+
+    <TEXTURE id="redbull">
+        <file path="images/redbull.jpg" />
+        <amplif_factor s="5" t="4" />
+    </TEXTURE>
+
+    <TEXTURE id="renault">
+        <file path="images/renault.jpg" />
+        <amplif_factor s="5" t="4" />
+    </TEXTURE>
+
+    <TEXTURE id="bmw">
+        <file path="images/bmw.jpg" />
+        <amplif_factor s="5" t="4" />
+    </TEXTURE>
+
+    <TEXTURE id="ferrari">
+        <file path="images/ferrari.jpg" />
+        <amplif_factor s="5" t="4" />
+    </TEXTURE>
+
+    <TEXTURE id="marussia">
+        <file path="images/marussia.jpg" />
+        <amplif_factor s="5" t="4" />
+    </TEXTURE>
+
+    <TEXTURE id="track">
+        <file path="images/track.jpg" />
+        <amplif_factor s="5" t="4" />
+    </TEXTURE>
+
+    <TEXTURE id="final">
+        <file path="images/final.jpg" />
+        <amplif_factor s="5" t="4" />
+    </TEXTURE>
+
+    <TEXTURE id="wall">
+        <file path="images/wall.jpg" />
+        <amplif_factor s="4" t="5" />
+    </TEXTURE>
+    <TEXTURE id="sun_wall">
+        <file path="images/sun-wall.jpg" />
+        <amplif_factor s="4" t="5" />
     </TEXTURE>
 
 
@@ -92,14 +144,23 @@
 
 
 <MATERIALS>
-	<!-- Car Material -->
-   <MATERIAL id="CarMaterial">
-     <shininess value="1" />
-     <specular r="0" g="0" b="0" a="1" />
-     <diffuse r="1.0" g="0.15" b="0.0" a="1" />
-     <ambient r="0" g="0" b="0" a="1" />
-     <emission r="0.0" g="0.0" b="0.0" a="1" />
-  </MATERIAL>
+	   <!-- Red Material -->
+      <MATERIAL id="RedMaterial">
+          <shininess value="1" />
+          <specular r="0" g="0" b="0" a="1" />
+          <diffuse r="1.0" g="0.15" b="0.0" a="1" />
+          <ambient r="0" g="0" b="0" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+      </MATERIAL>
+
+        <!-- Blue Material -->
+      <MATERIAL id="BlueMaterial">
+          <shininess value="1" />
+          <specular r="0" g="0" b="0" a="1" />
+          <diffuse r="0" g="0.15" b="1.0" a="1" />
+          <ambient r="0" g="0" b="0" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+      </MATERIAL>
 
     	<!-- Wheel material -->
     	 <MATERIAL id="WheelMaterial">
@@ -149,8 +210,12 @@
 
         <DESCENDANTS>
             <NODEREF id="chao"/>
-       		  <NODEREF id="car" />
+            <NODEREF id="Gwall"/>
+            <NODEREF id="sun_wall"/>
+            <NODEREF id="track"/>
+       		  <NODEREF id="cars" />
             <NODEREF id="bancadas"/>
+            <NODEREF id="boxes"/>
         </DESCENDANTS>
 
     </NODE>
@@ -160,15 +225,501 @@
         <MATERIAL id="null" />
         <TEXTURE id="relva" />
 
-        <SCALE sx="40" sy="0.1" sz="80" />
-        <TRANSLATION x="-2.5" y="0" z="2.5" />
+        <TRANSLATION x="-100" y="0" z="180" />
         <ROTATION axis="x" angle="-90" />
+        <SCALE sx="40" sy="80" sz="0.1" />
 
         <DESCENDANTS>
 				<LEAF  type="rectangle" args="0 4 5 0" />
 		    </DESCENDANTS>
 
     </NODE>
+
+    <!-- Walls -->
+     <NODE id="Gwall">
+        <MATERIAL id="null" />
+        <TEXTURE id="wall" />
+
+        <TRANSLATION x="-100" y="0" z="180" />
+        <ROTATION axis="y" angle="90" />
+        <SCALE sx="80" sy="30" sz="0.1" />
+
+        <DESCENDANTS>
+        <LEAF  type="rectangle" args="0 5 4 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="sun_wall">
+       <MATERIAL id="null" />
+       <TEXTURE id="sun_wall" />
+
+       <TRANSLATION x="-100" y="0" z="-140" />
+       <SCALE sx="50" sy="30" sz="0.1" />
+
+       <DESCENDANTS>
+       <LEAF  type="rectangle" args="0 5 4 0" />
+       </DESCENDANTS>
+
+   </NODE>
+
+ <!-- TRACK -->
+    <NODE id="track">
+       <MATERIAL id="defaultMaterial" />
+       <TEXTURE id="null" />
+
+       <DESCENDANTS>
+         <NODEREF id="track1"/>
+         <NODEREF id="track2"/>
+         <NODEREF id="track3"/>
+         <NODEREF id="curva1"/>
+         <NODEREF id="relva1"/>
+         <NODEREF id="curva2"/>
+         <NODEREF id="relva2"/>
+         <NODEREF id="curva3"/>
+         <NODEREF id="relva3"/>
+         <NODEREF id="track4"/>
+         <NODEREF id="curva4"/>
+         <NODEREF id="relva4"/>
+         <NODEREF id="curva5"/>
+         <NODEREF id="track5"/>
+         <NODEREF id="relva5"/>
+         <NODEREF id="curva6"/>
+         <NODEREF id="relva6"/>
+         <NODEREF id="final"/>
+
+
+
+       </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="track1">
+      <MATERIAL id="null" />
+      <TEXTURE id="road" />
+
+      <TRANSLATION x="60" y="0.1" z="150" />
+      <ROTATION axis="x" angle="-90" />
+      <ROTATION axis="z" angle="90" />
+      <SCALE sx="50" sy="6" sz="1" />
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 4 5 0" />
+      </DESCENDANTS>
+
+  </NODE>
+
+  <NODE id="track2">
+     <MATERIAL id="null" />
+     <TEXTURE id="road" />
+
+     <TRANSLATION x="31.5" y="0.1" z="100" />
+     <ROTATION axis="x" angle="-90" />
+     <ROTATION axis="z" angle="90" />
+     <SCALE sx="30" sy="4" sz="1" />
+
+     <DESCENDANTS>
+       <LEAF type="rectangle" args="0 4 5 0" />
+     </DESCENDANTS>
+
+ </NODE>
+
+ <NODE id="track3">
+    <MATERIAL id="null" />
+    <TEXTURE id="road" />
+
+    <TRANSLATION x="-40" y="0.1" z="150" />
+    <ROTATION axis="x" angle="-90" />
+    <ROTATION axis="z" angle="90" />
+    <SCALE sx="50" sy="6" sz="1" />
+
+    <DESCENDANTS>
+      <LEAF type="rectangle" args="0 4 5 0" />
+    </DESCENDANTS>
+
+</NODE>
+
+
+<NODE id="curva1">
+    <MATERIAL id="null" />
+    <TEXTURE id="road" />
+    <TRANSLATION x="35" y="0.05" z="98" />
+    <ROTATION axis="x" angle="-90" />
+
+    <DESCENDANTS>
+      <LEAF type="cylinder" args="0.001 20 20 20 20 1 1" />
+    </DESCENDANTS>
+
+</NODE>
+
+<NODE id="relva1">
+   <MATERIAL id="null" />
+   <TEXTURE id="relva" />
+
+   <TRANSLATION x="32" y="0.11" z="100" />
+   <ROTATION axis="x" angle="-90" />
+   <SCALE sx="1" sy="5" sz="1" />
+
+   <DESCENDANTS>
+     <LEAF type="rectangle" args="0 5 4 0" />
+   </DESCENDANTS>
+
+</NODE>
+
+<NODE id="curva2">
+    <MATERIAL id="null" />
+    <TEXTURE id="road" />
+    <TRANSLATION x="35" y="0.05" z="-50" />
+    <ROTATION axis="x" angle="-90" />
+
+    <DESCENDANTS>
+      <LEAF type="cylinder" args="0.001 20 20 20 20 1 1" />
+    </DESCENDANTS>
+
+</NODE>
+
+<NODE id="relva2">
+   <MATERIAL id="null" />
+   <TEXTURE id="relva" />
+
+   <TRANSLATION x="32" y="0.11" z="-25" />
+   <ROTATION axis="x" angle="-90" />
+   <SCALE sx="1" sy="5" sz="1" />
+
+   <DESCENDANTS>
+     <LEAF type="rectangle" args="0 5 4 0" />
+   </DESCENDANTS>
+
+</NODE>
+
+<NODE id="curva3">
+    <MATERIAL id="null" />
+    <TEXTURE id="road" />
+    <TRANSLATION x="35" y="0.05" z="150" />
+    <ROTATION axis="x" angle="-90" />
+
+    <DESCENDANTS>
+      <LEAF type="cylinder" args="0.001 25 25 20 20 1 1" />
+    </DESCENDANTS>
+
+</NODE>
+
+<NODE id="relva3">
+   <MATERIAL id="null" />
+   <TEXTURE id="relva" />
+
+   <TRANSLATION x="0" y="0.11" z="150" />
+   <ROTATION axis="x" angle="-90" />
+   <SCALE sx="9" sy="6" sz="1" />
+
+   <DESCENDANTS>
+     <LEAF type="rectangle" args="0 5 4 0" />
+   </DESCENDANTS>
+
+</NODE>
+
+<NODE id="track4">
+   <MATERIAL id="null" />
+   <TEXTURE id="road" />
+
+   <TRANSLATION x="-38" y="0.1" z="174" />
+   <ROTATION axis="x" angle="-90" />
+   <SCALE sx="15" sy="6" sz="1" />
+
+   <DESCENDANTS>
+     <LEAF type="rectangle" args="0 4 5 0" />
+   </DESCENDANTS>
+
+</NODE>
+
+<NODE id="curva4">
+    <MATERIAL id="null" />
+    <TEXTURE id="road" />
+    <TRANSLATION x="-39" y="0.05" z="150" />
+    <ROTATION axis="x" angle="-90" />
+
+    <DESCENDANTS>
+      <LEAF type="cylinder" args="0.001 25 25 20 20 1 1" />
+    </DESCENDANTS>
+
+</NODE>
+
+<NODE id="relva4">
+   <MATERIAL id="null" />
+   <TEXTURE id="relva" />
+
+   <TRANSLATION x="-40" y="0.11" z="150" />
+   <ROTATION axis="x" angle="-90" />
+   <SCALE sx="9" sy="6" sz="1" />
+
+   <DESCENDANTS>
+     <LEAF type="rectangle" args="0 5 4 0" />
+   </DESCENDANTS>
+
+</NODE>
+
+<NODE id="curva5">
+    <MATERIAL id="null" />
+    <TEXTURE id="road" />
+    <TRANSLATION x="35" y="0.05" z="-99" />
+    <ROTATION axis="x" angle="-90" />
+
+    <DESCENDANTS>
+      <LEAF type="cylinder" args="0.001 25 25 20 20 1 1" />
+    </DESCENDANTS>
+
+</NODE>
+
+<NODE id="track5">
+   <MATERIAL id="null" />
+   <TEXTURE id="road" />
+
+   <TRANSLATION x="-40" y="0.1" z="-100" />
+   <ROTATION axis="x" angle="-90" />
+   <SCALE sx="15" sy="6" sz="1" />
+
+   <DESCENDANTS>
+     <LEAF type="rectangle" args="0 4 5 0" />
+   </DESCENDANTS>
+
+</NODE>
+
+<NODE id="relva5">
+   <MATERIAL id="null" />
+   <TEXTURE id="relva" />
+
+   <TRANSLATION x="0" y="0.11" z="-70" />
+   <ROTATION axis="x" angle="-90" />
+   <SCALE sx="9" sy="6" sz="1" />
+
+   <DESCENDANTS>
+     <LEAF type="rectangle" args="0 5 4 0" />
+   </DESCENDANTS>
+
+</NODE>
+
+<NODE id="curva6">
+    <MATERIAL id="null" />
+    <TEXTURE id="road" />
+    <TRANSLATION x="-39" y="0.05" z="-99" />
+    <ROTATION axis="x" angle="-90" />
+
+    <DESCENDANTS>
+      <LEAF type="cylinder" args="0.001 25 25 20 20 1 1" />
+    </DESCENDANTS>
+
+</NODE>
+
+<NODE id="relva6">
+   <MATERIAL id="null" />
+   <TEXTURE id="relva" />
+
+   <TRANSLATION x="-40" y="0.11" z="-70" />
+   <ROTATION axis="x" angle="-90" />
+   <SCALE sx="9" sy="6" sz="1" />
+
+   <DESCENDANTS>
+     <LEAF type="rectangle" args="0 5 4 0" />
+   </DESCENDANTS>
+
+</NODE>
+
+<NODE id="final">
+   <MATERIAL id="null" />
+   <TEXTURE id="final" />
+
+   <TRANSLATION x="36" y="0.2" z="60" />
+   <ROTATION axis="x" angle="-90" />
+   <SCALE sx="4.8" sy="1.5" sz="1" />
+
+   <DESCENDANTS>
+     <LEAF type="rectangle" args="0 4 5 0" />
+   </DESCENDANTS>
+
+</NODE>
+
+
+<!-- BOXES -->
+
+    <NODE id="boxes">
+       <MATERIAL id="defaultMaterial" />
+       <TEXTURE id="null" />
+
+       <TRANSLATION x="-9" y="0" z="24" />
+       <SCALE sx="1.3" sy="1.3" sz="1.3" />
+
+       <DESCENDANTS>
+          <NODEREF id="box1" />
+          <NODEREF id="box2" />
+          <NODEREF id="box3" />
+          <NODEREF id="box4" />
+          <NODEREF id="box5" />
+       </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="box1">
+       <MATERIAL id="null" />
+       <TEXTURE id="null" />
+
+       <TRANSLATION x="0" y="-10" z="0" />
+       <ROTATION axis="y" angle="90" />
+       <SCALE sx="2.5" sy="2.5" sz="2.5" />
+
+
+
+       <DESCENDANTS>
+          <NODEREF id="porta1"/>
+          <NODEREF id="cuboG" />
+       </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="box2">
+       <MATERIAL id="null" />
+       <TEXTURE id="null" />
+
+       <TRANSLATION x="0" y="-10" z="12.5" />
+       <ROTATION axis="y" angle="90" />
+       <SCALE sx="2.5" sy="2.5" sz="2.5" />
+
+       <DESCENDANTS>
+         <NODEREF id="porta2"/>
+         <NODEREF id="cuboG" />
+       </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="box3">
+       <MATERIAL id="null" />
+       <TEXTURE id="null" />
+
+       <TRANSLATION x="0" y="-10" z="25" />
+       <ROTATION axis="y" angle="90" />
+       <SCALE sx="2.5" sy="2.5" sz="2.5" />
+
+
+       <DESCENDANTS>
+         <NODEREF id="porta3"/>
+         <NODEREF id="cuboG" />
+       </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="box4">
+       <MATERIAL id="null" />
+       <TEXTURE id="null" />
+
+       <TRANSLATION x="0" y="-10" z="37.5" />
+       <ROTATION axis="y" angle="90" />
+       <SCALE sx="2.5" sy="2.5" sz="2.5" />
+
+
+       <DESCENDANTS>
+         <NODEREF id="porta4"/>
+         <NODEREF id="cuboG" />
+       </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="box5">
+       <MATERIAL id="null" />
+       <TEXTURE id="null" />
+
+       <TRANSLATION x="0" y="-10" z="50" />
+       <ROTATION axis="y" angle="90" />
+       <SCALE sx="2.5" sy="2.5" sz="2.5" />
+
+       <DESCENDANTS>
+         <NODEREF id="porta5"/>
+         <NODEREF id="cuboG" />
+       </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="porta1">
+       <MATERIAL id="null" />
+       <TEXTURE id="redbull" />
+
+       <TRANSLATION x="2.75" y="4" z="7.51" />
+       <SCALE sx="0.9" sy="0.9" sz="1" />
+
+
+       <DESCENDANTS>
+         <LEAF type="rectangle" args="0 4 5 0" />
+       </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="porta2">
+       <MATERIAL id="null" />
+       <TEXTURE id="marussia" />
+
+       <TRANSLATION x="2.75" y="4" z="7.51" />
+       <SCALE sx="0.9" sy="0.9" sz="1" />
+
+
+       <DESCENDANTS>
+         <LEAF type="rectangle" args="0 4 5 0" />
+       </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="porta3">
+       <MATERIAL id="null" />
+       <TEXTURE id="renault" />
+
+       <TRANSLATION x="2.75" y="4" z="7.51" />
+       <SCALE sx="0.9" sy="0.9" sz="1" />
+
+
+       <DESCENDANTS>
+         <LEAF type="rectangle" args="0 4 5 0" />
+       </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="porta4">
+       <MATERIAL id="null" />
+       <TEXTURE id="ferrari" />
+
+       <TRANSLATION x="2.75" y="4" z="7.51" />
+       <SCALE sx="0.9" sy="0.9" sz="1" />
+
+
+       <DESCENDANTS>
+         <LEAF type="rectangle" args="0 4 5 0" />
+       </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="porta5">
+       <MATERIAL id="null" />
+       <TEXTURE id="bmw" />
+
+       <TRANSLATION x="2.75" y="4" z="7.51" />
+       <SCALE sx="0.9" sy="0.9" sz="1" />
+
+
+       <DESCENDANTS>
+         <LEAF type="rectangle" args="0 4 5 0" />
+       </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="cuboG">
+       <MATERIAL id="null" />
+       <TEXTURE id="cimento" />
+
+
+       <DESCENDANTS>
+         <NODEREF id="cubo"/>
+       </DESCENDANTS>
+
+    </NODE>
+
+    <!-- BANCADAS -->
+
 
 
     <NODE id="bancadas">
@@ -187,8 +738,8 @@
        <MATERIAL id="null" />
        <TEXTURE id="null" />
 
-       <TRANSLATION x="10" y="1" z="59" />
-       <ROTATION axis="y" angle="90" />
+       <TRANSLATION x="70" y="1" z="59" />
+       <ROTATION axis="y" angle="-90" />
 
        <DESCENDANTS>
          <NODEREF id="bancada" />
@@ -373,12 +924,53 @@
         </NODE>
 
 
+  <!-- CARS -->
 
-    <NODE id="car">
-        <MATERIAL id="defaultMaterial" />
+
+  <NODE id="cars">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+
+      <DESCENDANTS>
+        <NODEREF id="car1" />
+        <NODEREF id="car2" />
+      </DESCENDANTS>
+
+  </NODE>
+
+
+  <NODE id="car1">
+      <MATERIAL id="RedMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="17.5" y="0.2" z="0" />
+
+
+      <DESCENDANTS>
+        <NODEREF id="car" />
+      </DESCENDANTS>
+
+  </NODE>
+
+
+    <NODE id="car2">
+        <MATERIAL id="BlueMaterial" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="20" y="0.2" z="0" />
+        <TRANSLATION x="45" y="0.2" z="0" />
+
+
+        <DESCENDANTS>
+          <NODEREF id="car" />
+        </DESCENDANTS>
+
+    </NODE>
+
+
+    <NODE id="car">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
         <DESCENDANTS>
        		<NODEREF id="rodas" />
@@ -474,7 +1066,7 @@
 
 
   <NODE id="nariz">
-       <MATERIAL id="CarMaterial"/>
+       <MATERIAL id="null"/>
         <TEXTURE id="null" />
 
         <DESCENDANTS>
@@ -584,7 +1176,7 @@
 
 	<NODE id="cubo3">
         <TEXTURE id="null" />
-        <MATERIAL id="CarMaterial"/>
+        <MATERIAL id="null"/>
 
         <TRANSLATION x="0.5" y="-2.3" z="-0.8" />
         <SCALE sx="1" sy="0.6" sz="1.3" />
@@ -596,7 +1188,7 @@
     </NODE>
     	<NODE id="cubo9">
         <TEXTURE id="null" />
-        <MATERIAL id="CarMaterial"/>
+        <MATERIAL id="null"/>
 
         <TRANSLATION x="2" y="-2.3" z="-0.8" />
         <SCALE sx="0.7" sy="0.6" sz="0.5" />
@@ -656,7 +1248,7 @@
 
      <NODE id="pilot_helmet">
         <TEXTURE id="null" />
-        <MATERIAL id="CarMaterial"/>
+        <MATERIAL id="null"/>
 
         <TRANSLATION x="5.5" y="2.5" z="5.5" />
  		 <SCALE sx="0.4" sy="0.4" sz="0.4" />
@@ -745,7 +1337,7 @@
 
     	<NODE id="cubo4">
         <TEXTURE id="null" />
-        <MATERIAL id="CarMaterial"/>
+        <MATERIAL id="null"/>
 
         <TRANSLATION x="2" y="2.8" z="0" />
         <SCALE sx="0.7" sy="0.1" sz="0.2" />
@@ -784,7 +1376,7 @@
 
     <NODE id="CilindroCarro">
  		 <TEXTURE id="null" />
- 		 <MATERIAL id="CarMaterial"/>
+ 		 <MATERIAL id="null"/>
 
         <TRANSLATION x="3.2" y="0.8" z="1.5" />
         <ROTATION axis="y" angle="90" />
