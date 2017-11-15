@@ -4,12 +4,12 @@ class Animation {
      * Abstract animation constructor.
      * @param scene Scene to apply the animation to
      * @param id Animation identification string.
-     * @param time Animation time span.
+     * @param speed Animation time span.
      */
-    constructor(scene, id, time) {
+    constructor(scene, id, speed) {
         this.scene = scene;
         this.id = id;
-        this.time = time;
+        this.speed = time;
         this.done = false;
     }
 
