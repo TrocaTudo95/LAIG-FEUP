@@ -117,11 +117,6 @@
         <amplif_factor s="5" t="4" />
     </TEXTURE>
 
-    <TEXTURE id="track">
-        <file path="images/track.jpg" />
-        <amplif_factor s="5" t="4" />
-    </TEXTURE>
-
     <TEXTURE id="final">
         <file path="images/final.jpg" />
         <amplif_factor s="5" t="4" />
