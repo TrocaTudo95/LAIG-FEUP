@@ -20,6 +20,8 @@ function MyGraphNode(graph, nodeID) {
     // The texture ID.
     this.textureID = null ;
 
+    this.animations =[];
+
     this.transformMatrix = mat4.create();
     mat4.identity(this.transformMatrix);
 }
@@ -38,10 +40,19 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
     this.leaves.push(leaf);
 }
 /**
-* Display the leaves 
+* Display the leaves
 */
 MyGraphNode.prototype.display = function(){
   for(var i = 0; i < this.leaves.length; i++){
     this.leaves[i].display();
   }
+}
+
+MyGraphNode.prototype.addAnimation =function(animationID){
+    this.animations.push(animationID);
+}
+
+MyGraphNode.prototype.get_animationMatrix(elapsedSeconds){
+
+
 }
