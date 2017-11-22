@@ -3,7 +3,7 @@
  * @constructor
  */
 function MyInterface() {
-    //call CGFinterface constructor 
+    //call CGFinterface constructor
     CGFinterface.call(this);
 }
 ;
@@ -21,11 +21,12 @@ MyInterface.prototype.init = function(application) {
 
     // init GUI. For more information on the methods, check:
     //  http://workshop.chromeexperiments.com/examples/gui
-    
+
     this.gui = new dat.GUI();
 
+
     // add a group of controls (and open/expand by defult)
-    
+
     return true;
 };
 
@@ -48,3 +49,17 @@ MyInterface.prototype.addLightsGroup = function(lights) {
     }
 }
 
+MyInterface.prototype.addShadersGroup = function(selectable) {
+
+    var group = this.gui.addFolder("Shaders");
+    group.add(this.scene,'Shader',{Normal: 0, Fragment: 1,Vertex: 2, 'Vertex/Fragment': 3});
+
+
+
+    for (var key in selectable) {
+        if (selectable.hasOwnProperty(key)) {
+            this.scene.selectableValues[key] = selectable[key][0];
+            group.add(this.scene.selectableValues, key);
+        }
+    }
+}

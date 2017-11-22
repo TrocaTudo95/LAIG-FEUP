@@ -1169,6 +1169,7 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
 MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
     // Traverses nodes.
+    this.selectable =[];
     var children = nodesNode.children;
 
     for (var i = 0; i < children.length; i++) {
@@ -1195,8 +1196,22 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
             this.log("Processing node "+nodeID);
 
+            var selected = this.reader.getString(children[i],'selectable',false);
+
+            if(selected == null){
+              selected == "false";
+            }else if((selected != "false") && (selected != "true")){
+
+                return "fail to retrieve selectable" ;
+            }
+
+            if(selected == "true"){
+              this.selectable[nodeID] = [false];
+
+            }
+
             // Creates node.
-            this.nodes[nodeID] = new MyGraphNode(this,nodeID);
+            this.nodes[nodeID] = new MyGraphNode(this,nodeID,selected);
 
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
@@ -1475,7 +1490,7 @@ MySceneGraph.prototype.displayScene = function() {
  }
 
  /**
-  * Displays the node,processing his texture and material 
+  * Displays the node,processing his texture and material
   */
  MySceneGraph.prototype.displayNode = function(node) {
     let tID;
@@ -1500,11 +1515,22 @@ MySceneGraph.prototype.displayScene = function() {
     this.stackMaterials.push(mID);
     this.stackTextures.push(tID);
 
+    if(node.selected == "true" && this.scene.selectableValues[node.nodeID]){
+
+      this.scene.setActiveShader(this.scene.Shaders[this.scene.Shader]);
+
+    }
     for (let i = 0; i < node.children.length; i++) { //missing transformations
         let childName = node.children[i];
         let child = this.nodes[childName];
 
         this.displayNode(child);
+    }
+
+    if(node.selected == "true" && this.scene.selectableValues[node.nodeID]){
+
+      this.scene.setActiveShader(this.scene.defaultShader);
+
     }
 
     if(tID != "clear")

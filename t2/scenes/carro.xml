@@ -3,11 +3,11 @@
 <!-- Initial values -->
 <INITIALS>
     <frustum near="0.1" far="500"/>
-    <translation x="-50" y="-50" z="-30" />
-    <rotation axis="x" angle="-30" />
-    <rotation axis="y" angle="45" />
-    <rotation axis="z" angle="30" />
-    <scale sx="0.25" sy="0.25" sz="0.25" />
+    <translation x="-1" y="-3" z="0" />
+    <rotation axis="x" angle="0" />
+    <rotation axis="y" angle="20" />
+    <rotation axis="z" angle="0" />
+    <scale sx="0.05" sy="0.05" sz="0.05" />
     <reference length="5" />
 </INITIALS>
 
@@ -56,6 +56,22 @@
     <LIGHT id="light4">
         <enable value ="1" />
         <position x="-90" y="0" z="140" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+        <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light5">
+        <enable value ="1" />
+        <position x="0" y="0" z="180" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+        <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light6">
+        <enable value ="1" />
+        <position x="0" y="0" z="-140" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
         <specular r="0.6" g="0.6" b="0.6" a="1.0" />
@@ -342,7 +358,7 @@
     <ROTATION axis="x" angle="-90" />
 
     <DESCENDANTS>
-      <LEAF type="cylinder" args="0.001 20 20 20 20 1 1" />
+      <LEAF type="cylinder" args="0.001 20 20 20 20 1 0" />
     </DESCENDANTS>
 
 </NODE>
@@ -368,7 +384,7 @@
     <ROTATION axis="x" angle="-90" />
 
     <DESCENDANTS>
-      <LEAF type="cylinder" args="0.001 20 20 20 20 1 1" />
+      <LEAF type="cylinder" args="0.001 20 20 20 20 1 0" />
     </DESCENDANTS>
 
 </NODE>
@@ -394,7 +410,7 @@
     <ROTATION axis="x" angle="-90" />
 
     <DESCENDANTS>
-      <LEAF type="cylinder" args="0.001 25 25 20 20 1 1" />
+      <LEAF type="cylinder" args="0.001 25 25 20 20 1 0" />
     </DESCENDANTS>
 
 </NODE>
@@ -434,7 +450,7 @@
     <ROTATION axis="x" angle="-90" />
 
     <DESCENDANTS>
-      <LEAF type="cylinder" args="0.001 25 25 20 20 1 1" />
+      <LEAF type="cylinder" args="0.001 25 25 20 20 1 0" />
     </DESCENDANTS>
 
 </NODE>
@@ -460,7 +476,7 @@
     <ROTATION axis="x" angle="-90" />
 
     <DESCENDANTS>
-      <LEAF type="cylinder" args="0.001 25 25 20 20 1 1" />
+      <LEAF type="cylinder" args="0.001 25 25 20 20 1 0" />
     </DESCENDANTS>
 
 </NODE>
@@ -500,7 +516,7 @@
     <ROTATION axis="x" angle="-90" />
 
     <DESCENDANTS>
-      <LEAF type="cylinder" args="0.001 25 25 20 20 1 1" />
+      <LEAF type="cylinder" args="0.001 25 25 20 20 1 0" />
     </DESCENDANTS>
 
 </NODE>
@@ -854,7 +870,7 @@
        <MATERIAL id="null" />
        <TEXTURE id="null" />
 
-       <TRANSLATION x="60" y="16.5" z="3.4" />
+       <TRANSLATION x="60" y="16.5" z="3" />
        <ROTATION axis="x" angle="-90"/>
        <ROTATION axis="y" angle="180"/>
 
@@ -928,14 +944,14 @@
 
 
       <DESCENDANTS>
-        <NODEREF id="car1" />
-        <NODEREF id="car2" />
+        <NODEREF id="RedCar" />
+        <NODEREF id="BlueCar" />
       </DESCENDANTS>
 
   </NODE>
 
 
-  <NODE id="car1">
+  <NODE id="RedCar" selectable="true">
       <MATERIAL id="RedMaterial" />
       <TEXTURE id="null" />
 
@@ -949,7 +965,7 @@
   </NODE>
 
 
-    <NODE id="car2">
+    <NODE id="BlueCar" selectable="true">
         <MATERIAL id="BlueMaterial" />
         <TEXTURE id="null" />
 
