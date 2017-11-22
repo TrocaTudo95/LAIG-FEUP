@@ -35,8 +35,9 @@ this.done = true;
 
 display(){
   this.scene.translate(this.center[0],this.center[1],this.center[2]);
-  this.scene.translate(this.radius* Math.sin(this.start_angle + this.rotation_angle), 0, this.radius * Math.cos(this.start_angle + this.rotation_angle));
    this.scene.rotate(Math.PI / 2 + this.start_angle + this.rotation_angle, 0, 1, 0);
+  this.scene.translate(this.radius* Math.sin(this.start_angle + this.rotation_angle), 0, this.radius * Math.cos(this.start_angle + this.rotation_angle));
+
 }
 
 calculate_distance(){

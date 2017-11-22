@@ -1,4 +1,4 @@
-var degToRad = Math.PI / 180;
+var DEGREE_TO_RAD = Math.PI / 180;
 
 // Order of the groups in the XML document.
 var INITIALS_INDEX = 0;
@@ -9,7 +9,6 @@ var MATERIALS_INDEX = 4;
 var ANIMATIONS_INDEX = 5;
 var LEAVES_INDEX = 6;
 var NODES_INDEX = 7;
-
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -23,6 +22,7 @@ function MySceneGraph(filename, scene) {
     scene.graph = this;
 
     this.nodes = [];
+    this.selectableNodeIds = [];
 
     this.idRoot = null;                    // The id of the root element.
 
@@ -34,16 +34,14 @@ function MySceneGraph(filename, scene) {
     // File reading
     this.reader = new CGFXMLreader();
 
-     this.stackTextures = new Array();
-  this.stackMaterials = new Array();
-
     /*
-	 * Read the contents of the xml file, and refer to this class for loading and error handlers.
-	 * After the file is read, the reader calls onXMLReady on this object.
-	 * If any error occurs, the reader calls onXMLError on this object, with an error message
-	 */
+     * Read the contents of the xml file, and refer to this class for loading and error handlers.
+     * After the file is read, the reader calls onXMLReady on this object.
+     * If any error occurs, the reader calls onXMLError on this object, with an error message
+     */
 
     this.reader.open('scenes/' + filename, this);
+
     this.elapsedSeconds = 0;
 }
 
@@ -1159,6 +1157,7 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
 
         // Creates material with the specified characteristics.
         var newMaterial = new CGFappearance(this.scene);
+        newMaterial.setTextureWrap("CLAMP_TO_EDGE", "CLAMP_TO_EDGE");
         newMaterial.setShininess(shininess);
         newMaterial.setAmbient(ambientComponent[0], ambientComponent[1], ambientComponent[2], ambientComponent[3]);
         newMaterial.setDiffuse(diffuseComponent[0], diffuseComponent[1], diffuseComponent[2], diffuseComponent[3]);
@@ -1194,7 +1193,7 @@ function createLinearAnim(graph, xmlAnim) {
             controlPoints.push(point);
         }
     }
-    //return new LinearAnimation(graph.scene, controlPoints, animSpeed);
+    return new LinearAnimation(graph.scene, controlPoints, animSpeed);
 }
 
 function createCircularAnim(graph, xmlAnim) {
@@ -1208,7 +1207,7 @@ function createCircularAnim(graph, xmlAnim) {
 
 
 
-    //return new CircularAnimation(graph.scene, animSpeed, centerX, centerY, centerZ, radius, startAng, rotAng);
+    return new CircularAnimation(graph.scene, animSpeed, centerX, centerY, centerZ, radius, startAng, rotAng);
 }
 
 function createBezierAnim(graph, xmlAnim) {
@@ -1228,7 +1227,7 @@ function createBezierAnim(graph, xmlAnim) {
             controlPoints.push(point);
         }
     }
-  //  return new BezierAnimation(graph.scene, animSpeed, controlPoints);
+    return new BezierAnimation(graph.scene, animSpeed, controlPoints);
 }
 
 function createComboAnim(graph, xmlAnim) {
@@ -1244,8 +1243,9 @@ function createComboAnim(graph, xmlAnim) {
     }
 }
 
-/* Parse the <ANIMATIONS> block*/
-
+/**
+ * Parses the <ANIMATIONS> block.
+ */
 MySceneGraph.prototype.parseAnimations = function(animsNode) {
     this.animations = [];
     let children = animsNode.children;
@@ -1288,14 +1288,12 @@ MySceneGraph.prototype.parseAnimations = function(animsNode) {
     }
 }
 
-
 /**
  * Parses the <NODES> block.
  */
 MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
     // Traverses nodes.
-    this.selectable =[];
     var children = nodesNode.children;
 
     for (var i = 0; i < children.length; i++) {
@@ -1320,29 +1318,23 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             if (this.nodes[nodeID] != null )
                 return "node ID must be unique (conflict: ID = " + nodeID + ")";
 
-            this.log("Processing node "+nodeID);
+            this.log("Processing node " + nodeID);
 
-            var selected = this.reader.getString(children[i],'selectable',false);
-
-            if(selected == null){
-              selected == "false";
-            }else if((selected != "false") && (selected != "true")){
-
-                return "fail to retrieve selectable" ;
+            let selectableNode = this.reader.getBoolean(children[i], 'selectable', false);
+            if (selectableNode == null) {
+                selectableNode = false;
             }
-
-            if(selected == "true"){
-              this.selectable[nodeID] = [false];
-
+            if (selectableNode) {
+                this.selectableNodeIds.push(nodeID);
             }
 
             // Creates node.
-            this.nodes[nodeID] = new MyGraphNode(this,nodeID,selected);
+            this.nodes[nodeID] = new MyGraphNode(this, nodeID, selectableNode);
 
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
             var specsNames = [];
-            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS","ANIMATIONREFS"];
+            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS", "ANIMATIONREFS"];
             for (var j = 0; j < nodeSpecs.length; j++) {
                 var name = nodeSpecs[j].nodeName;
                 specsNames.push(nodeSpecs[j].nodeName);
@@ -1373,6 +1365,10 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 return "unable to parse texture ID (node ID = " + nodeID + ")";
             if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null )
                 return "ID does not correspond to a valid texture (node ID = " + nodeID + ")";
+
+            if (nodeID == "luzes") {
+                let i = 1+1;
+            }
 
             this.nodes[nodeID].textureID = textureID;
 
@@ -1457,6 +1453,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 }
             }
 
+            // Retrieves possible animations.
             let animsIndex = specsNames.indexOf("ANIMATIONREFS");
             if (animsIndex != -1) {
                 let animationRefs = nodeSpecs[animsIndex].children;
@@ -1475,11 +1472,11 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             var sizeChildren = 0;
             for (var j = 0; j < descendants.length; j++) {
                 if (descendants[j].nodeName == "NODEREF")
-				{
+                {
 
-					var curId = this.reader.getString(descendants[j], 'id');
+                    var curId = this.reader.getString(descendants[j], 'id');
 
-					this.log("   Descendant: "+curId);
+                    this.log("   Descendant: "+curId);
 
                     if (curId == null )
                         this.onXMLMinorError("unable to parse descendant id");
@@ -1491,61 +1488,21 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                     }
                 }
                 else
-					if (descendants[j].nodeName == "LEAF")
-					{
-					var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
-						if (type != null && type != 'patch'){
-                        var s_args= this.reader.getString(descendants[j],'args');
-                       // console.log(s_args);
-						var args=s_args.split(" ");
-						//console.log(args);
-                        this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,type,args));
-							this.log("   Leaf: "+ type);
-                         }
-            else if (type =='patch'){
-                var s_args= this.reader.getString(descendants[j],'args');
-                       // console.log(s_args);
-				var args=s_args.split(" ");
-				let div_u = parseInt(args[0]);
-				let div_v = parseInt(args[1]);
-				let deg_u = descendants[j].children.length -1;
-				let deg_v = descendants[j].children[0].children.length -1;
-				args[2] = deg_u;
-				args[3] = deg_v;
-				args[4] = new Array();      //gets the arguments needed to build the patch
-				for(let nu = 0;nu <= deg_u;nu++){
-				    let ctr_pt_ln = new Array();
-				    for(let nv = 0;nv <= deg_v;nv++){
-				        let ctr_pt = new Array();   //gets point by point and line by line
-				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'xx'));
-				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'yy'));
-				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'zz'));
-				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'ww'));
-				        ctr_pt_ln.push(ctr_pt);
-				    }
-				    args[4].push(ctr_pt_ln);
-				}
+                    if (descendants[j].nodeName == "LEAF")
+                    {
+                        var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
 
-				this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,type,args));
-				this.log("   Leaf: "+ type);
-            }
+                        if (type != null)
+                            this.log("   Leaf: "+ type);
+                        else
+                            this.warn("Error in leaf");
 
-
-
-						else if (type == null)
-							console.log("Error in this leaf");
-
-						//parse leaf
-
-
-
-
-
-
+                        //parse leaf
+                        this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
                         sizeChildren++;
-					}
-					else
-						this.onXMLMinorError("unknown tag <" + descendants[j].nodeName + ">");
+                    }
+                    else
+                        this.onXMLMinorError("unknown tag <" + descendants[j].nodeName + ">");
 
             }
             if (sizeChildren == 0)
@@ -1555,10 +1512,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             this.onXMLMinorError("unknown tag name <" + nodeName);
     }
 
-    this.stackTextures.push("clear");
-    this.stackMaterials.push(this.defaultMaterialID);
     console.log("Parsed nodes");
-    //this.updateTexCoords();
     return null ;
 }
 
@@ -1614,95 +1568,74 @@ MySceneGraph.generateRandomString = function(length) {
     return String.fromCharCode.apply(null, numbers);
 }
 
-MySceneGraph.prototype.update = function(deltaMs) {
-    this.elapsedSeconds += deltaMs / 1000.0;
-}
-
-
-
 /**
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.displayScene = function() {
+    let rootNode = this.nodes[this.idRoot];
+    this.displayNode(rootNode, null, null, 1, 1, false);
+}
 
- 	let rootNode = this.nodes[this.idRoot];
- 	this.displayNode(rootNode, "null", "null", false);
- }
+/**
+ * Displays the scene, processing each node, starting at the given node.
+ * Must be called from displayScene to start at the root node.
+ */
+MySceneGraph.prototype.displayNode = function(node, materialID, textureID, ampS, ampT, appliedMaterial, isSelectable = false) {
 
- /**
-  * Displays the node,processing his texture and material
-  */
- MySceneGraph.prototype.displayNode = function(node) {
-    let tID;
-    let mID;
-
-    if(node.materialID == "null"){
-      mID = this.stackMaterials[this.stackMaterials.length-1];
-    }
-    else{
-      mID = node.materialID;
-    }
-    if(node.textureID == "null"){
-      tID = this.stackTextures[this.stackTextures.length - 1];
-
-    }
-    else{
-      tID = node.textureID;
+    if (node.selectable && !this.scene.isSelectableShaderSet) {
+        isSelectable = true;
+        this.scene.setActiveShader(this.scene.selectableShader);
+        this.scene.isSelectableShaderSet = true;
+    } else if (this.scene.isSelectableShaderSet && !isSelectable) {
+        this.scene.setActiveShader(this.scene.defaultShader);
+        this.scene.isSelectableShaderSet = false;
     }
 
     this.scene.pushMatrix();
+
     this.scene.multMatrix(node.transformMatrix);
-    this.stackMaterials.push(mID);
-    this.stackTextures.push(tID);
-
-    if(node.selected == "true" && this.scene.selectableValues[node.nodeID]){
-
-      this.scene.setActiveShader(this.scene.Shaders[this.scene.Shader]);
-
+    let animTransform = node.getAnimTransform(this.elapsedSeconds);
+    if (animTransform != null) {
+        this.scene.multMatrix(animTransform);
     }
+    if (node.materialID != "null") {
+        materialID = node.materialID;
+    }
+    if (node.textureID != null && node.textureID != "null" && node.textureID != "clear") {
+        textureID = node.textureID;
+        ampS = this.textures[textureID][1];
+        ampT = this.textures[textureID][2];
+    }
+
+    if (node.textureID == "clear" && textureID != null) {
+        this.textures[textureID][0].unbind();
+        textureID = null;
+        node.textureID = null;
+    }
+
     for (let i = 0; i < node.children.length; i++) { //missing transformations
         let childName = node.children[i];
         let child = this.nodes[childName];
-
-        this.displayNode(child);
-    }
-
-    if(node.selected == "true" && this.scene.selectableValues[node.nodeID]){
-
-      this.scene.setActiveShader(this.scene.defaultShader);
+        this.displayNode(child, materialID, textureID, ampS, ampT, appliedMaterial, isSelectable);
 
     }
-
-    if(tID != "clear")
-    {
-      this.materials[mID].setTexture(this.textures[tID][0])
-    }
-
-    else if( tID == "clear"){
-
-      this.materials[mID].setTexture(null);
-    }
-
-
-    this.materials[mID].apply();
-
     for (let i = 0; i < node.leaves.length; i++) {
-        let leaf=node.leaves[i];
-        if((leaf.object instanceof MyTriangle || leaf.object instanceof MyRectangle ) && tID!="clear"){
-           // console.log(this.textures[tID]);
-           leaf.scaleTexCoords(this.textures[tID][1],this.textures[tID][2]);
+        if (materialID != null) {
+            this.materials[materialID].apply();
         }
-
+        if (textureID != null) {
+            this.textures[textureID][0].bind();
+        }
+        node.leaves[i].updateTexCoords(ampS, ampT);
         node.leaves[i].display();
-
-
     }
+    this.scene.popMatrix();
+}
 
-    //if(tID != "clear")
-      //this.textures[tID][0].unbind();
-
-    this.stackMaterials.pop();
-    this.stackTextures.pop();
-    this.scene.popMatrix()
-    first_run=true;
+/**
+ * Called by the scene to update the animations.
+ * deltaMs - Milliseconds since previous update() call.
+ */
+MySceneGraph.prototype.update = function(deltaMs) {
+    this.elapsedSeconds += deltaMs / 1000.0;
 }

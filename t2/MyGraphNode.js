@@ -20,7 +20,9 @@ function MyGraphNode(graph, nodeID,selected) {
     // The texture ID.
     this.textureID = null ;
 
-    this.selected = selected;
+  this.selected = selected;
+    this.animations =[];
+
 
     this.transformMatrix = mat4.create();
     mat4.identity(this.transformMatrix);
@@ -49,5 +51,14 @@ MyGraphNode.prototype.display = function(){
     this.leaves[i].display();
 
 }
+
+}
+
+MyGraphNode.prototype.addAnimation =function(animationID){
+    this.animations.push(animationID);
+}
+
+MyGraphNode.prototype.get_animationMatrix(elapsedSeconds){
+
 
 }
