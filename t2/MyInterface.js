@@ -52,6 +52,7 @@ MyInterface.prototype.addLightsGroup = function(lights) {
 MyInterface.prototype.addShadersGroup = function(selectable) {
 
     var group = this.gui.addFolder("Shaders");
+    group.open();
     group.add(this.scene,'Shader',{Normal: 0, Fragment: 1,Vertex: 2, 'Vertex/Fragment': 3});
 
 
