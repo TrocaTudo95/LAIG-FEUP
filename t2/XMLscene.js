@@ -117,10 +117,10 @@ XMLscene.prototype.onGraphLoaded = function()
 }
 
 
-XMLscene.prototype.update = funtion(currTime){
+XMLscene.prototype.update = function(currTime){
+    let time = currTime- this.prevTime;
     if(this.prevTime==0)
       time=0;
-    let time = currTime- this.prevTime;
     this.graph.update(time/1000);
 }
 

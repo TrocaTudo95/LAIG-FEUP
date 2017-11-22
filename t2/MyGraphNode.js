@@ -58,7 +58,7 @@ MyGraphNode.prototype.addAnimation =function(animationID){
     this.animations.push(animationID);
 }
 
-MyGraphNode.prototype.get_animationMatrix(elapsedSeconds){
+MyGraphNode.prototype.get_animationMatrix =function(elapsedSeconds){
 
 
 }
