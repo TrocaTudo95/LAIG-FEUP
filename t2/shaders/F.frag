@@ -16,9 +16,9 @@ void main() {
 	if (uUseTexture)
 	{
 		vec4 textureColor = texture2D(uSampler, vTextureCoord);
-		gl_FragColor = mix((vFinalColor*textureColor),vec4(1.0,0.0,0.0, 1.0),timeFactor);
+		gl_FragColor = mix((vFinalColor*textureColor),vec4(0.0,1.0,0.0, 1.0),timeFactor);
 	}
 	else
-		gl_FragColor = mix(vFinalColor,vec4(1.0,0.0,0.0, 1.0),timeFactor);
+		gl_FragColor = mix(vFinalColor,vec4(0.0,1.0,0.0, 1.0),timeFactor);
 
 }
