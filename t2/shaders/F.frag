@@ -2,24 +2,23 @@
 precision highp float;
 #endif
 
-struct lightProperties {
-    vec4 position;                  
-    vec4 ambient;                   
-    vec4 diffuse;                   
-    vec4 specular;                  
-    vec4 half_vector;
-    vec3 spot_direction;            
-    float spot_exponent;            
-    float spot_cutoff;              
-    float constant_attenuation;     
-    float linear_attenuation;       
-    float quadratic_attenuation;    
-    bool enabled;                   
-};
+varying vec4 vFinalColor;
+varying vec2 vTextureCoord;
+uniform float timeFactor;
 
-#define NUMBER_OF_LIGHTS 8
-uniform lightProperties uLight[NUMBER_OF_LIGHTS];
+uniform sampler2D uSampler;
+
+uniform bool uUseTexture;
 
 void main() {
-		gl_FragColor =  vec4(0.6,0.6,0.9, 1.0) * uLight[0].diffuse;
+	// Branching should be reduced to a minimal.
+	// When based on a non-changing uniform, it is usually optimized.
+	if (uUseTexture)
+	{
+		vec4 textureColor = texture2D(uSampler, vTextureCoord);
+		gl_FragColor = mix((vFinalColor*textureColor),vec4(1.0,0.0,0.0, 1.0),timeFactor);
+	}
+	else
+		gl_FragColor = mix(vFinalColor,vec4(1.0,0.0,0.0, 1.0),timeFactor);
+
 }

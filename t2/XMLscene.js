@@ -11,6 +11,7 @@ function XMLscene(interface) {
 
     this.lightValues = {};
     this.prevTime=0;
+
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -31,28 +32,36 @@ XMLscene.prototype.init = function(application) {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
+    this.setUpdatePeriod(500);
+
     this.axis = new CGFaxis(this);
 
     this.Shaders=[
     this.defaultShader,
     new CGFshader(this.gl, "shaders/F.vert", "shaders/F.frag"),
     new CGFshader(this.gl, "shaders/V.vert", "shaders/V.frag"),
-		new CGFshader(this.gl, "shaders/V_F.vert", "shaders/V_F.frag")
+		new CGFshader(this.gl, "shaders/V.vert", "shaders/F.frag")
 	];
 
-    //this.Shaders[1].setUniformsValues({uSampler2: 1});
 
-    //this.updateScaleFactor();
-
+    this.scaleFactor=0;
+    this.timeFactor=0;
     this.Shader = 0;
     this.selectableValues =[];
+
 }
 
-//XMLscene.prototype.updateScaleFactor=function(v)
-//{
-//	this.Shaders[2].setUniformsValues({normScale: this.scaleFactor});
-//	this.Shaders[1].setUniformsValues({normScale: this.scaleFactor});
-//}
+XMLscene.prototype.updateTimeFactor=function(timeFactor)
+{
+	this.Shaders[1].setUniformsValues({timeFactor: timeFactor});
+	this.Shaders[3].setUniformsValues({timeFactor: timeFactor});
+}
+
+XMLscene.prototype.updateScaleFactor=function(scaleFactor)
+{
+	this.Shaders[2].setUniformsValues({normScale: scaleFactor});
+	this.Shaders[3].setUniformsValues({normScale: scaleFactor});
+}
 
 /**
  * Initializes the scene lights with the values read from the LSX file.
@@ -119,9 +128,15 @@ XMLscene.prototype.onGraphLoaded = function()
 
 XMLscene.prototype.update = function(currTime){
     let time = currTime- this.prevTime;
+    let v = currTime/1000;
     if(this.prevTime==0)
       time=0;
     this.graph.update(time/1000);
+    this.scaleFactor = (Math.sin(v)/2)+0.5;
+    this.timeFactor = (Math.sin(v)/2)+0.5;
+    this.updateScaleFactor(this.scaleFactor);
+    this.updateTimeFactor(this.timeFactor);
+
 }
 
 /**
