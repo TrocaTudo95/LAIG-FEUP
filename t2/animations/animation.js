@@ -6,10 +6,9 @@ class Animation {
      * @param id Animation identification string.
      * @param speed Animation time span.
      */
-    constructor(scene, id, speed) {
+    constructor(scene, speed) {
         this.scene = scene;
-        this.id = id;
-        this.speed = time;
+        this.speed = speed;
         this.done = false;
     }
 

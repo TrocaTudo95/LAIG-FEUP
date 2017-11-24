@@ -126,11 +126,17 @@ XMLscene.prototype.onGraphLoaded = function()
 }
 
 
-XMLscene.prototype.update = function(currTime){
-    let time = currTime- this.prevTime;
+  XMLscene.prototype.update = function(currTime){
+  	let time;
+  	if(this.prevTime==0){
+  	time=0;
+  	}
+  	else{
+    time = currTime- this.prevTime;
+  	}
+  	    this.prevTime=currTime;
     let v = currTime/1000;
-    if(this.prevTime==0)
-      time=0;
+   
     this.graph.update(time/1000);
     this.scaleFactor = (Math.sin(v)/2)+0.5;
     this.timeFactor = (Math.sin(v)/2)+0.5;

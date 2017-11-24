@@ -1,81 +1,110 @@
-class LinearAnimation extens Animation{
-  constructor(scene,args){
-    super(scene,args[0],args[1]);
-    this.control_points=args[2];
-    this.done = false;
-    this.time_elapsed = 0;
-    this.indice=0;
-    this.distancePoints=[];
-    this.timePoints=[];
-    this.totalDistance=0;
-    this.vectors=[];
+
+
+class LinearAnimation extends Animation{
+  constructor(scene,speed, controlPoints){
+    super(scene,speed);
+    this.control_points=controlPoints;
+    this.speed = speed;
+    this.counter = 0;
+    this.current_rotation = 0;
+    this.control = [0,0,0];
+    this.TotalDistance= this.calculateTotalDistance();
+    this.totalTime=this.TotalDistance/this.speed;
+    this.calcNextPoints();
 
   }
 
-  function distance_between_points(point1,point2){
-  return
-
-  }
-  init_variables(){
-    let dis;
-    let temp_vector=[];
-    for(let i=1; i< this.control_points.length; i++){
-      dis= Math.sqrt( Math.pow(this.control_points[i][0]-this.control_points[i-1][0],2)+ Math.pow(this.control_points[i][1]-this.control_points[i-1][1],2)+ Math.pow(this.control_points[i][2]-this.control_points[i-1][2],2));
-    this.distancePoints.push(dis);
-    this.timePoints.push.push(dis/this.speed);
-    temp_vector[0]=this.control_points[i][0]-this.control_points[i-1][0];
-    temp_vector[1]=this.control_points[i][1]-this.control_points[i-1][1];
-    temp_vector[2]=this.control_points[i][2]-this.control_points[i-1][2];
-    this.vectors.push(temp_vector);
-    this.totalDistance+=dis;
+  distanceBetweenPoints(p1,p2){
+    let distance = Math.sqrt(Math.pow((p2[0] - p1[0]), 2) +Math.pow(p2[1] - p1[1], 2) +Math.pow(p2[2] - p1[2], 2));
+    return distance;
   }
 
-  this.ang=Math.atan(this.vectors[this.indice][0]/this.vectors[this.indice][2]);
+  calculateTotalDistance(){
+    let distance=0;
+    for(let i=0;i<this.control_points.length-1;i++){
+      distance +=  this.distanceBetweenPoints(this.control_points[i],this.control_points[i+1]);
+    }
+    return distance;
   }
-   update(){
-     if (this.time_elapsed >= this.time)
-     this.done = true;
-
-      this.time_elapsed+=time/1000;
-
-      if (this.time_elapsed >= this.timePoints[this.indice]) {
-
-          if(this.indice != this.timePoints.length-1)
-          {
-            this.indice++;
-          }
-
-          this.ang=Math.atan(this.vectors[this.indice][0]/this.vectors[this.indice][2]);
-        }
-
-        
-     var minTime;
-        var maxTime;
-
-        if (this.Indice == 0) {
-          console.log("ZERO");
-            maxTime = this.timeEachPoints[this.indice];
-            minTime = 0;
-        } else {
-            maxTime = this.timeEachPoints[this.indice];
-            minTime = this.timeEachPoints[this.indice - 1];
-        }
 
 
-         var percentage = (this.currTime - minTime) / maxTime;
-         this.x = this.vectors[this.indice][0] * percentage;
-         this.y = this.vectors[this.Indice][1] * percentage;
-         this.z = this.vectors[this.Indice][2] * percentage;
+
+  getMatrix(deltaTime) {
+  	var m = mat4.create();
+      mat4.identity(m);
+
+      this.update(deltaTime);
+
+      mat4.translate(m, m, [this.x, this.y, this.z]);
+      mat4.rotate(m, m, this.current_rotation, [0, 1, 0]);
+
+  	return m;
+  }
+
+  calcNextPoints(){
+    this.x1 = this.control_points[this.counter][0];
+    this.y1 = this.control_points[this.counter][1];
+    this.z1 = this.control_points[this.counter][2];
+
+    this.x = this.x1;
+    this.y = this.y1;
+    this.z = this.z1;
+
+    if (this.counter + 1 <  this.control_points.length){
+        this.x2 = this.control_points[this.counter+1][0];
+        this.y2 = this.control_points[this.counter+1][1];
+        this.z2 = this.control_points[this.counter+1][2];
+    }
+    else {
+
+        this.inUse = false;
+        return;
+    }
+
+    this.distX = this.x2-this.x1;
+    this.distY = this.y2-this.y1;
+    this.distZ = this.z2-this.z1;
+
+    var p1 = [this.x1, this.y1, this.z1];
+    var p2 = [this.x2, this.y2, this.z2];
+    var distance = this.distanceBetweenPoints(p1,p2);
+    var time = distance / this.speed;
+
+    this.current_rotation = Math.atan2(p2[0] - p1[0], p2[2] - p1[2]);
+
+    this.speed_x = this.distX / time;
+    this.speed_y = this.distY / time;
+    this.speed_z = this.distZ / time;
+
+
+    this.control = [0,0,0];
+    this.counter++;
+
+  }
+
+
+   update(deltaTime){
+     this.x += this.speed_x * deltaTime;
+     this.control[0] += this.speed_x * deltaTime ;
+
+     this.y += this.speed_y * deltaTime;
+     this.control[1] += this.speed_y * deltaTime;
+
+     this.z += this.speed_z * deltaTime;
+     this.control[2] += this.speed_z * deltaTime;
+
+     if ((Math.abs(this.distX) <= Math.abs(this.control[0])) &&
+         (Math.abs(this.distY) <= Math.abs(this.control[1])) &&
+         (Math.abs(this.distZ) <= Math.abs(this.control[2]))){
+         this.calcNextPoints();
+         return;
+     }
+
+     if(this.inUse == false)
+         return;
 
    }
 
 
-   display(){
-     let x=this.controlPoints[this.Indice].x+this.x;
-     let y=this.controlPoints[this.Indice].y+this.y;
-     let z=this.controlPoints[this.Indice].z+this.z;
 
-     this.scene.translate(this.controlPoints[this.Indice].x+this.x,this.controlPoints[this.Indice].y+this.y,this.controlPoints[this.Indice].z+this.z);
-     this.scene.rotate(this.ang,0,1,0);
-   }
 }

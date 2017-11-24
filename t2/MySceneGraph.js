@@ -1194,7 +1194,7 @@ function createLinearAnim(graph, xmlAnim) {
             controlPoints.push(point);
         }
     }
-    //return new LinearAnimation(graph.scene, controlPoints, animSpeed);
+    return new LinearAnimation(graph.scene, animSpeed, controlPoints);
 }
 
 function createCircularAnim(graph, xmlAnim) {
@@ -1615,7 +1615,7 @@ MySceneGraph.generateRandomString = function(length) {
 }
 
 MySceneGraph.prototype.update = function(deltaMs) {
-    this.elapsedSeconds += deltaMs / 1000.0;
+    this.elapsedSeconds += deltaMs;
 }
 
 
@@ -1624,7 +1624,7 @@ MySceneGraph.prototype.update = function(deltaMs) {
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.displayScene = function() {
-
+  //console.log(this.animations);
  	let rootNode = this.nodes[this.idRoot];
  	this.displayNode(rootNode, "null", "null", false);
  }
@@ -1652,6 +1652,14 @@ MySceneGraph.prototype.displayScene = function() {
 
     this.scene.pushMatrix();
     this.scene.multMatrix(node.transformMatrix);
+
+    let animTransform = node.getAnimTransform(this.elapsedSeconds);
+
+    if (animTransform != null) {
+    //  console.log(node.transformMatrix);
+    //  console.log(animTransform);
+       this.scene.multMatrix(animTransform);
+      }
     this.stackMaterials.push(mID);
     this.stackTextures.push(tID);
 
@@ -1703,6 +1711,5 @@ MySceneGraph.prototype.displayScene = function() {
 
     this.stackMaterials.pop();
     this.stackTextures.pop();
-    this.scene.popMatrix()
-    first_run=true;
+    this.scene.popMatrix();
 }
