@@ -24,34 +24,32 @@ class BezierAnimation extends Animation{
     this.t=0;
   }
 
-distance_between_points(p1,p2){
-    return Math.sqrt(Math.pow((p2[0]-p1[0]),2)+Math.pow((p2[1]-p1[1]),2)+Math.pow((p2[2]-p1[2]),2));
-  }
 
 bezier_distance(c_pts)
   {
-    var p1=this.ponto_medio(c_pts[0],c_pts[1]);          //ponto entre P1 e P2
+    let p1=this.ponto_medio(c_pts[0],c_pts[1]);          //ponto entre P1 e P2
 
-    var p2=this.ponto_medio(c_pts[1],c_pts[2]);          //ponto entre P2 e P3
+    let p2=this.ponto_medio(c_pts[1],c_pts[2]);          //ponto entre P2 e P3
 
-    var p3=this.ponto_medio(c_pts[2],c_pts[3]);          //ponto entre P3 e P4
+    let p3=this.ponto_medio(c_pts[2],c_pts[3]);          //ponto entre P3 e P4
 
-    var p4=this.ponto_medio(p1,p2);                     //ponto entre p1 e p2(criados acima)
+    let p4=this.ponto_medio(p1,p2);                     //ponto entre p1 e p2(criados acima)
 
-    var p5=this.ponto_medio(p2,p3);                    //ponto entre p2 e p3(criados acima)
-
-
+    let p5=this.ponto_medio(p2,p3);                    //ponto entre p2 e p3(criados acima)
 
     return (this.distance_between_points(c_pts[0],p1) + this.distance_between_points(p1,p4) + this.distance_between_points(p4,p5) + this.distance_between_points(p5,c_pts[3]));
 
   }
 
+distance_between_points(p1,p2){
+    return Math.sqrt(Math.pow((p2[0]-p1[0]),2)+Math.pow((p2[1]-p1[1]),2)+Math.pow((p2[2]-p1[2]),2));
+  }
 
 ponto_medio(p1,p2){
 
-    var x =(p1[0]+p2[0])/2
-    var y =(p1[1]+p2[1])/2
-    var p=[x,y]
+    let x =(p1[0]+p2[0])/2
+    let y =(p1[1]+p2[1])/2
+    let p=[x,y,0]
     return p;
 
   }
