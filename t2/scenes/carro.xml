@@ -222,10 +222,10 @@
     />
 
     <ANIMATION id="bb" speed="1.5" type="bezier">
-      <controlpoint xx="5" yy="5" zz="0"/>
-      <controlpoint xx="6" yy="6" zz="0"/>
-      <controlpoint xx="10" yy="7" zz="0"/>
-      <controlpoint xx="20" yy="10" zz="0"/>
+      <controlpoint xx="-10" yy="-10" zz="0"/>
+      <controlpoint xx="-15" yy="-10" zz="0"/>
+      <controlpoint xx="-15" yy="-15" zz="0"/>
+      <controlpoint xx="-10" yy="-15" zz="0"/>
     </ANIMATION>
 
   </ANIMATIONS>
