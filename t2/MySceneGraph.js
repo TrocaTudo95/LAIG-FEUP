@@ -1228,20 +1228,23 @@ function createBezierAnim(graph, xmlAnim) {
             controlPoints.push(point);
         }
     }
-    return new BezierAnimation(graph.scene, animSpeed, controlPoints);
+   return new BezierAnimation(graph.scene, animSpeed, controlPoints);
 }
 
 function createComboAnim(graph, xmlAnim) {
     let xmlAnimIds = xmlAnim.children;
-    let animIds = [];
+    let anims = [];
     for (let i = 0; i < xmlAnimIds.length; i++) {
         let spanName;
         if ((spanName =xmlAnimIds[i].nodeName) != "SPANREF") {
             graph.onXMLMinorError("unknown tag <" + spanName + ">");
         } else {
-
+            let comboID =this.reader.getString(xmlAnim,"id");
+            let clone = Object.assign(Object.create(Object.getPrototypeOf(this.animations[comboID])),this.animations[comboID]);
+            anims.push(clone);
         }
     }
+    return new new ComboAnimation(this.scene, animationSpeed, anims);
 }
 
 /* Parse the <ANIMATIONS> block*/

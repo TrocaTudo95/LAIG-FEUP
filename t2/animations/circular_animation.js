@@ -16,6 +16,7 @@ class CircularAnimation extends Animation{
   this.y=0;
   this.z=this.radius * Math.cos(this.start_angle);
   this.current_ang = 0;
+  this.done=false;
 }
 
 
@@ -32,8 +33,10 @@ getMatrix(deltaTime) {
 }
 
 calcNextPosition(delta_time){
-  if(this.current_ang > this.rotation_angle)
+  if(this.current_ang > this.rotation_angle){
+    this.done = true;
   return;
+}
   let rotation= delta_time *this.angular_velocity;
   this.current_ang+=rotation;
   this.x=this.radius* Math.cos(this.current_ang);

@@ -1,5 +1,4 @@
 
-
 class LinearAnimation extends Animation{
   constructor(scene,speed, controlPoints){
     super(scene,speed);
@@ -11,6 +10,7 @@ class LinearAnimation extends Animation{
     this.TotalDistance= this.calculateTotalDistance();
     this.totalTime=this.TotalDistance/this.speed;
     this.calcNextPoints();
+    this.done=false;
 
   }
 
@@ -57,7 +57,7 @@ class LinearAnimation extends Animation{
     }
     else {
 
-        this.inUse = false;
+        this.done = true;
         return;
     }
 
@@ -100,7 +100,7 @@ class LinearAnimation extends Animation{
          return;
      }
 
-     if(this.inUse == false)
+     if(this.done)
          return;
 
    }
