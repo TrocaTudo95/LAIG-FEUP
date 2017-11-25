@@ -4,33 +4,27 @@ class ComboAnimation extends Animation{
     this.animations = animations;
     this.index = 0;
     this.done=false;
+    this.lastMatrix=null;
   }
 
   checkStatus(){
     if(this.animations[this.index].done){
       this.index++;
-      if(this.index == this.animations.length){
+
+            if(this.index == this.animations.length){
         this.done = true;
       }
     }
   }
 
-  update(deltaTime){
-    if(!this.done){
-        this.animations[this.index].update(deltaTime);
-        this.transformMatrix = this.animations[this.index].transformMatrix;
-        this.checkStatus();
-    }
-    else{
-      this.animations[this.index].update(deltaTime);
-      this.transformMatrix = this.animations[this.index].transformMatrix;
-    }
-
-  }
 
 
   getMatrix(deltaTime) {
-
+    if(this.done)
+    return this.lastMatrix;
+   this.lastMatrix = this.animations[this.index].getMatrix(deltaTime);
+   this.checkStatus();
+   return this.lastMatrix;
 
   }
 }

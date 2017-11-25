@@ -1239,12 +1239,13 @@ function createComboAnim(graph, xmlAnim) {
         if ((spanName =xmlAnimIds[i].nodeName) != "SPANREF") {
             graph.onXMLMinorError("unknown tag <" + spanName + ">");
         } else {
-            let comboID =this.reader.getString(xmlAnim,"id");
-            let clone = Object.assign(Object.create(Object.getPrototypeOf(this.animations[comboID])),this.animations[comboID]);
+            let comboID =xmlAnimIds[i].id;
+            let clone = graph.animations[comboID];
             anims.push(clone);
         }
     }
-    return new new ComboAnimation(this.scene, animationSpeed, anims);
+    let s=0;
+    return new ComboAnimation(this.scene, s, anims);
 }
 
 /* Parse the <ANIMATIONS> block*/
@@ -1617,8 +1618,8 @@ MySceneGraph.generateRandomString = function(length) {
     return String.fromCharCode.apply(null, numbers);
 }
 
-MySceneGraph.prototype.update = function(deltaMs) {
-    this.elapsedSeconds += deltaMs;
+MySceneGraph.prototype.update = function(delta) {
+    this.elapsedSeconds=delta;
 }
 
 
@@ -1659,8 +1660,6 @@ MySceneGraph.prototype.displayScene = function() {
     let animTransform = node.getAnimTransform(this.elapsedSeconds);
 
     if (animTransform != null) {
-    //  console.log(node.transformMatrix);
-    //  console.log(animTransform);
        this.scene.multMatrix(animTransform);
       }
     this.stackMaterials.push(mID);

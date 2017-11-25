@@ -22,6 +22,7 @@ function MyGraphNode(graph, nodeID,selected) {
 
   this.selected = selected;
     this.animations =[];
+    this.prevTime=0;
 
 
     this.transformMatrix = mat4.create();
@@ -64,7 +65,6 @@ MyGraphNode.prototype.getAnimTransform = function(currentSeconds) {
     let elapsedTime = 0;
     for (let i = 0; i < this.animations.length; i++) {
         let animation = this.graph.animations[this.animations[i]];
-       // console.log(animation);
         if (elapsedTime + animation.totalTime > currentSeconds  || i + 1 == this.animations.length) {
             return animation.getMatrix(currentSeconds);
             break;
