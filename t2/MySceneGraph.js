@@ -1228,7 +1228,7 @@ function createBezierAnim(graph, xmlAnim) {
             controlPoints.push(point);
         }
     }
-  //  return new BezierAnimation(graph.scene, animSpeed, controlPoints);
+    return new BezierAnimation(graph.scene, animSpeed, controlPoints);
 }
 
 function createComboAnim(graph, xmlAnim) {

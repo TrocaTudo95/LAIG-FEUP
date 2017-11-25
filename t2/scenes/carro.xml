@@ -220,8 +220,15 @@
     centerx="2" centery="0" centerz="2"
     radius="10" startang="0" rotang="90"
     />
-    
-</ANIMATIONS>
+
+    <ANIMATION id="bb" speed="1.5" type="bezier">
+      <controlpoint xx="5" yy="5" zz="0"/>
+      <controlpoint xx="6" yy="6" zz="0"/>
+      <controlpoint xx="10" yy="7" zz="0"/>
+      <controlpoint xx="20" yy="10" zz="0"/>
+    </ANIMATION>
+
+  </ANIMATIONS>
 
 
 <!-- The leaves -->
@@ -984,7 +991,7 @@
       </DESCENDANTS>
 
       <ANIMATIONREFS>
-        <ANIMATIONREF id="ss"/>
+        <ANIMATIONREF id="bb"/>
       </ANIMATIONREFS>
   </NODE>
 
