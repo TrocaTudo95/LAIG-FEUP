@@ -22,7 +22,11 @@ class BezierAnimation extends Animation{
     this.distance = this.bezier_distance(this.control_points);
     this.angulo = 0;
     this.t=0;
+    this.x = this.p1x;
+    this.y = this.p1y;
+    this.z = this.p1z;
     this.totalTime=this.distance/this.speed;
+
   }
 
 
@@ -69,38 +73,28 @@ ponto_medio(p1,p2){
   }
 //o delta time ja é o tempo desde a ultima vez
   update(deltaTime){
-    this.t=(this.velocity*deltaTime)/this.distance;
+
+    this.t += (deltaTime * this.speed) / this.distance;
+    console.log(this.t);
+    if(this.t >= 1){
+
+        this.x = this.p4x;
+        this.y = this.p4y;
+        this.z = this.p4z;
+        return;
+
+    }
+    else{
     var P=[this.x, this.y, this.z];
 		this.x=Math.pow((1-this.t),3)*this.p1x + 3*this.t*Math.pow((1-this.t),2)*this.p2x+3*Math.pow(this.t,2)*(1-this.t)*this.p3x+Math.pow(this.t,3)*this.p4x;
 		this.y=Math.pow((1-this.t),3)*this.p1y + 3*this.t*Math.pow((1-this.t),2)*this.p2y+3*Math.pow(this.t,2)*(1-this.t)*this.p3y+Math.pow(this.t,3)*this.p4y;
 		this.z=Math.pow((1-this.t),3)*this.p1z + 3*this.t*Math.pow((1-this.t),2)*this.p2z+3*Math.pow(this.t,2)*(1-this.t)*this.p3z+Math.pow(this.t,3)*this.p4z;
 
 
-			if((this.z-P[2])==0)
-      {
-				if((this.x-P[0])>0)
-        {
-					this.angulo=90*degToRad;
-				}
-				else if((this.x-P[0])<0)
-        {
-					this.angulo=-90*degToRad;
-				}
-			}
-			else
-      {
-				if((P[2]-this.z)<0)
-        {
-					this.angulo=Math.atan((this.x-P[0])/(this.z-P[2]));
-				}
-				else if((P[2]-this.z)>0)
-        {
-					this.angulo=180*degToRad+Math.atan((this.x-P[0])/(this.z-P[2]));
-				}
-
-			}
+			this.angulo = Math.atan2(this.x - P[0], this.z - P[2]);
     }
 
 
 
+}
 }
