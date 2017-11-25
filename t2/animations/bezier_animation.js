@@ -24,9 +24,8 @@ class BezierAnimation extends Animation{
     this.t=0;
   }
 
- distanceBetweenPoints(p1,p2){
-    let distance = Math.sqrt(Math.pow((p2[0] - p1[0]), 2) +Math.pow(p2[1] - p1[1], 2) +Math.pow(p2[2] - p1[2], 2));
-    return distance;
+distance_between_points(p1,p2){
+    return Math.sqrt(Math.pow((p2[0]-p1[0]),2)+Math.pow((p2[1]-p1[1]),2)+Math.pow((p2[2]-p1[2]),2));
   }
 
 bezier_distance(c_pts)
@@ -40,14 +39,10 @@ bezier_distance(c_pts)
     var p4=this.ponto_medio(p1,p2);                     //ponto entre p1 e p2(criados acima)
 
     var p5=this.ponto_medio(p2,p3);                    //ponto entre p2 e p3(criados acima)
-	
-	let d1=this.distanceBetweenPoints(c_pts[0],p1);
-	let d2=this.distanceBetweenPoints(p1,p4);
-	let d3=this.distanceBetweenPoints(p4,p5);
-	let d4=this.distanceBetweenPoints(p5,c_pts[3]);
 
 
-    return d1+d2+d3+d4;
+
+    return (this.distance_between_points(c_pts[0],p1) + this.distance_between_points(p1,p4) + this.distance_between_points(p4,p5) + this.distance_between_points(p5,c_pts[3]));
 
   }
 
