@@ -9,7 +9,6 @@ class Animation {
     constructor(scene, speed) {
         this.scene = scene;
         this.speed = speed;
-        this.done = false;
     }
 
 

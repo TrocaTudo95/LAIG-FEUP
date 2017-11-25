@@ -1,55 +1,52 @@
 class CircularAnimation extends Animation{
-  //args[0]-id
-  //args[1]-speed
-  //args[2]-center
-  //args[3]-radius
-  //args[4]-start_angle
-  //args[5]-rotation_angle
-  constructor(scene,args){
-  super(scene,args[0],args[1]);
-  this.center[0]=parseFloat(args[2][0]);
-  this.center[1]=parseFloat(args[2][1]);
-  this.center[2]=parseFloat(args[2][2]);
-  this.radius=parseFloat(args[3]);
-  this.start_angle=parseFloat(args[4]);
-  this.rotation_angle=parseFloat(args[5]);
-  this.initial_position();
-  this.angular_velocity=this.velocity/this.radius;
-  this.calulate_distance();
-  this.time=this.distance/this.velocity;
+  constructor(scene, speed, centerX, centerY, centerZ, radius, startAng, rotAng){
+  super(scene,speed);
+  var DEGREE_TO_RAD = Math.PI/180;
+  this.centerX=centerX;
+  this.centerY=centerY;
+  this.centerZ=centerZ;
+  this.radius=radius;
+  this.start_angle=startAng* DEGREE_TO_RAD;
+  this.rotation_angle=rotAng* DEGREE_TO_RAD;
+  this.angular_velocity=this.speed/this.radius;
+  this.calculate_distance();
+  this.totalTime=this.distance/this.speed;
+
+  this.x=this.radius * Math.sin(this.start_angle);
+  this.y=0;
+  this.z=this.radius * Math.cos(this.start_angle);
+  this.current_ang = 0;
 }
 
-update(delta_time,is_updated){
-  if (this.is_updated != is_updated || this.done)
-return;
 
-this.time_elapsed+=delta_time/1000;
-let rotation= delta_time/1000 *this.angular_velocity;
-this.rotation_angle+=rotation;
-this.is_updated= !this.is_updated;
+getMatrix(deltaTime) {
+  var m = mat4.create();
+    mat4.identity(m);
 
-if (this.time_elapsed >= this.time)
-this.done = true;
+    this.update(deltaTime);
+    mat4.translate(m,m,[this.centerX,this.centerY,this.centerZ]);
+    mat4.translate(m, m, [this.x, this.y, this.z]);
+    mat4.rotate(m, m, this.start_angle- this.current_ang, [0, 1, 0]);
+
+  return m;
+}
+
+calcNextPosition(delta_time){
+  if(this.current_ang > this.rotation_angle)
+  return;
+  let rotation= delta_time *this.angular_velocity;
+  this.current_ang+=rotation;
+  this.x=this.radius* Math.cos(this.current_ang);
+  this.z=this.radius *Math.sin(this.current_ang);
 
 }
 
-display(){
-  this.scene.translate(this.center[0],this.center[1],this.center[2]);
-   this.scene.rotate(Math.PI / 2 + this.start_angle + this.rotation_angle, 0, 1, 0);
-  this.scene.translate(this.radius* Math.sin(this.start_angle + this.rotation_angle), 0, this.radius * Math.cos(this.start_angle + this.rotation_angle));
-
+update(delta_time){
+this.calcNextPosition(delta_time);
 }
 
 calculate_distance(){
   this.distance=this.radius*this.rotation_angle;
 }
 
-  initial_position(){
-    this.position = [this.radius * Math.sin(this.start_angle), 0, this.radius * Math.cos(this.start_angle)];
-    this.done = false;
-    this.time_elapsed = 0;
-    this.current_ang = 0;
-    this.is_updated=false;
-
-  }
 }

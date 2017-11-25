@@ -58,12 +58,14 @@ MyGraphNode.prototype.addAnimation =function(animationID){
     this.animations.push(animationID);
 }
 
+
+
 MyGraphNode.prototype.getAnimTransform = function(currentSeconds) {
     let elapsedTime = 0;
     for (let i = 0; i < this.animations.length; i++) {
         let animation = this.graph.animations[this.animations[i]];
        // console.log(animation);
-        if (elapsedTime + animation.totalTime > currentSeconds || i + 1 == this.animations.length) {
+        if (elapsedTime + animation.totalTime > currentSeconds  || i + 1 == this.animations.length) {
             let animT = (currentSeconds - elapsedTime) / animation.totalTime;
             return animation.getMatrix(animT);
             break;

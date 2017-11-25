@@ -215,6 +215,12 @@
     <controlpoint xx="7" yy="7" zz="0"/>
     <controlpoint xx="20" yy="20" zz="0"/>
   </ANIMATION>
+
+  <ANIMATION id="aa" speed="1.5" type="circular"
+    centerx="2" centery="0" centerz="2"
+    radius="10" startang="0" rotang="90"
+    />
+    
 </ANIMATIONS>
 
 
@@ -993,6 +999,10 @@
         <DESCENDANTS>
           <NODEREF id="car" />
         </DESCENDANTS>
+
+        <ANIMATIONREFS>
+          <ANIMATIONREF id="aa"/>
+        </ANIMATIONREFS>
 
     </NODE>
 
