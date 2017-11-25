@@ -55,8 +55,8 @@ class BezierAnimation extens Animation{
     return p;
 
   }
-
-  update(){
+//o delta time ja é o tempo desde a ultima vez
+  update(deltaTime){
 
   if (this.lastUpdate == -1)
   {
@@ -103,6 +103,18 @@ class BezierAnimation extens Animation{
 
    }
 
+}
+
+getMatrix(deltaTime) {
+  var m = mat4.create();
+    mat4.identity(m);
+
+    this.update(deltaTime);
+
+    mat4.translate(m, m, [this.x, this.y, this.z]);
+    mat4.rotate(m, m, this.current_rotation, [0, 1, 0]);
+
+  return m;
 }
 
 display()
