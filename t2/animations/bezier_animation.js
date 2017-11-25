@@ -22,6 +22,20 @@ class BezierAnimation extends Animation{
     this.distance = this.bezier_distance(this.control_points);
     this.angulo = 0;
     this.t=0;
+    this.totalTime=this.distance/this.speed;
+  }
+
+
+  getMatrix(deltaTime) {
+  	var m = mat4.create();
+      mat4.identity(m);
+
+      this.update(deltaTime);
+
+      mat4.translate(m, m, [this.x, this.y, this.z]);
+      mat4.rotate(m, m, this.angulo, [0, 1, 0]);
+
+  	return m;
   }
 
 
@@ -88,15 +102,5 @@ ponto_medio(p1,p2){
     }
 
 
-getMatrix(deltaTime) {
-  var m = mat4.create();
-    mat4.identity(m);
 
-    this.update(deltaTime);
-
-    mat4.translate(m, m, [this.x, this.y, this.z]);
-    mat4.rotate(m, m, this.angulo, [0, 1, 0]);
-
-  return m;
-}
 }
