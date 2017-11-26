@@ -26,6 +26,7 @@ class BezierAnimation extends Animation{
     this.y = this.p1y;
     this.z = this.p1z;
     this.totalTime=this.distance/this.speed;
+    this.done = false;
 
   }
 
@@ -81,6 +82,7 @@ ponto_medio(p1,p2){
         this.x = this.p4x;
         this.y = this.p4y;
         this.z = this.p4z;
+        this.done = true;
         return;
 
     }

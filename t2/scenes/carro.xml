@@ -204,28 +204,118 @@
 
 <ANIMATIONS>
 
-  <ANIMATION id="ss" speed="1.5" type="linear">
-    <controlpoint xx="20" yy="0" zz="20"/>
-    <controlpoint xx="1" yy="1" zz="0"/>
-    <controlpoint xx="2" yy="2" zz="0"/>
-    <controlpoint xx="3" yy="3" zz="0"/>
-    <controlpoint xx="4" yy="4" zz="0"/>
-    <controlpoint xx="5" yy="5" zz="0"/>
-    <controlpoint xx="6" yy="6" zz="0"/>
-    <controlpoint xx="7" yy="7" zz="0"/>
-    <controlpoint xx="20" yy="20" zz="0"/>
-  </ANIMATION>
 
-  <ANIMATION id="aa" speed="0.01" type="circular"
-    centerx="2" centery="0" centerz="2"
-    radius="10" startang="0" rotang="90"
-    />
+    <ANIMATION id="Red_Boxes" speed="1" type="linear">
+      <controlpoint xx="9" yy="0" zz="0"/>
+      <controlpoint xx="9" yy="0" zz="85"/>
+    </ANIMATION>
 
-    <ANIMATION id="bb" speed="1.5" type="bezier">
-      <controlpoint xx="-40" yy="0" zz="-40"/>
-      <controlpoint xx="5" yy="0" zz="-40"/>
-      <controlpoint xx="5" yy="0" zz="-70"/>
-      <controlpoint xx="-40" yy="0" zz="-70"/>
+    <ANIMATION id="Reta1" speed="1" type="linear">
+      <controlpoint xx="20" yy="0" zz="30"/>
+      <controlpoint xx="20" yy="0" zz="125"/>
+    </ANIMATION>
+
+
+    <ANIMATION id="Red_Curva_Boxes" speed="3" type="bezier">
+      <controlpoint xx="9" yy="0" zz="95"/>
+      <controlpoint xx="17" yy="0" zz="110"/>
+      <controlpoint xx="22" yy="0" zz="110"/>
+      <controlpoint xx="27" yy="0" zz="125"/>
+    </ANIMATION>
+
+    <ANIMATION id="Rcurva1" speed="1" type="circular"
+      centerx="12" centery="0" centerz="130"
+      radius="20" startang="0" rotang="90"
+      />
+
+      <ANIMATION id="Bcurva1" speed="1" type="circular"
+        centerx="12" centery="0" centerz="130"
+        radius="20" startang="0" rotang="90"
+        />
+
+      <ANIMATION id="Reta2" speed="1" type="linear">
+        <controlpoint xx="8" yy="0" zz="150"/>
+        <controlpoint xx="-35" yy="0" zz="150"/>
+      </ANIMATION>
+
+      <ANIMATION id="Rcurva2" speed="1" type="circular"
+        centerx="-50" centery="0" centerz="150"
+        radius="20" startang="-90" rotang="90"
+        />
+
+        <ANIMATION id="Bcurva2" speed="1" type="circular"
+          centerx="-50" centery="0" centerz="150"
+          radius="20" startang="-90" rotang="90"
+          />
+
+      <ANIMATION id="Reta3" speed="1" type="linear">
+        <controlpoint xx="-50" yy="0" zz="150"/>
+        <controlpoint xx="-50" yy="0" zz="-80"/>
+      </ANIMATION>
+
+      <ANIMATION id="Rcurva3" speed="1" type="circular"
+        centerx="-50" centery="0" centerz="-70"
+        radius="20" startang="180" rotang="90"
+        />
+
+        <ANIMATION id="Bcurva3" speed="1" type="circular"
+          centerx="-50" centery="0" centerz="-70"
+          radius="20" startang="180" rotang="90"
+          />
+
+      <ANIMATION id="Reta4" speed="1" type="linear">
+        <controlpoint xx="-50" yy="0" zz="-100"/>
+        <controlpoint xx="10" yy="0" zz="-100"/>
+      </ANIMATION>
+
+      <ANIMATION id="Rcurva4" speed="1" type="circular"
+        centerx="0" centery="0" centerz="-80"
+        radius="10" startang="90" rotang="90"
+        />
+
+        <ANIMATION id="Bcurva4" speed="1" type="circular"
+          centerx="0" centery="0" centerz="-80"
+          radius="10" startang="90" rotang="90"
+          />
+
+        <ANIMATION id="Red_Final" speed="1" type="linear">
+          <controlpoint xx="30" yy="0" zz="-100"/>
+          <controlpoint xx="30" yy="0" zz="60"/>
+        </ANIMATION>
+
+        <ANIMATION id="Blue_Final" speed="1" type="linear">
+          <controlpoint xx="30" yy="0" zz="-100"/>
+          <controlpoint xx="30" yy="0" zz="90"/>
+        </ANIMATION>
+
+
+    <ANIMATION id="RedCarAnimation" type="combo">
+      <SPANREF id="Red_Boxes" />
+      <SPANREF id="Red_Curva_Boxes" />
+      <SPANREF id="Rcurva1" />
+      <SPANREF id="Reta2" />
+      <SPANREF id="Rcurva2" />
+      <SPANREF id="Reta3" />
+      <SPANREF id="Rcurva3" />
+      <SPANREF id="Reta4" />
+      <SPANREF id="Rcurva4" />
+      <SPANREF id="Red_Final" />
+
+
+    </ANIMATION>
+
+    <ANIMATION id="BlueCarAnimation" type="combo">
+      <SPANREF id="Reta1" />
+      <SPANREF id="Bcurva1" />
+      <SPANREF id="Reta2" />
+      <SPANREF id="Bcurva2" />
+      <SPANREF id="Reta3" />
+      <SPANREF id="Bcurva3" />
+      <SPANREF id="Reta4" />
+      <SPANREF id="Bcurva4" />
+      <SPANREF id="Blue_Final" />
+
+
     </ANIMATION>
 
   </ANIMATIONS>
@@ -983,7 +1073,7 @@
       <MATERIAL id="RedMaterial" />
       <TEXTURE id="null" />
 
-      <TRANSLATION x="17.5" y="0.2" z="0" />
+      <TRANSLATION x="9" y="0.2" z="0" />
 
 
       <DESCENDANTS>
@@ -991,7 +1081,7 @@
       </DESCENDANTS>
 
       <ANIMATIONREFS>
-        <ANIMATIONREF id="bb"/>
+        <ANIMATIONREF id="RedCarAnimation"/>
       </ANIMATIONREFS>
   </NODE>
 
@@ -1000,7 +1090,7 @@
         <MATERIAL id="BlueMaterial" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="45" y="0.2" z="0" />
+        <TRANSLATION x="20" y="0.2" z="0" />
 
 
         <DESCENDANTS>
@@ -1008,7 +1098,7 @@
         </DESCENDANTS>
 
         <ANIMATIONREFS>
-          <ANIMATIONREF id="aa"/>
+          <ANIMATIONREF id="BlueCarAnimation"/>
         </ANIMATIONREFS>
 
     </NODE>
