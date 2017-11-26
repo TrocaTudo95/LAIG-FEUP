@@ -11,7 +11,7 @@ class CircularAnimation extends Animation{
         this.angular_velocity=this.speed/this.radius;
         this.calculate_distance();
         this.totalTime=this.distance/this.speed;
-        this.current_ang = this.start_angle;
+        this.current_ang = 0;
         this.done=false;
     }
 
@@ -23,7 +23,7 @@ class CircularAnimation extends Animation{
         this.update(deltaTime);
         mat4.translate(m,m,[this.centerX,this.centerY,this.centerZ]);
         mat4.translate(m, m, [this.x, this.y, this.z]);
-        mat4.rotate(m, m, this.start_angle + this.current_ang, [0, 1, 0]);
+        mat4.rotate(m, m, Math.PI + this.start_angle + this.current_ang, [0, 1, 0]);
 
         return m;
     }
@@ -32,13 +32,6 @@ class CircularAnimation extends Animation{
         if(this.current_ang > this.rotation_angle){
             this.done = true;
             return;
-        }
-        if(this.angular_velocity < 0){
-            let rotation += delta_time *this.angular_velocity;
-            this.y=0;
-            this.x=this.radius * Math.cos(this.start_angle + this.current_ang);
-            this.z=-this.radius * Math.sin(this.start_angle + this.current_ang);
-
         }
         let rotation= delta_time *this.angular_velocity;
         this.current_ang+=rotation;
@@ -53,7 +46,7 @@ class CircularAnimation extends Animation{
     }
 
     calculate_distance(){
-        this.distance = Math.abs(this.radius*this.rotation_angle);
+        this.distance=Math.abs(this.radius*this.rotation_angle);
     }
 
 }
