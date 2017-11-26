@@ -222,7 +222,7 @@
 
     <ANIMATION id="Rcurva1" speed="1" type="circular"
       centerx="12" centery="0" centerz="130"
-      radius="20" startang="0" rotang="90"
+      radius="20" startang="0" rotang="-90"
       />
 
       <ANIMATION id="Reta2" speed="2" type="linear">
@@ -230,9 +230,9 @@
         <controlpoint xx="-35" yy="0" zz="150"/>
       </ANIMATION>
 
-      <ANIMATION id="Rcurva2" speed="0.1" type="circular"
-        centerx="12" centery="0" centerz="130"
-        radius="20" startang="180" rotang="90"
+      <ANIMATION id="Rcurva2" speed="1" type="circular"
+        centerx="-30" centery="0" centerz="130"
+        radius="20" startang="90" rotang="-90"
         />
 
 
@@ -243,7 +243,7 @@
 
       <ANIMATION id="Rcurva3" speed="1" type="circular"
         centerx="-50" centery="0" centerz="-70"
-        radius="20" startang="180" rotang="90"
+        radius="20" startang="180" rotang="-90"
         />
 
 
@@ -254,7 +254,7 @@
 
       <ANIMATION id="Rcurva4" speed="1" type="circular"
         centerx="0" centery="0" centerz="-80"
-        radius="10" startang="90" rotang="90"
+        radius="10" startang="270" rotang="-90"
         />
 
 
