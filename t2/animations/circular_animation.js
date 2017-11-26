@@ -11,10 +11,6 @@ class CircularAnimation extends Animation{
   this.angular_velocity=this.speed/this.radius;
   this.calculate_distance();
   this.totalTime=this.distance/this.speed;
-
-  this.x=this.radius * Math.sin(this.start_angle);
-  this.y=0;
-  this.z=this.radius * Math.cos(this.start_angle);
   this.current_ang = 0;
   this.done=false;
 }
@@ -39,6 +35,7 @@ calcNextPosition(delta_time){
 }
   let rotation= delta_time *this.angular_velocity;
   this.current_ang+=rotation;
+  this.y=0;
   this.x=this.radius* Math.cos(this.current_ang);
   this.z=this.radius *Math.sin(this.current_ang);
 
