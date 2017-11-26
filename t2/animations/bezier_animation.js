@@ -1,4 +1,10 @@
 class BezierAnimation extends Animation{
+  /**
+   * Bezier animation constructor.
+   * @param scene Scene to apply the animation to
+   * @param speed Animation time span.
+   * @param controlPoint Point to generate the bezier curve.
+   */
   constructor(scene,speed,controlPoints){
     super(scene,speed);
     this.control_points=controlPoints;
@@ -19,10 +25,10 @@ class BezierAnimation extends Animation{
     this.p4x= this.p4[0];
     this.p4y= this.p4[1];
     this.p4z= this.p4[2];
-    this.distance = this.bezier_distance(this.control_points);
+    this.distance = this.bezier_distance();   //total distance
     this.angulo = 0;
-    this.t=0;
-    this.x = this.p1x;
+    this.t=0;      // time of the animation
+    this.x = this.p1x;  //inicial points
     this.y = this.p1y;
     this.z = this.p1z;
     this.totalTime=this.distance/this.speed;
@@ -44,20 +50,34 @@ class BezierAnimation extends Animation{
   }
 
 
-bezier_distance(c_pts)
+bezier_distance()
   {
-    let p1=this.ponto_medio(c_pts[0],c_pts[1]);          //ponto entre P1 e P2
+      // calculates the distance of the curve with an error smaller than 1E-4
+      var result = 0, resultA = 0;
+      var error = 100;
+      var points = [this.p1, this.p2, this.p3, this.p4];
+      var pointM;
 
-    let p2=this.ponto_medio(c_pts[1],c_pts[2]);          //ponto entre P2 e P3
+      while(error > 1E-4){
+          var pointsA = [];
+          pointsA.push(this.p1);
 
-    let p3=this.ponto_medio(c_pts[2],c_pts[3]);          //ponto entre P3 e P4
+          for(var i = 0; i < (points.length -1); i++){
+              pointM = this.ponto_medio(points[i], points[i+1]);
+              pointsA.push(pointM);
+          }
+          pointsA.push(this.p4);
+          points = pointsA;
+          result = 0;
+          for(var i = 0; i < (points.length -1); i++){
+              result += this.distance_between_points(points[i], points[i+1]);
+          }
+          error = Math.abs(resultA - result);
+          resultA = result;
 
-    let p4=this.ponto_medio(p1,p2);                     //ponto entre p1 e p2(criados acima)
 
-    let p5=this.ponto_medio(p2,p3);                    //ponto entre p2 e p3(criados acima)
-
-    return (this.distance_between_points(c_pts[0],p1) + this.distance_between_points(p1,p4) + this.distance_between_points(p4,p5) + this.distance_between_points(p5,c_pts[3]));
-
+      }
+      return result;
   }
 
 distance_between_points(p1,p2){
@@ -66,9 +86,10 @@ distance_between_points(p1,p2){
 
 ponto_medio(p1,p2){
 
-    let x =(p1[0]+p2[0])/2
-    let y =(p1[1]+p2[1])/2
-    let p=[x,y,0]
+    let x =(p1[0]+p2[0])/2;
+    let y = p1[1];  //there's no diference on the y parameter of the points because they are on the xOz plane.
+    let z = (p1[2]+p2[2])/2;
+    let p=[x,y,z];
     return p;
 
   }
@@ -77,7 +98,7 @@ ponto_medio(p1,p2){
 
     this.t += (deltaTime * this.speed) / this.distance;
     console.log(this.t);
-    if(this.t >= 1){
+    if(this.t >= 1){  // if animation is over
 
         this.x = this.p4x;
         this.y = this.p4y;
@@ -87,7 +108,8 @@ ponto_medio(p1,p2){
 
     }
     else{
-    var P=[this.x, this.y, this.z];
+    var P=[this.x, this.y, this.z];  // lastUpdate points
+    //new points
 		this.x=Math.pow((1-this.t),3)*this.p1x + 3*this.t*Math.pow((1-this.t),2)*this.p2x+3*Math.pow(this.t,2)*(1-this.t)*this.p3x+Math.pow(this.t,3)*this.p4x;
 		this.y=Math.pow((1-this.t),3)*this.p1y + 3*this.t*Math.pow((1-this.t),2)*this.p2y+3*Math.pow(this.t,2)*(1-this.t)*this.p3y+Math.pow(this.t,3)*this.p4y;
 		this.z=Math.pow((1-this.t),3)*this.p1z + 3*this.t*Math.pow((1-this.t),2)*this.p2z+3*Math.pow(this.t,2)*(1-this.t)*this.p3z+Math.pow(this.t,3)*this.p4z;

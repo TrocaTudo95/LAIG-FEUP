@@ -20,6 +20,7 @@ function MyGraphNode(graph, nodeID,selected) {
     // The texture ID.
     this.textureID = null ;
 
+    //selected node
   this.selected = selected;
     this.animations =[];
     this.prevTime=0;
@@ -60,7 +61,9 @@ MyGraphNode.prototype.addAnimation =function(animationID){
 }
 
 
-
+/**
+*Gets the animation from the node
+*/
 MyGraphNode.prototype.getAnimTransform = function(currentSeconds) {
     let elapsedTime = 0;
     for (let i = 0; i < this.animations.length; i++) {

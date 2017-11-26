@@ -35,14 +35,13 @@ XMLscene.prototype.init = function(application) {
     this.setUpdatePeriod(500);
 
     this.axis = new CGFaxis(this);
-
+// SHADERS VARIAVELS
     this.Shaders=[
     this.defaultShader,
     new CGFshader(this.gl, "shaders/F.vert", "shaders/F.frag"),
     new CGFshader(this.gl, "shaders/V.vert", "shaders/V.frag"),
 		new CGFshader(this.gl, "shaders/V.vert", "shaders/F.frag")
 	];
-
 
     this.scaleFactor=0;
     this.timeFactor=0;
@@ -135,11 +134,14 @@ XMLscene.prototype.onGraphLoaded = function()
     time = currTime- this.prevTime;
   	}
   	    this.prevTime=currTime;
-    let v = currTime/1000;
-   
+
     this.graph.update(time/1000);
+
+    //SHADERS VARIAVELS
+    let v = currTime/1000;
     this.scaleFactor = (Math.sin(v)/2)+0.5;
     this.timeFactor = (Math.sin(v)/2)+0.5;
+    //updates the scale factor and time factor to the shaders
     this.updateScaleFactor(this.scaleFactor);
     this.updateTimeFactor(this.timeFactor);
 

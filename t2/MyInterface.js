@@ -56,7 +56,6 @@ MyInterface.prototype.addShadersGroup = function(selectable) {
     group.add(this.scene,'Shader',{Normal: 0, Fragment: 1,Vertex: 2, 'Vertex/Fragment': 3});
 
 
-
     for (var key in selectable) {
         if (selectable.hasOwnProperty(key)) {
             this.scene.selectableValues[key] = selectable[key][0];
