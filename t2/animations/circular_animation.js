@@ -12,9 +12,9 @@ class CircularAnimation extends Animation{
   this.calculate_distance();
   this.totalTime=this.distance/this.speed;
 
-  this.x=this.radius * Math.sin(this.start_angle);
+  this.x=this.radius * Math.cos(this.start_angle);
   this.y=0;
-  this.z=this.radius * Math.cos(this.start_angle);
+  this.z=this.radius * Math.sin(this.start_angle);
   this.current_ang = 0;
   this.done=false;
 }
