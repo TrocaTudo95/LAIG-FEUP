@@ -1,5 +1,11 @@
 
 class LinearAnimation extends Animation{
+  /**
+   * Bezier animation constructor.
+   * @param scene Scene to apply the animation to
+   * @param speed Animation time span.
+   * @param controlPoint Point to generate the line.
+   */
   constructor(scene,speed, controlPoints){
     super(scene,speed);
     this.control_points=controlPoints;
@@ -14,12 +20,12 @@ class LinearAnimation extends Animation{
 
   }
 
-  distanceBetweenPoints(p1,p2){
+  distanceBetweenPoints(p1,p2){ //distance between two points
     let distance = Math.sqrt(Math.pow((p2[0] - p1[0]), 2) +Math.pow(p2[1] - p1[1], 2) +Math.pow(p2[2] - p1[2], 2));
     return distance;
   }
 
-  calculateTotalDistance(){
+  calculateTotalDistance(){  // Total Distance that the car does
     let distance=0;
     for(let i=0;i<this.control_points.length-1;i++){
       distance +=  this.distanceBetweenPoints(this.control_points[i],this.control_points[i+1]);
@@ -41,7 +47,7 @@ class LinearAnimation extends Animation{
   	return m;
   }
 
-  calcNextPoints(){
+  calcNextPoints(){    //calculates the points
     this.x1 = this.control_points[this.counter][0];
     this.y1 = this.control_points[this.counter][1];
     this.z1 = this.control_points[this.counter][2];

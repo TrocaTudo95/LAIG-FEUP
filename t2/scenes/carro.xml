@@ -220,47 +220,55 @@
       <controlpoint xx="27" yy="0" zz="125"/>
     </ANIMATION>
 
-    <ANIMATION id="Rcurva1" speed="1" type="circular"
-      centerx="12" centery="0" centerz="130"
-      radius="20" startang="0" rotang="-90"
-      />
+    <ANIMATION id="Rcurva1" speed="1.5" type="bezier">
+      <controlpoint xx="27" yy="0" zz="125"/>
+      <controlpoint xx="27" yy="0" zz="150"/>
+      <controlpoint xx="20" yy="0" zz="150"/>
+      <controlpoint xx="15" yy="0" zz="150"/>
+    </ANIMATION>
 
       <ANIMATION id="Reta2" speed="2" type="linear">
-        <controlpoint xx="8" yy="0" zz="150"/>
+        <controlpoint xx="15" yy="0" zz="150"/>
         <controlpoint xx="-35" yy="0" zz="150"/>
       </ANIMATION>
 
-      <ANIMATION id="Rcurva2" speed="1" type="circular"
-        centerx="-30" centery="0" centerz="130"
-        radius="20" startang="90" rotang="-90"
-        />
+      <ANIMATION id="Rcurva2" speed="1.5" type="bezier">
+        <controlpoint xx="-35" yy="0" zz="150"/>
+        <controlpoint xx="-50" yy="0" zz="150"/>
+        <controlpoint xx="-50" yy="0" zz="140"/>
+        <controlpoint xx="-50" yy="0" zz="130"/>
+      </ANIMATION>
 
 
       <ANIMATION id="Reta3" speed="3" type="linear">
-        <controlpoint xx="-50" yy="0" zz="150"/>
+        <controlpoint xx="-50" yy="0" zz="130"/>
         <controlpoint xx="-50" yy="0" zz="-80"/>
       </ANIMATION>
 
-      <ANIMATION id="Rcurva3" speed="1" type="circular"
-        centerx="-50" centery="0" centerz="-70"
-        radius="20" startang="180" rotang="-90"
-        />
+      <ANIMATION id="Rcurva3" speed="1.5" type="bezier">
+        <controlpoint xx="-50" yy="0" zz="-80"/>
+        <controlpoint xx="-50" yy="0" zz="-100"/>
+        <controlpoint xx="-40" yy="0" zz="-100"/>
+        <controlpoint xx="-30" yy="0" zz="-100"/>
+      </ANIMATION>
 
 
       <ANIMATION id="Reta4" speed="2" type="linear">
-        <controlpoint xx="-50" yy="0" zz="-100"/>
+        <controlpoint xx="-30" yy="0" zz="-100"/>
         <controlpoint xx="10" yy="0" zz="-100"/>
       </ANIMATION>
 
-      <ANIMATION id="Rcurva4" speed="1" type="circular"
-        centerx="0" centery="0" centerz="-80"
-        radius="10" startang="270" rotang="-90"
-        />
+      <ANIMATION id="Rcurva4" speed="1.5" type="bezier">
+        <controlpoint xx="10" yy="0" zz="-100"/>
+        <controlpoint xx="27" yy="0" zz="-100"/>
+        <controlpoint xx="27" yy="0" zz="-90"/>
+        <controlpoint xx="27" yy="0" zz="-80"/>
+      </ANIMATION>
 
 
         <ANIMATION id="Red_Final" speed="3" type="linear">
-          <controlpoint xx="30" yy="0" zz="-100"/>
-          <controlpoint xx="30" yy="0" zz="70"/>
+          <controlpoint xx="27" yy="0" zz="-80"/>
+          <controlpoint xx="27" yy="0" zz="70"/>
         </ANIMATION>
 
 
@@ -282,17 +290,30 @@
 
     <!--BLUE CAR ANIMATION -->
 
-    <ANIMATION id="Reta1" speed="2" type="linear">
+    <ANIMATION id="Reta1" speed="3" type="linear">
       <controlpoint xx="20" yy="0" zz="30"/>
       <controlpoint xx="20" yy="0" zz="125"/>
     </ANIMATION>
 
-    <ANIMATION id="Blue_Curva" speed="2" type="bezier">
+    <ANIMATION id="BCurva1" speed="2" type="circular"
+      centerx="40" centery="0" centerz="130"
+      radius="20" startang="180" rotang="90"
+      />
+
+      <ANIMATION id="BRetaF" speed="2" type="linear">
+        <controlpoint xx="40" yy="0" zz="150"/>
+        <controlpoint xx="60" yy="0" zz="150"/>
+      </ANIMATION>
+
+
+      <!--despiste alternativo -->
+
+    <!-- <ANIMATION id="Blue_Curva" speed="2" type="bezier">
       <controlpoint xx="20" yy="0" zz="125"/>
       <controlpoint xx="15" yy="0" zz="160"/>
       <controlpoint xx="10" yy="0" zz="195"/>
       <controlpoint xx="5" yy="0" zz="198"/>
-    </ANIMATION>
+    </ANIMATION> -->
 
 
 
@@ -300,7 +321,8 @@
 
     <ANIMATION id="BlueCarAnimation" type="combo">
       <SPANREF id="Reta1" />
-      <SPANREF id="Blue_Curva" />
+      <SPANREF id="BCurva1" />
+      <SPANREF id="BRetaF" />
 
 
     </ANIMATION>

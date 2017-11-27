@@ -1,4 +1,10 @@
 class ComboAnimation extends Animation{
+  /**
+   * Bezier animation constructor.
+   * @param scene Scene to apply the animation to
+   * @param speed Animation time span.
+   * @param animation animation to generate.
+   */
   constructor(scene, speed, animations){
     super(scene, speed);
     this.animations = animations;
@@ -7,7 +13,7 @@ class ComboAnimation extends Animation{
     this.lastMatrix=null;
   }
 
-  checkStatus(){
+  checkStatus(){ // check if the animation has ended
     if(this.animations[this.index].done){
       this.index++;
 

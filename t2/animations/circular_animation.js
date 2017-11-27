@@ -1,18 +1,28 @@
 class CircularAnimation extends Animation{
+  /**
+   * Bezier animation constructor.
+   * @param scene Scene to apply the animation to
+   * @param speed Animation time span.
+   * @param centerX X value of the center of the rotation.
+   * @param centerY Y value of the center of the rotation.
+   * @param centerZ Z value of the center of the rotation.
+   * @param radius radius of the rotation.
+   * @param startAng Inicial angle.
+   * @param rotAng rotate ang.
+   */
     constructor(scene, speed, centerX, centerY, centerZ, radius, startAng, rotAng){
         super(scene,speed);
         var DEGREE_TO_RAD = Math.PI/180;
         this.centerX=centerX;
-        this.centerY=centerY;
+        this.centerY=centerY;   //center of the rotation
         this.centerZ=centerZ;
         this.radius=radius;
         this.start_angle=startAng* DEGREE_TO_RAD;
         this.rotation_angle=rotAng* DEGREE_TO_RAD;
         this.angular_velocity=this.speed/this.radius;
-        this.calculate_distance();
         this.totalTime=this.distance/this.speed;
         this.current_ang = 0;
-        this.done=false;
+        this.done=false;   //if the animation is done
     }
 
 
@@ -34,7 +44,7 @@ class CircularAnimation extends Animation{
             return;
         }
         let rotation= delta_time *this.angular_velocity;
-        this.current_ang+=rotation;
+        this.current_ang+=rotation;                       //calculates the next point in the rotation
         this.y=0;
         this.x=this.radius * Math.cos(this.start_angle + this.current_ang);
         this.z=-this.radius * Math.sin(this.start_angle + this.current_ang);
@@ -45,8 +55,5 @@ class CircularAnimation extends Animation{
         this.calcNextPosition(delta_time);
     }
 
-    calculate_distance(){
-        this.distance=Math.abs(this.radius*this.rotation_angle);
-    }
 
 }

@@ -1176,7 +1176,7 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
 
     console.log("Parsed materials");
 }
-
+//Creates the LinearAnimation
 function createLinearAnim(graph, xmlAnim) {
     let animSpeed = graph.reader.getFloat(xmlAnim, 'speed');
     let xmlPoints = xmlAnim.children;
@@ -1196,7 +1196,7 @@ function createLinearAnim(graph, xmlAnim) {
     }
     return new LinearAnimation(graph.scene, animSpeed, controlPoints);
 }
-
+//Creates the CircularAnimation
 function createCircularAnim(graph, xmlAnim) {
     let animSpeed = graph.reader.getFloat(xmlAnim, 'speed');
     let centerX = graph.reader.getFloat(xmlAnim, 'centerx');
@@ -1210,7 +1210,7 @@ function createCircularAnim(graph, xmlAnim) {
 
     return new CircularAnimation(graph.scene, animSpeed, centerX, centerY, centerZ, radius, startAng, rotAng);
 }
-
+//Creates the BezierAnimation
 function createBezierAnim(graph, xmlAnim) {
     let animSpeed = graph.reader.getFloat(xmlAnim, 'speed');
     let xmlPoints = xmlAnim.children;
@@ -1230,7 +1230,7 @@ function createBezierAnim(graph, xmlAnim) {
     }
    return new BezierAnimation(graph.scene, animSpeed, controlPoints);
 }
-
+//Creates the ComboAnimation
 function createComboAnim(graph, xmlAnim) {
     let xmlAnimIds = xmlAnim.children;
     let anims = [];
