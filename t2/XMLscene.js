@@ -139,8 +139,8 @@ XMLscene.prototype.onGraphLoaded = function()
 
     //SHADERS VARIAVELS
     let v = currTime/1000;
-    this.scaleFactor = (Math.sin(v)/2)+0.5;
-    this.timeFactor = (Math.sin(v)/2)+0.5;
+    this.scaleFactor = (Math.sin(v))+0.5;
+    this.timeFactor = (Math.sin(v))+0.5;
     //updates the scale factor and time factor to the shaders
     this.updateScaleFactor(this.scaleFactor);
     this.updateTimeFactor(this.timeFactor);
