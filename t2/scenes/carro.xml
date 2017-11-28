@@ -173,6 +173,15 @@
           <emission r="0.0" g="0.0" b="0.0" a="1" />
       </MATERIAL>
 
+      <!-- Green Material -->
+    <MATERIAL id="GreenMaterial">
+        <shininess value="1" />
+        <specular r="0" g="0" b="0" a="1" />
+        <diffuse r="0" g="1.0" b="0.15" a="1" />
+        <ambient r="0" g="0" b="0" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
     	<!-- Wheel material -->
     	 <MATERIAL id="WheelMaterial">
             <shininess value="1" />
@@ -325,6 +334,14 @@
       <SPANREF id="BRetaF" />
 
 
+    </ANIMATION>
+
+
+  <!--BLUE CAR ANIMATION -->
+
+    <ANIMATION id="GreenAnimation" speed="1" type="linear">
+      <controlpoint xx="9" yy="0" zz="-30"/>
+      <controlpoint xx="9" yy="0" zz="50"/>
     </ANIMATION>
 
   </ANIMATIONS>
@@ -1073,6 +1090,7 @@
       <DESCENDANTS>
         <NODEREF id="RedCar" />
         <NODEREF id="BlueCar" />
+        <NODEREF id="GreenCar" />
       </DESCENDANTS>
 
   </NODE>
@@ -1109,6 +1127,25 @@
         <ANIMATIONREFS>
           <ANIMATIONREF id="BlueCarAnimation"/>
         </ANIMATIONREFS>
+
+    </NODE>
+
+    <NODE id="GreenCar" selectable="true">
+        <MATERIAL id="GreenMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="9" y="0.2" z="-30" />
+
+
+        <DESCENDANTS>
+          <NODEREF id="car" />
+        </DESCENDANTS>
+
+        <ANIMATIONREFS>
+          <ANIMATIONREF id="GreenAnimation"/>
+        </ANIMATIONREFS>
+
+
 
     </NODE>
 
