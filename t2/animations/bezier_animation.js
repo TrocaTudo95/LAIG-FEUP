@@ -52,13 +52,13 @@ class BezierAnimation extends Animation{
 
 bezier_distance()
   {
-      // calculates the distance of the curve with an error smaller than 1E-4
+      // calculates the distance of the curve with an error smaller than 1E-5
       var result = 0, resultA = 0;
       var error = 100;
       var points = [this.p1, this.p2, this.p3, this.p4];
       var pointM;
 
-      while(error > 1E-4){
+      while(error > 1E-5){
           var pointsA = [];
           pointsA.push(this.p1);
 
