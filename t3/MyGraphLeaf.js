@@ -20,7 +20,9 @@ function MyGraphLeaf(graph, type,args) {
         case 'patch':
         this.object = new MyPatch(graph.scene,args);
         break;
-
+        case 'piece':
+        this.object = new MyPiece(graph.scene,args);
+        break;
       default:
       break;
 
