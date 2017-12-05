@@ -1482,7 +1482,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 else
 					if (descendants[j].nodeName == "LEAF")
 					{
-					var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
+					var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch','piece']);
 						if (type != null && type != 'patch'){
                         var s_args= this.reader.getString(descendants[j],'args');
                        // console.log(s_args);

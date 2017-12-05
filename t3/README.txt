@@ -1,4 +1,4 @@
-LAIG Second Project (Continuation of the first Project)
+LAIG Third Project
 
 Project by:
  -José Machado
