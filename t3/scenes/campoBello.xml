@@ -3,11 +3,11 @@
 <!-- Initial values -->
 <INITIALS>
     <frustum near="0.1" far="500"/>
-    <translation x="-1" y="-3" z="0" />
+    <translation x="-1" y="-1" z="0" />
     <rotation axis="x" angle="0" />
     <rotation axis="y" angle="20" />
     <rotation axis="z" angle="0" />
-    <scale sx="0.05" sy="0.05" sz="0.05" />
+    <scale sx="0.25" sy="0.25" sz="0.25" />
     <reference length="5" />
 </INITIALS>
 
@@ -82,9 +82,9 @@
 <!-- Textures -->
 <TEXTURES>
 
-    <TEXTURE id="grill">
-        <file path="images/grill.jpg" />
-        <amplif_factor s="1" t="1" />
+    <TEXTURE id="board_image">
+        <file path="images/board.jpg" />
+        <amplif_factor s="5" t="5" />
     </TEXTURE>
 
 
@@ -135,14 +135,14 @@
     <!-- chao -->
      <NODE id="tabuleiro">
         <MATERIAL id="null" />
-        <TEXTURE id="grill" />
+        <TEXTURE id="board_image" />
 
-        <TRANSLATION x="-100" y="0" z="220" />
+        <TRANSLATION x="0" y="0" z="0" />
         <ROTATION axis="x" angle="-90" />
-        <SCALE sx="40" sy="90" sz="0.1" />
+        <SCALE sx="10" sy="10" sz="1" />
 
         <DESCENDANTS>
-				<LEAF  type="rectangle" args="0 4 5 0" />
+				<LEAF  type="rectangle" args="0 5 5 0" />
 		    </DESCENDANTS>
 
     </NODE>
