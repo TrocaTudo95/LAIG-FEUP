@@ -23,6 +23,9 @@ function MyGraphLeaf(graph, type,args) {
         case 'piece':
         this.object = new MyPiece(graph.scene,args);
         break;
+        case 'board':
+        this.object = new MyBoard(graph.scene);
+        break;
       default:
       break;
 
