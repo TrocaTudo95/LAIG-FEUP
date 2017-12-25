@@ -1484,40 +1484,39 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 					{
 					var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch','piece','board']);
 						if (type != null && type != 'patch'){
-                        var s_args= this.reader.getString(descendants[j],'args');
-                       // console.log(s_args);
-						var args=s_args.split(" ");
-						//console.log(args);
-                        this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,type,args));
-							this.log("   Leaf: "+ type);
-                         }
+                  var s_args= this.reader.getString(descendants[j],'args');
+						      var args=s_args.split(" ");
+                  this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,type,args));
+							    this.log("   Leaf: "+ type);
+                }
             else if (type =='patch'){
-                var s_args= this.reader.getString(descendants[j],'args');
-                       // console.log(s_args);
-				var args=s_args.split(" ");
-				let div_u = parseInt(args[0]);
-				let div_v = parseInt(args[1]);
-				let deg_u = descendants[j].children.length -1;
-				let deg_v = descendants[j].children[0].children.length -1;
-				args[2] = deg_u;
-				args[3] = deg_v;
-				args[4] = new Array();      //gets the arguments needed to build the patch
-				for(let nu = 0;nu <= deg_u;nu++){
-				    let ctr_pt_ln = new Array();
-				    for(let nv = 0;nv <= deg_v;nv++){
-				        let ctr_pt = new Array();   //gets point by point and line by line
-				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'xx'));
-				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'yy'));
-				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'zz'));
-				        ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'ww'));
-				        ctr_pt_ln.push(ctr_pt);
-				    }
-				    args[4].push(ctr_pt_ln);
-				}
+                    var s_args= this.reader.getString(descendants[j],'args');
+				            var args=s_args.split(" ");
+				            let div_u = parseInt(args[0]);
+				            let div_v = parseInt(args[1]);
+				            let deg_u = descendants[j].children.length -1;
+				            let deg_v = descendants[j].children[0].children.length -1;
+				            args[2] = deg_u;
+				            args[3] = deg_v;
+				            args[4] = new Array();      //gets the arguments needed to build the patch
+				            for(let nu = 0;nu <= deg_u;nu++){
+				                 let ctr_pt_ln = new Array();
+				                 for(let nv = 0;nv <= deg_v;nv++){
+				                       let ctr_pt = new Array();   //gets point by point and line by line
+				                       ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'xx'));
+				                       ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'yy'));
+				                       ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'zz'));
+				                       ctr_pt.push(this.reader.getFloat(descendants[j].children[nu].children[nv],'ww'));
+				                       ctr_pt_ln.push(ctr_pt);
+				                         }
+				                 args[4].push(ctr_pt_ln);
+				                 }
 
-				this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,type,args));
-				this.log("   Leaf: "+ type);
+				           this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,type,args));
+				           this.log("   Leaf: "+ type);
             }
+
+
 
 
 
