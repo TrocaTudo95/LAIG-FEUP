@@ -35,6 +35,7 @@ XMLscene.prototype.init = function(application) {
     this.setUpdatePeriod(500);
 
     this.axis = new CGFaxis(this);
+    this.theme = 0;
 
 }
 
@@ -99,6 +100,21 @@ XMLscene.prototype.onGraphLoaded = function()
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
 }
+
+XMLscene.prototype.loadTheme = function(theme) {
+    if (theme == THEME.CAMPO) {
+        let filename = getUrlVars()['file'] || "campo.xml";
+        this.lights = [];
+        this.cameras = [];
+        this.graph = new MySceneGraph(filename, this);
+    }
+    else if(theme == THEME.CASINO){
+        let filename = getUrlVars()['file'] || "casino.xml";
+        this.cameras = [];
+        this.lights = [];
+        this.graph = new MySceneGraph(filename, this);
+    }
+};
 
 
   XMLscene.prototype.update = function(currTime){

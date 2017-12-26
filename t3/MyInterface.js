@@ -25,6 +25,20 @@ MyInterface.prototype.init = function(application) {
     this.gui = new dat.GUI();
 
 
+    let config = {
+        theme: THEME.CAMPO,
+        loadTheme: this.loadTheme
+    };
+
+    let configFolder = this.gui.addFolder('Configuration');
+
+    configFolder.add(config, 'theme', {
+     'Campo': THEME.CAMPO,
+     'Casino': THEME.CASINO
+ }).name('Theme');
+    configFolder.add(config, 'loadTheme').name('Load Theme');
+
+
     // add a group of controls (and open/expand by defult)
 
     return true;
@@ -47,4 +61,8 @@ MyInterface.prototype.addLightsGroup = function(lights) {
             group.add(this.scene.lightValues, key);
         }
     }
-}
+};
+
+MyInterface.prototype.loadTheme = function(){
+    this.scene.loadTheme(this.theme);
+};
