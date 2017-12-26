@@ -36,6 +36,7 @@ XMLscene.prototype.init = function(application) {
 
     this.axis = new CGFaxis(this);
     this.theme = 0;
+    this.setPickEnabled(true);
 
 }
 
@@ -74,6 +75,23 @@ XMLscene.prototype.initLights = function() {
 
 }
 
+XMLscene.prototype.logPicking = function ()
+{
+	if (this.pickMode == false) {
+		if (this.pickResults != null && this.pickResults.length > 0) {
+			for (var i=0; i< this.pickResults.length; i++) {
+				var obj = this.pickResults[i][0];
+				if (obj)
+				{
+					var customId = this.pickResults[i][1];
+					 console.log("Picked object: " + obj + ", with pick id " + customId);
+          this.game.pickCell(customId);
+				}
+			}
+			this.pickResults.splice(0,this.pickResults.length);
+		}
+	}
+};
 /**
  * Initializes the scene cameras.
  */
@@ -101,20 +119,6 @@ XMLscene.prototype.onGraphLoaded = function()
     this.interface.addLightsGroup(this.graph.lights);
 }
 
-XMLscene.prototype.loadTheme = function(theme) {
-    if (theme == THEME.CAMPO) {
-        let filename = getUrlVars()['file'] || "campo.xml";
-        this.lights = [];
-        this.cameras = [];
-        this.graph = new MySceneGraph(filename, this);
-    }
-    else if(theme == THEME.CASINO){
-        let filename = getUrlVars()['file'] || "casino.xml";
-        this.cameras = [];
-        this.lights = [];
-        this.graph = new MySceneGraph(filename, this);
-    }
-};
 
 
   XMLscene.prototype.update = function(currTime){
@@ -136,6 +140,9 @@ XMLscene.prototype.loadTheme = function(theme) {
  */
 XMLscene.prototype.display = function() {
     // ---- BEGIN Background, camera and axis setup
+
+    this.logPicking();
+    this.clearPickRegistration();
 
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -189,4 +196,9 @@ XMLscene.prototype.display = function() {
 
     // ---- END Background, camera and axis setup
 
+}
+
+XMLscene.prototype.changeGraph = function(filename){
+  this.cameraIndex = 0;
+  this.graph = new MySceneGraph(filename, this);
 }

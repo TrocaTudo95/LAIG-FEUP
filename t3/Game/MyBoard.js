@@ -15,6 +15,8 @@ function MyBoard(scene) {
     this.circles.push(new Circle(scene,6));
   }
 
+
+
   this.boardAp=new CGFappearance(scene);
 	this.boardAp.loadTexture("scenes/images/board.jpg");
 
@@ -28,6 +30,7 @@ MyBoard.prototype.constructor=MyBoard;
 
 
 MyBoard.prototype.display = function() {
+
 
 	//board
 	this.scene.pushMatrix();
@@ -132,5 +135,8 @@ for(let v=0 ; v<4 ; v++){
 	this.scene.popMatrix();
 this.scene.popMatrix();
 
+for(let k=0;k < 41;k++){
+		this.scene.registerForPick(k+1, this.circles[k]);
+}
 
 }

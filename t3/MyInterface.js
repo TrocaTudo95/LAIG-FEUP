@@ -24,21 +24,13 @@ MyInterface.prototype.init = function(application) {
 
     this.gui = new dat.GUI();
 
-
-    let config = {
-        theme: THEME.CAMPO,
-        loadTheme: this.loadTheme
-    };
-
-    let configFolder = this.gui.addFolder('Configuration');
-
-    configFolder.add(config, 'theme', {
-     'Campo': THEME.CAMPO,
-     'Casino': THEME.CASINO
- }).name('Theme');
-    configFolder.add(config, 'loadTheme').name('Load Theme');
-
-
+    this.scenes = this.gui.addFolder("Scenes");
+  	this.scenes.open();
+  	this.gui.scene = 'Campo';
+  	this.gui.sceneList = this.scenes.add(this.gui, 'scene', ['Campo', 'Casino']);
+    this.gui.sceneList.onFinishChange(function(){
+  		this.scene.changeGraph(this.gui.scene + '.xml');
+  	}.bind(this))
     // add a group of controls (and open/expand by defult)
 
     return true;
@@ -63,6 +55,15 @@ MyInterface.prototype.addLightsGroup = function(lights) {
     }
 };
 
-MyInterface.prototype.loadTheme = function(){
-    this.scene.loadTheme(this.theme);
+MyInterface.prototype.removeFolder = function(name,parent) {
+	if(!parent)
+		parent = this.gui;
+  var folder = parent.__folders[name];
+  if (!folder) {
+    return;
+  }
+  folder.close();
+  parent.__ul.removeChild(folder.domElement.parentNode);
+  delete parent.__folders[name];
+  parent.onResize();
 };
