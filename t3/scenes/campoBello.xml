@@ -138,11 +138,12 @@
         <TEXTURE id="board_image" />
 
         <TRANSLATION x="0" y="0" z="0" />
-        <ROTATION axis="x" angle="-90" />
-        <SCALE sx="10" sy="10" sz="1" />
+        <ROTATION axis="z" angle="0" />
+        <ROTATION axis="z" angle="0" />
+        <SCALE sx="1" sy="1" sz="1" />
 
         <DESCENDANTS>
-				<LEAF  type="rectangle" args="0 5 5 0" />
+				<LEAF  type="board" args=""/>
 		    </DESCENDANTS>
 
     </NODE>
