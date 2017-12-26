@@ -107,9 +107,11 @@ parse_input(handshake, handshake).
 parse_input(test(C,N), Res) :- test(C,Res,N).
 parse_input(quit, goodbye).
 
-parse_input(start_game,[Board,Player1,Player2]):-
-	initialize_board(Board),
-	initialize_players(Player1, Player2).
+parse_input(init_board,Board):-
+	initialize_board(Board).
+
+	parse_input(init_players,[Player1,Player2]):-
+		initialize_players(Player1, Player2).
 
 	parse_input(possible_moves(Position),List):-
 		possible_moves(Position,List).
