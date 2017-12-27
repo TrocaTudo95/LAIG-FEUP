@@ -5,15 +5,15 @@
  * @param scene Scene
  * @param args Arguments to build the Piece
  */
- function MyPiece(scene,args) {
+ function MyPiece(scene,color,id,x,z) {
 
 
  	CGFobject.call(this,scene);
     this.scene=scene;
-    this.color = args[0];
-    this.position=args[1];
-    this.x=args[2];
-    this.y=args[3];
+    this.color = color;
+    this.id=id;
+    this.x=x;
+    this.z=z;
 
     var argsc=[0.5,1,1,10,20,1,1];
     this.cylinder = new MyCylinder(this.scene,argsc);
