@@ -83,11 +83,6 @@ function MyGameBoard(scene){
 };
 
 
-
-MyGameBoard.prototype.createPieces=function(){
-
-
-};
 MyGameBoard.prototype = Object.create(CGFobject.prototype);
 MyGameBoard.prototype.constructor=MyGameBoard;
 
@@ -98,6 +93,7 @@ MyGameBoard.prototype.display = function() {
 
   for(let i=0; i<this.pieces.length;i++){
     this.scene.pushMatrix();
+    this.scene.registerForPick(this.pieces[i].id +100, this.pieces[i]);
     this.pieces[i].display();
     this.scene.popMatrix();
   }
