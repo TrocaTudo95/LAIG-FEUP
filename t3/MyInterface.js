@@ -29,6 +29,7 @@ MyInterface.prototype.init = function(application) {
   	this.gui.scene = 'Campo';
   	this.gui.sceneList = this.scenes.add(this.gui, 'scene', ['Campo', 'Casino']);
     this.gui.sceneList.onFinishChange(function(){
+      this.removeFolder("Lights",this.gui);
   		this.scene.changeGraph(this.gui.scene + '.xml');
   	}.bind(this))
     // add a group of controls (and open/expand by defult)
