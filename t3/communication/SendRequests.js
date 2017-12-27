@@ -20,13 +20,13 @@ MyGameBoard.prototype.init_players =function(){
 this.getPrologRequest('init_players', this.getPlayers);
 };
 MyGameBoard.prototype.calculate_score = function(){
-  let request = 'calculate_score('+this.encodeBoard+','+this.player1Encode+','+
+  let request = 'calculate_score('+this.encodeBoard()+','+this.player1Encode+','+
   this.player2Encode+')';
 
   this.getPrologRequest(request, this.getScore);
 };
 
-MyGameboard.prototype.getBoard = function(data){
+MyGameBoard.prototype.getBoard = function(data){
   let temp = data.target.response;
 			  temp = temp.slice(3,temp.length -2);
 			  this.prologBoard= temp.split("),p(");
@@ -47,16 +47,17 @@ MyGameBoard.prototype.encodeBoard =function() {
 
 
 MyGameBoard.prototype.getScore = function(data){
-console.log(ola);
+console.log(data);
 };
 
 
 MyGameBoard.prototype.getPlayers= function(data){
   let temp = data.target.response;
-        temp = temp.slice(2,temp.length -2);
-        let temparray= temp.split("],[");
+        let temparray= temp.split("-");
         this.player1Encode=temparray[0];
         this.player2Encode=temparray[1];
+        temparray[0]=temparray[0].slice(1,temparray[0].length-1);
+        temparray[1]=temparray[1].slice(1,temparray[1].length-1);
         this.player1 = temparray[0].split(",");
         this.player2 = temparray[1].split(",");
 };

@@ -11,6 +11,8 @@ function XMLscene(interface) {
 
     this.lightValues = {};
     this.prevTime=0;
+    this.game= new MyGameBoard();
+    this.game.init_board();
 
 }
 
