@@ -126,7 +126,7 @@ parse_input(init_board,Board):-
 		update_player(Player1, Player2, CapturedPiece, NewPlayer1, NewPlayer2).
 
 
-		parse_input(calculate_score(Board,Player1,Player2),[Score1,Score2]):-
+		parse_input(calculate_score(Board,Player1,Player2),Score1-Score2):-
 			Score=0,
 			calculate_score(Board, Player1, Score, Score1),
 		 	Score3=0,
