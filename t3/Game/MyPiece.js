@@ -47,6 +47,8 @@ MyPiece.prototype.constructor = MyPiece;
  MyPiece.prototype.display = function() {
 
   this.scene.pushMatrix();
+  this.scene.translate(this.x,0.1,this.z);
+  this.scene.rotate(-90 * Math.PI /180,1,0,0);
   this.scene.scale(1, 1, 1);
   this.pieceAppearence.apply();
   this.cylinder.display();
