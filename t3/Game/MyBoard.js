@@ -11,17 +11,94 @@ function MyBoard(scene) {
   var args=[0,1,1,0];
   this.rectangle = new MyRectangle(scene,args);
   this.circles=[];
-  for(let i=0; i < 41;i++){
-    this.circles.push(new Circle(scene,6));
-  }
 
+			//1
+			this.circles.push(new BoardPiece(scene,6,1,20,46));
+			//2
+			this.circles.push(new BoardPiece(scene,6,2,6.5,46));
+			//3
+			this.circles.push(new BoardPiece(scene,6,3,-6.5,46));
+			//4
+			this.circles.push(new BoardPiece(scene,6,4,-20,46));
+			//5
+			this.circles.push(new BoardPiece(scene,6,5,-13.5,34.5));
+			//6
+			this.circles.push(new BoardPiece(scene,6,6,0,34.5));
+			//7
+			this.circles.push(new BoardPiece(scene,6,7,13.5,34.5));
+			//8
+			this.circles.push(new BoardPiece(scene,6,8,6.5,23));
+			//9
+			this.circles.push(new BoardPiece(scene,6,9,-6.5,23));
+			//10
+			this.circles.push(new BoardPiece(scene,6,10,0,11));
+			//11
+			this.circles.push(new BoardPiece(scene,6,11,46,20));
+			//12
+			this.circles.push(new BoardPiece(scene,6,12,46,6.5));
+			//13
+			this.circles.push(new BoardPiece(scene,6,13,46,-6.5));
+			//14
+			this.circles.push(new BoardPiece(scene,6,14,46,-20));
+			//15
+			this.circles.push(new BoardPiece(scene,6,15,34.5,-13.5));
+			//16
+			this.circles.push(new BoardPiece(scene,6,16,34.5,0));
+			//17
+			this.circles.push(new BoardPiece(scene,6,17,34.5,13.5));
+			//18
+			this.circles.push(new BoardPiece(scene,6,18,23,6.5));
+			//19
+			this.circles.push(new BoardPiece(scene,6,19,23,-6.5));
+			//20
+			this.circles.push(new BoardPiece(scene,6,20,11,0));
+			//21
+			this.circles.push(new BoardPiece(scene,6,21,20,-46));
+			//22
+			this.circles.push(new BoardPiece(scene,6,22,6.5,-46));
+			//23
+			this.circles.push(new BoardPiece(scene,6,23,-6.5,-46));
+			//24
+			this.circles.push(new BoardPiece(scene,6,24,-20,-46));
+			//25
+			this.circles.push(new BoardPiece(scene,6,25,-13.5,-34.5));
+			//26
+			this.circles.push(new BoardPiece(scene,6,26,0,-34.5));
+			//27
+			this.circles.push(new BoardPiece(scene,6,27,13.5,-34.5));
+			//28
+			this.circles.push(new BoardPiece(scene,6,28,6.5,-23));
+			//29
+			this.circles.push(new BoardPiece(scene,6,29,-6.5,-23));
+			//30
+			this.circles.push(new BoardPiece(scene,6,30,0,-11));
+			//31
+			this.circles.push(new BoardPiece(scene,6,31,-46,20));
+			//32
+			this.circles.push(new BoardPiece(scene,6,32,-46,6.5));
+			//33
+			this.circles.push(new BoardPiece(scene,6,33,-46,-6.5));
+			//34
+			this.circles.push(new BoardPiece(scene,6,34,-46,-20));
+			//35
+			this.circles.push(new BoardPiece(scene,6,35,-34.5,-13.5));
+			//36
+			this.circles.push(new BoardPiece(scene,6,36,-34.5,0));
+			//37
+			this.circles.push(new BoardPiece(scene,6,37,-34.5,13.5));
+			//38
+			this.circles.push(new BoardPiece(scene,6,38,-23,6.5));
+			//39
+			this.circles.push(new BoardPiece(scene,6,39,-23,-6.5));
+			//40
+			this.circles.push(new BoardPiece(scene,6,40,-11,0));
+			//41 (center point)
+			this.circles.push(new BoardPiece(scene,6,41,0,0));
 
 
   this.boardAp=new CGFappearance(scene);
 	this.boardAp.loadTexture("scenes/images/board.jpg");
 
-	this.piecesAp = new CGFappearance(this.scene);
-	this.piecesAp.setDiffuse(1,1,1,1);
 };
 
 
@@ -42,110 +119,16 @@ MyBoard.prototype.display = function() {
 	this.rectangle.display();
 	this.scene.popMatrix();
 
-for(let v=0 ; v<4 ; v++){
+for(let v=0 ; v<41 ; v++){
 
-	let j=v*10;
-
-	//v1
 	this.scene.pushMatrix();
-	this.scene.translate(20,0.1,46);
-	this.scene.rotate(-90 * Math.PI /180,1,0,0);
-	this.piecesAp.apply();
-	this.scene.registerForPick(j+1, this.circles[j+0]);
-	this.circles[j+0].display();
-	this.scene.popMatrix();
-	//v2
-	this.scene.pushMatrix();
-	this.scene.translate(6.5,0.1,46);
-	this.scene.rotate(-90 * Math.PI /180,1,0,0);
-	this.piecesAp.apply();
-	this.scene.registerForPick(j+2, this.circles[j+1]);
-	this.circles[j+1].display();
-	this.scene.popMatrix();
-	//v3
-	this.scene.pushMatrix();
-	this.scene.translate(-6.5,0.1,46);
-	this.scene.rotate(-90 * Math.PI /180,1,0,0);
-	this.piecesAp.apply();
-	this.scene.registerForPick(j+3, this.circles[j+2]);
-	this.circles[j+2].display();
-	this.scene.popMatrix();
-	//v4
-	this.scene.pushMatrix();
-	this.scene.translate(-20,0.1,46);
-	this.scene.rotate(-90 * Math.PI /180,1,0,0);
-	this.piecesAp.apply();
-	this.scene.registerForPick(j+4, this.circles[j+3]);
-	this.circles[j+3].display();
-	this.scene.popMatrix();
-	//v5
-	this.scene.pushMatrix();
-	this.scene.translate(-13.5,0.1,34.5);
-	this.scene.rotate(-90 * Math.PI /180,1,0,0);
-	this.piecesAp.apply();
-	this.scene.registerForPick(j+5, this.circles[j+4]);
-	this.circles[j+4].display();
+	this.scene.registerForPick(v+1, this.circles[v]);
+	this.circles[v].display();
 	this.scene.popMatrix();
 
-	//v6
-	this.scene.pushMatrix();
-	this.scene.translate(0,0.1,34.5);
-	this.scene.rotate(-90 * Math.PI /180,1,0,0);
-	this.piecesAp.apply();
-	this.scene.registerForPick(j+6, this.circles[j+5]);
-	this.circles[j+5].display();
-	this.scene.popMatrix();
-
-	//v7
-	this.scene.pushMatrix();
-	this.scene.translate(13.5,0.1,34.5);
-	this.scene.rotate(-90 * Math.PI /180,1,0,0);
-	this.piecesAp.apply();
-	this.scene.registerForPick(j+7, this.circles[j+6]);
-	this.circles[j+6].display();
-	this.scene.popMatrix();
-
-	//v8
-	this.scene.pushMatrix();
-	this.scene.translate(6.5,0.1,23);
-	this.scene.rotate(-90 * Math.PI /180,1,0,0);
-	this.piecesAp.apply();
-	this.scene.registerForPick(j+8, this.circles[j+7]);
-	this.circles[j+7].display();
-	this.scene.popMatrix();
-
-	//v9
-	this.scene.pushMatrix();
-	this.scene.translate(-6.5,0.1,23);
-	this.scene.rotate(-90 * Math.PI /180,1,0,0);
-	this.piecesAp.apply();
-	this.scene.registerForPick(j+9, this.circles[j+8]);
-	this.circles[j+8].display();
-	this.scene.popMatrix();
-
-	//v10
-	this.scene.pushMatrix();
-	this.scene.translate(0,0.1,11);
-	this.scene.rotate(-90 * Math.PI /180,1,0,0);
-	this.piecesAp.apply();
-	this.scene.registerForPick(j+10, this.circles[j+9]);
-	this.circles[j+9].display();
-	this.scene.popMatrix();
-
-	this.scene.rotate(90 * Math.PI /180,0,1,0);
 
 }
 
-	//41 (center point)
-
-	this.scene.pushMatrix();
-	this.scene.translate(0,0.1,0);
-	this.scene.rotate(-90 * Math.PI /180,1,0,0);
-	this.piecesAp.apply();
-	this.scene.registerForPick(41, this.circles[40]);
-	this.circles[40].display();
-	this.scene.popMatrix();
-	this.scene.popMatrix();
 
 
 }
