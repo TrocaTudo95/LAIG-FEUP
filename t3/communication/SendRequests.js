@@ -47,7 +47,11 @@ MyGameBoard.prototype.encodeBoard =function() {
 
 
 MyGameBoard.prototype.getScore = function(data){
-console.log(data);
+  let temp = data.target.response;
+        let temparray= temp.split("-");
+        this.score1=parseInt(temparray[0]);
+        this.score2=parseInt(temparray[1]);
+
 };
 
 
