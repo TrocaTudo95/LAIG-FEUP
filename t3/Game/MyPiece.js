@@ -11,6 +11,7 @@
  	CGFobject.call(this,scene);
     this.scene=scene;
     this.color = args[0];
+    this.position=args[1];
 
     var argsc=[0.5,1,1,10,20,1,1];
     this.cylinder = new MyCylinder(this.scene,argsc);

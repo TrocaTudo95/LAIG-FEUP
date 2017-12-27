@@ -110,7 +110,7 @@ parse_input(quit, goodbye).
 parse_input(init_board,Board):-
 	initialize_board(Board).
 
-	parse_input(init_players,[Player1,Player2]):-
+	parse_input(init_players,Player1-Player2):-
 		initialize_players(Player1, Player2).
 
 	parse_input(possible_moves(Position),List):-
