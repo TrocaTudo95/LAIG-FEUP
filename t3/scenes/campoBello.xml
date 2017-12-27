@@ -137,7 +137,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="board_image" />
 
-        <TRANSLATION x="0" y="0" z="0" />
+        <TRANSLATION x="-100" y="0" z="0" />
         <ROTATION axis="z" angle="0" />
         <ROTATION axis="z" angle="0" />
         <SCALE sx="1" sy="1" sz="1" />
