@@ -8,7 +8,7 @@
  function BoardPiece(scene,slices,id,x,z) {
 
 
- 	CGFobject.call(this,scene);
+ 	  CGFobject.call(this,scene);
     this.scene=scene;
     this.slices=slices;
     this.id=id;

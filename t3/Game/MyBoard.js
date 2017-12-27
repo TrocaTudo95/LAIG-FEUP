@@ -1,12 +1,5 @@
-/**
- * MyBoard
- * @param gl {WebGLRenderingContext}
- * @constructor
- */
-
-
 function MyBoard(scene) {
-	CGFobject.call(this,scene);
+  CGFobject.call(this,scene);
   this.scene=scene;
   var args=[0,1,1,0];
   this.rectangle = new MyRectangle(scene,args);

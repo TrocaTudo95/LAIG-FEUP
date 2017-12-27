@@ -11,8 +11,6 @@ function XMLscene(interface) {
 
     this.lightValues = {};
     this.prevTime=0;
-    this.game= new MyGameBoard();
-    this.game.init_board();
 
 }
 
@@ -38,6 +36,8 @@ XMLscene.prototype.init = function(application) {
 
     this.axis = new CGFaxis(this);
     this.setPickEnabled(true);
+
+     this.game= new MyGameBoard(this);
 
 }
 
@@ -191,7 +191,7 @@ XMLscene.prototype.display = function() {
 		this.axis.display();
 	}
 
-
+  this.game.display();
     this.popMatrix();
 
     // ---- END Background, camera and axis setup
