@@ -26,7 +26,7 @@ MyGameBoard.prototype.calculate_score = function(){
   this.getPrologRequest(request, this.getScore);
 };
 
-MyGameboard.prototype.getBoard = function(data){
+MyGameBoard.prototype.getBoard = function(data){
   let temp = data.target.response;
 			  temp = temp.slice(3,temp.length -2);
 			  this.prologBoard= temp.split("),p(");
