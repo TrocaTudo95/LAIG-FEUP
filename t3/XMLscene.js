@@ -190,8 +190,17 @@ XMLscene.prototype.display = function() {
 		// Draw axis
 		this.axis.display();
 	}
-
-  this.game.display();
+      this.pushMatrix();
+          if(this.graph.filename == "campo.xml"){
+            this.translate(42,0.2,40);
+            this.scale(0.22,1,0.22);
+          }
+          else if(this.graph.filename == "casino.xml"){
+            this.translate(0,8.7,0);
+            this.scale(0.22,1,0.22);
+          }
+        this.game.display();
+      this.popMatrix();
     this.popMatrix();
 
     // ---- END Background, camera and axis setup
