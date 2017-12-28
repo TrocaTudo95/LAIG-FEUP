@@ -116,15 +116,12 @@ MyBoard.prototype.display = function() {
 for(let v=0 ; v<41 ; v++){
 
 	this.scene.pushMatrix();
-<<<<<<< HEAD
-=======
   if(this.circles[v].possibleMove == true){
     //this.scene.setActiveShader(this.shader);
   }
   if(v==40)
   this.scene.registerForPick(50, this.circles[v]);
   else
->>>>>>> 95d2e2eff56ef6b5a4fbddb8d0cb6a1ed6d64983
 	this.scene.registerForPick(v+1, this.circles[v]);
 	this.circles[v].display();
 	this.scene.popMatrix();
