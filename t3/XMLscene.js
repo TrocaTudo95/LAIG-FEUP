@@ -138,6 +138,13 @@ XMLscene.prototype.onGraphLoaded = function()
 
     this.graph.update(time/1000);
 
+    //teste
+    if(this.game.pieces[8].done == false){
+    var p4=[0,0.1,0];
+    this.game.pieces[8].movePiece(p4,time/1000);
+}
+
+
     for(let i=0;i < this.game.possibleMoves.length;i++){
       let posS = this.game.possibleMoves[i];
       let pos = parseInt(posS)-1;
