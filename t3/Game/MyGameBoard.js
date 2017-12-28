@@ -3,15 +3,18 @@ function MyGameBoard(scene){
   this.scene=scene;
   this.player1Encode="";
   this.player2Encode="";
+  this.encodedBoard="";
   this.player1 = [];
   this.player2=[];
   this.prologBoard=[];
+  //round variables
   this.selectedPiece=null;
   this.possibleMoves=[];
   this.positionToMove=null;
-  this.validMove=false;
   this.CapturedPiece=null;
-
+  this.indexMovingPiece=null;
+  this.indexEatedPiece=null;
+//////////////////
   this.board = new MyBoard(this.scene);
   this.pieces=[];
   this.pieces.push(new MyPiece(scene,"blue",1,1,20,46));
@@ -89,8 +92,10 @@ function MyGameBoard(scene){
 this.init_board();
 this.init_players();
 
+this.GameStates=['Playing','Game_over'];
 this.states=['Pick a Piece to Move', 'Pick a Place to Move the Piece', 'Moving the piece'];
 this.currentState=0;
+this.currentGameState=0;
 this.currentPlayer=1;
 };
 
@@ -135,6 +140,22 @@ MyGameBoard.prototype.selectPositionMove =function(id) {
   this.make_play();
 };
 
+MyGameBoard.prototype.end_turn = function(){
+  if (this.currentPlayer==1){
+  this.currentPlayer=2;
+    }
+    else {
+    this.currentPlayer=1;
+  }
+  this.currentState=0;
+  this.selectedPiece=null;
+  this.possibleMoves=[];
+  this.positionToMove=null;
+  this.CapturedPiece=null;
+  this.indexMovingPiece=null;
+  this.indexEatedPiece=null;
+};
+
 MyGameBoard.prototype.makeMove =function() {
 
 let ind= this.pieces.indexOf(this.selectedPiece);
@@ -144,27 +165,34 @@ for(i=0; i<this.board.circles.length;i++){
         break;
 }
 
-this.pieces[ind].x=this.board.circles[i].x;
-this.pieces[ind].z=this.board.circles[i].z;
-
-
+this.pieces[ind].movePiece([this.board.circles[i].x,0.1,this.board.circles[i].z]);
+this.indexMovingPiece=ind;
+this.currentState=3;
 
 };
 
-MyGameBoard.prototype.update = function(){
+MyGameBoard.prototype.update = function(deltaTime){
 if(this.currentState==2 && this.CapturedPiece!=null)
 this.makeMove();
 
-if(this.currentState==1){
-for(let i=0;i < this.possibleMoves.length;i++){
-  let posS = this.possibleMoves[i];
-  let pos = parseInt(posS)-1;
-  if(this.possibleMoves[i] == "50"){
-    pos=40;
-  }
-  this.board.circles[pos].possibleMove = true;
+
+if(this.currentState==3 && !this.pieces[this.indexMovingPiece].done){
+  this.pieces[this.indexMovingPiece].update(deltaTime);
 }
+else if(this.currentState==3 && this.pieces[this.indexMovingPiece].done){
+  this.end_turn();
 }
+
+// if(this.currentState==1){
+// for(let i=0;i < this.possibleMoves.length;i++){
+//   let posS = this.possibleMoves[i];
+//   let pos = parseInt(posS)-1;
+//   if(this.possibleMoves[i] == "50"){
+//     pos=40;
+//   }
+//   this.board.circles[pos].possibleMove = true;
+// }
+// }
 
 
 };

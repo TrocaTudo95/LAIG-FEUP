@@ -26,15 +26,20 @@ MyGameBoard.prototype.init_players =function(){
 this.getPrologRequest('init_players', this.getPlayers);
 };
 MyGameBoard.prototype.calculate_score = function(){
-  let request = 'calculate_score('+this.encodeBoard()+','+this.player1Encode+','+
+  let request = 'calculate_score('+this.encodedBoard+','+this.player1Encode+','+
   this.player2Encode+')';
 
   this.getPrologRequest(request, this.getScore);
 };
 
 MyGameBoard.prototype.make_play =function(){
-let request= 'make_move(p'+this.selectedPiece.id+','+this.positionToMove+','+this.encodeBoard()+','+this.player1Encode+','+
-this.player2Encode+')';
+  let request;
+  if(this.currentPlayer==1){
+   request= 'make_move(p'+this.selectedPiece.id+','+this.positionToMove+','+this.encodedBoard+','+this.player1Encode+','+this.player2Encode+')';
+}
+  else{
+   request= 'make_move(p'+this.selectedPiece.id+','+this.positionToMove+','+this.encodedBoard+','+this.player2Encode+','+this.player1Encode+')';
+}
 this.getPrologRequest(request, this.parseMove);
 };
 
@@ -46,7 +51,8 @@ MyGameBoard.prototype.parseMove = function(data){
   return;
 }
   let temparray= temp.split("-");
-  temparray[0] = temparray[0].slice(3,temp.length -2);
+    this.encodedBoard=temparray[0];
+  temparray[0] = temparray[0].slice(3,temparray[0].length -2);
   this.prologBoard= temparray[0].split("),p(");
   this.player1Encode=temparray[1];
   this.player2Encode=temparray[2];
@@ -60,6 +66,7 @@ MyGameBoard.prototype.parseMove = function(data){
 
 MyGameBoard.prototype.getBoard = function(data){
   let temp = data.target.response;
+        this.encodedBoard=temp;
 			  temp = temp.slice(3,temp.length -2);
 			  this.prologBoard= temp.split("),p(");
 

@@ -137,12 +137,11 @@ XMLscene.prototype.onGraphLoaded = function()
   	    this.prevTime=currTime;
 
     this.graph.update(time/1000);
-    this.game.update();
+    this.game.update(time/1000);
     //teste
-    if(this.game.pieces[8].done == false){
-    var p4=[0,0.1,0];
-    this.game.pieces[8].movePiece(p4,time/1000);
-  }
+
+
+
 }
 
 /**

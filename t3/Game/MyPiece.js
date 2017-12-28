@@ -18,7 +18,7 @@
     this.z=z;
     this.p1=[x,0.1,z];
     this.t=0;
-    this.done=false;
+    this.done=true;
 
     var argsc=[0.5,1,1,10,20,1,1];
     this.cylinder = new MyCylinder(this.scene,argsc);
@@ -90,36 +90,36 @@ MyPiece.prototype.bezier_distance= function(p1,p2,p3,p4)
       return result;
   }
 
-MyPiece.prototype.movePiece = function(p4,deltaTime){
-  var speed = 5;
-  var pM=this.ponto_medio(this.p1,p4);
+MyPiece.prototype.movePiece = function(p4){
+  this.done=false;
+  this.speed = 5;
+  this.p4=p4;
+  var pM=this.ponto_medio(this.p1,this.p4);
   pM[1]=4;
-  var p2=this.ponto_medio(this.p1,pM);
-  var p3=this.ponto_medio(pM,p4);
-  var distance = this.bezier_distance(this.p1,p2,p3,p4);   //total distance
-  this.update(deltaTime,speed,distance,this.p1,p2,p3,p4);
-
+  this.p2=this.ponto_medio(this.p1,pM);
+  this.p3=this.ponto_medio(pM,this.p4);
+  this.distance = this.bezier_distance(this.p1,this.p2,this.p3,this.p4);   //total distance
 }
 
 
 
 
-MyPiece.prototype.update = function(deltaTime,speed,distance,p1,p2,p3,p4){
+MyPiece.prototype.update = function(deltaTime){
 
-  this.t += (deltaTime * speed) / distance;
+  this.t += (deltaTime * this.speed) / this.distance;
   if(this.t >= 1){  // if animation is over
 
-      this.x = p4[0];
-      this.y = p4[1];
-      this.z = p4[2];
+      this.x = this.p4[0];
+      this.y = this.p4[1];
+      this.z = this.p4[2];
       this.done = true;
       return;
 
   }
   else{
-  this.x=Math.pow((1-this.t),3)*p1[0] + 3*this.t*Math.pow((1-this.t),2)*p2[0]+3*Math.pow(this.t,2)*(1-this.t)*p3[0]+Math.pow(this.t,3)*p4[0];
-  this.y=Math.pow((1-this.t),3)*p1[1] + 3*this.t*Math.pow((1-this.t),2)*p2[1]+3*Math.pow(this.t,2)*(1-this.t)*p3[1]+Math.pow(this.t,3)*p4[1];
-  this.z=Math.pow((1-this.t),3)*p1[2] + 3*this.t*Math.pow((1-this.t),2)*p2[2]+3*Math.pow(this.t,2)*(1-this.t)*p3[2]+Math.pow(this.t,3)*p4[2];
+  this.x=Math.pow((1-this.t),3)*this.p1[0] + 3*this.t*Math.pow((1-this.t),2)*this.p2[0]+3*Math.pow(this.t,2)*(1-this.t)*this.p3[0]+Math.pow(this.t,3)*this.p4[0];
+  this.y=Math.pow((1-this.t),3)*this.p1[1] + 3*this.t*Math.pow((1-this.t),2)*this.p2[1]+3*Math.pow(this.t,2)*(1-this.t)*this.p3[1]+Math.pow(this.t,3)*this.p4[1];
+  this.z=Math.pow((1-this.t),3)*this.p1[2] + 3*this.t*Math.pow((1-this.t),2)*this.p2[2]+3*Math.pow(this.t,2)*(1-this.t)*this.p3[2]+Math.pow(this.t,3)*this.p4[2];
 
   }
 
