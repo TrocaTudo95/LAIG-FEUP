@@ -43,6 +43,7 @@ game(Board, Player1, Player2, Round):-
 % inicio da jogada
 play(Board, Player1, Player2, Player, Round, Turn):-
   ask_for_movement(Piece, Position, Player,Board),
+  write(Piece),nl,
   find_pos(Board, Piece, Pos),
   verify_empty_pos(Position, Board),
   verify_next_pos(Board, Piece, Position),

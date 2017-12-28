@@ -68,3 +68,18 @@ MyInterface.prototype.removeFolder = function(name,parent) {
   delete parent.__folders[name];
   parent.onResize();
 };
+
+MyInterface.prototype.processKeyboard = function(event) {
+CGFinterface.prototype.processKeyboard.call(this,event);
+
+switch (event.keyCode)
+	{
+      case (99):
+      if(this.scene.game.currentState==1 ||  this.scene.game.currentState==2){
+      this.scene.game.currentState=0;
+      alert("Choose another piece to move!");
+    }
+      break;
+
+  }
+};

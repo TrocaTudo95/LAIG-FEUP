@@ -121,6 +121,9 @@ for(let v=0 ; v<41 ; v++){
   if(this.circles[v].possibleMove == true){
     //this.scene.setActiveShader(this.shader);
   }
+  if(v==40)
+  this.scene.registerForPick(50, this.circles[v]);
+  else
 	this.scene.registerForPick(v+1, this.circles[v]);
 	this.circles[v].display();
   //this.scene.setActiveShader(this.scene.defaultShader);
