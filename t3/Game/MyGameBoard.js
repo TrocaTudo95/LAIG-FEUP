@@ -155,14 +155,14 @@ MyGameBoard.prototype.update = function(){
 if(this.currentState==2 && this.CapturedPiece!=null)
 this.makeMove();
 
-if(this.game.currentState==1){
-for(let i=0;i < this.game.possibleMoves.length;i++){
-  let posS = this.game.possibleMoves[i];
+if(this.currentState==1){
+for(let i=0;i < this.possibleMoves.length;i++){
+  let posS = this.possibleMoves[i];
   let pos = parseInt(posS)-1;
-  if(this.game.possibleMoves[i] == "50"){
+  if(this.possibleMoves[i] == "50"){
     pos=40;
   }
-  this.game.board.circles[pos].possibleMove = true;
+  this.board.circles[pos].possibleMove = true;
 }
 }
 

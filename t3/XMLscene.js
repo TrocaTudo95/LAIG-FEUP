@@ -32,7 +32,7 @@ XMLscene.prototype.init = function(application) {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
-    this.setUpdatePeriod(500);
+    this.setUpdatePeriod(10);
 
     this.axis = new CGFaxis(this);
     this.setPickEnabled(true);
@@ -138,7 +138,12 @@ XMLscene.prototype.onGraphLoaded = function()
 
     this.graph.update(time/1000);
     this.game.update();
+    //teste
+    if(this.game.pieces[8].done == false){
+    var p4=[0,0.1,0];
+    this.game.pieces[8].movePiece(p4,time/1000);
   }
+}
 
 /**
  * Displays the scene.

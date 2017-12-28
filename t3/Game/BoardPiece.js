@@ -20,6 +20,8 @@
 
     this.pieceSl = new CGFappearance(this.scene);
     this.pieceSl.setDiffuse(0,0,0,1);
+    this.pieceSl.setSpecular(0,0,0,1);
+    this.pieceSl.setAmbient(0,0,0,1);
 
     this.pieceAp = new CGFappearance(this.scene);
     this.pieceAp.setDiffuse(1,1,1,1);
