@@ -93,8 +93,6 @@ function MyBoard(scene) {
 	this.boardAp.loadTexture("scenes/images/board.jpg");
 
 
-  this.shader = new CGFshader(this.scene.gl, 'shaders/pick.vert', 'shaders/pick.frag');
-
 };
 
 
@@ -118,17 +116,12 @@ MyBoard.prototype.display = function() {
 for(let v=0 ; v<41 ; v++){
 
 	this.scene.pushMatrix();
-  if(this.circles[v].possibleMove == true){
-    //this.scene.setActiveShader(this.shader);
-  }
 	this.scene.registerForPick(v+1, this.circles[v]);
 	this.circles[v].display();
-  //this.scene.setActiveShader(this.scene.defaultShader);
 	this.scene.popMatrix();
 
 
 }
-
 
 
 }
