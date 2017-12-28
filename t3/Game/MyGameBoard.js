@@ -9,6 +9,8 @@ function MyGameBoard(scene){
   this.selectedPiece=null;
   this.possibleMoves=[];
   this.positionToMove=null;
+  this.validMove=false;
+  this.CapturedPiece=null;
 
   this.board = new MyBoard(this.scene);
   this.pieces=[];
@@ -86,6 +88,10 @@ function MyGameBoard(scene){
 
 this.init_board();
 this.init_players();
+
+this.states=['Pick a Piece to Move', 'Pick a Place to Move the Piece', 'Moving the piece'];
+this.currentState=0;
+this.currentPlayer=1;
 };
 
 
@@ -96,6 +102,22 @@ MyGameBoard.prototype.constructor=MyGameBoard;
 
 MyGameBoard.prototype.selectPiece = function(id) {
   let temp= id -100;
+  let temp_piece= "p"+temp;
+  let ind;
+//check if the piece belongs to the currentPlayer
+if(this.currentPlayer==1)
+  ind=this.player1.indexOf(temp_piece);
+  else
+  ind=this.player2.indexOf(temp_piece);
+
+ if(ind==-1){
+   if(this.currentPlayer==1)
+   alert("This piece does not Belong you player1, your pieces are the green and the blue!");
+   else
+     alert("This piece does not Belong you player2, your pieces are the red and the yellow!");
+
+     return;
+ }
 
   for (let i =0; i< this.pieces.length; i++){
     if(this.pieces[i].id ==temp){
@@ -104,9 +126,19 @@ MyGameBoard.prototype.selectPiece = function(id) {
     }
   }
 this.possible_moves();
+this.currentState=1;
 };
 
+MyGameBoard.prototype.selectPositionMove =function(id) {
+  this.positionToMove=id;
+  this.currentState=2;
+  this.makeMove();
+};
 
+MyGameBoard.prototype.makeMove =function() {
+this.make_play();
+
+}
 
 MyGameBoard.prototype.display = function() {
   this.scene.pushMatrix();

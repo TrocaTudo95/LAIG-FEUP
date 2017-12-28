@@ -86,8 +86,11 @@ XMLscene.prototype.logPicking = function ()
 				{
 					var customId = this.pickResults[i][1];
 					console.log("Picked object: " + obj + ", with pick id " + customId);
-          if(customId>100)
+          if(customId>100 && this.game.currentState==0)
           this.game.selectPiece(customId);
+
+          else if(customId<100 && this.game.currentState==1)
+            this.game.selectPositionMove(customId);
 				}
 			}
 			this.pickResults.splice(0,this.pickResults.length);

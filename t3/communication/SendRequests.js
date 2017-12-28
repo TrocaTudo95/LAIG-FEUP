@@ -36,6 +36,25 @@ MyGameBoard.prototype.make_play =function(){
 let request= 'make_move(p'+this.selectedPiece.id+','+this.positionToMove+','+this.encodeBoard()+','+this.player1Encode+','+
 this.player2Encode+')';
 this.getPrologRequest(request, this.parseMove);
+};
+
+MyGameBoard.prototype.parseMove = function(data){
+  let temp = data.target.response;
+  if(temp=='Bad Request'){
+    alert("Choose a valid Position to move your piece!");
+  return;
+}
+  let temparray= temp.split("-");
+  temparray[0] = temparray[0].slice(3,temp.length -2);
+  this.prologBoard= temparray[0].split("),p(");
+  this.player1Encode=temparray[1];
+  this.player2Encode=temparray[2];
+  temparray[1]=temparray[1].slice(1,temparray[1].length-1);
+  temparray[2]=temparray[2].slice(1,temparray[2].length-1);
+  this.player1 = temparray[1].split(",");
+  this.player2 = temparray[2].split(",");
+  this.CapturedPiece= parseInt(temparray[3]);
+
 }
 
 MyGameBoard.prototype.getBoard = function(data){
