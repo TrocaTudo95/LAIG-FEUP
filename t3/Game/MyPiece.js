@@ -5,13 +5,14 @@
  * @param scene Scene
  * @param args Arguments to build the Piece
  */
- function MyPiece(scene,color,id,x,z) {
+ function MyPiece(scene,color,id,position,x,z) {
 
 
  	CGFobject.call(this,scene);
     this.scene=scene;
     this.color = color;
     this.id=id;
+    this.position=position;
     this.x=x;
     this.z=z;
 

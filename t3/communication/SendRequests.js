@@ -16,6 +16,12 @@ MyGameBoard.prototype.init_board = function(){
   this.getPrologRequest('init_board', this.getBoard);
 };
 
+MyGameBoard.prototype.possible_moves = function(){
+  let tempNum= this.selectedPiece -100;
+  let request='possible_moves('+this.selectedPiece.id+ ')';
+  this.getPrologRequest(request, this.getPossibleMoves);
+}
+
 MyGameBoard.prototype.init_players =function(){
 this.getPrologRequest('init_players', this.getPlayers);
 };
@@ -30,6 +36,10 @@ MyGameBoard.prototype.getBoard = function(data){
   let temp = data.target.response;
 			  temp = temp.slice(3,temp.length -2);
 			  this.prologBoard= temp.split("),p(");
+
+};
+
+MyGameBoard.prototype.getPossibleMoves = function(){
 
 };
 
