@@ -135,6 +135,7 @@ XMLscene.prototype.onGraphLoaded = function()
 
     this.graph.update(time/1000);
 
+
 }
 
 /**
@@ -192,6 +193,7 @@ XMLscene.prototype.display = function() {
 		// Draw axis
 		this.axis.display();
 	}
+
       this.pushMatrix();
           if(this.graph.filename == "campo.xml"){
             this.translate(42,0.2,40);
@@ -210,6 +212,5 @@ XMLscene.prototype.display = function() {
 }
 
 XMLscene.prototype.changeGraph = function(filename){
-  this.cameraIndex = 0;
   this.graph = new MySceneGraph(filename, this);
 }

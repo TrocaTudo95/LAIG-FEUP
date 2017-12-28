@@ -86,11 +86,14 @@ function MyBoard(scene) {
 			//40
 			this.circles.push(new BoardPiece(scene,6,40,-11,0));
 			//41 (center point)
-			this.circles.push(new BoardPiece(scene,6,41,0,0));
+			this.circles.push(new BoardPiece(scene,6,50,0,0));
 
 
   this.boardAp=new CGFappearance(scene);
 	this.boardAp.loadTexture("scenes/images/board.jpg");
+
+
+  this.shader = new CGFshader(this.scene.gl, 'shaders/pick.vert', 'shaders/pick.frag');
 
 };
 
@@ -115,8 +118,12 @@ MyBoard.prototype.display = function() {
 for(let v=0 ; v<41 ; v++){
 
 	this.scene.pushMatrix();
+  if(this.circles[v].possibleMove == true){
+    //this.scene.setActiveShader(this.shader);
+  }
 	this.scene.registerForPick(v+1, this.circles[v]);
 	this.circles[v].display();
+  //this.scene.setActiveShader(this.scene.defaultShader);
 	this.scene.popMatrix();
 
 

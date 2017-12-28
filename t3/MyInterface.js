@@ -26,8 +26,8 @@ MyInterface.prototype.init = function(application) {
 
     this.scenes = this.gui.addFolder("Scenes");
   	this.scenes.open();
-  	this.gui.scene = 'Campo';
-  	this.gui.sceneList = this.scenes.add(this.gui, 'scene', ['Campo', 'Casino']);
+  	this.gui.scene = 'campo';
+  	this.gui.sceneList = this.scenes.add(this.gui, 'scene', ['campo', 'casino']);
     this.gui.sceneList.onFinishChange(function(){
       this.removeFolder("Lights",this.gui);
   		this.scene.changeGraph(this.gui.scene + '.xml');

@@ -14,6 +14,7 @@
     this.id=id;
     this.x=x;
     this.z=z;
+    this.possibleMove=false;
 
     this.circle = new Circle(this.scene,6);
 
@@ -25,6 +26,11 @@
 
 BoardPiece.prototype = Object.create(CGFobject.prototype);
 BoardPiece.prototype.constructor = BoardPiece;
+
+BoardPiece.prototype.setPossibleMove= function(){
+  this.possibleMove = true;
+
+}
 
 
 /**
