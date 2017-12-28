@@ -137,18 +137,8 @@ XMLscene.prototype.onGraphLoaded = function()
   	    this.prevTime=currTime;
 
     this.graph.update(time/1000);
-
-    for(let i=0;i < this.game.possibleMoves.length;i++){
-      let posS = this.game.possibleMoves[i];
-      let pos = parseInt(posS)-1;
-      if(this.game.possibleMoves[i] == "50"){
-        pos=40;
-      }
-      this.game.board.circles[pos].possibleMove = true;
-    }
-
-
-}
+    this.game.update();
+  }
 
 /**
  * Displays the scene.

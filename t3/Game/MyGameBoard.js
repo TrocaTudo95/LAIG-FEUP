@@ -132,13 +132,42 @@ this.currentState=1;
 MyGameBoard.prototype.selectPositionMove =function(id) {
   this.positionToMove=id;
   this.currentState=2;
-  this.makeMove();
+  this.make_play();
 };
 
 MyGameBoard.prototype.makeMove =function() {
-this.make_play();
 
+let ind= this.pieces.indexOf(this.selectedPiece);
+let i;
+for(i=0; i<this.board.circles.length;i++){
+  if(this.board.circles[i].id==this.positionToMove)
+        break;
 }
+
+this.pieces[ind].x=this.board.circles[i].x;
+this.pieces[ind].z=this.board.circles[i].z;
+
+
+
+};
+
+MyGameBoard.prototype.update = function(){
+if(this.currentState==2 && this.CapturedPiece!=null)
+this.makeMove();
+
+if(this.game.currentState==1){
+for(let i=0;i < this.game.possibleMoves.length;i++){
+  let posS = this.game.possibleMoves[i];
+  let pos = parseInt(posS)-1;
+  if(this.game.possibleMoves[i] == "50"){
+    pos=40;
+  }
+  this.game.board.circles[pos].possibleMove = true;
+}
+}
+
+
+};
 
 MyGameBoard.prototype.display = function() {
   this.scene.pushMatrix();

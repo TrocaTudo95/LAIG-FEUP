@@ -42,6 +42,7 @@ MyGameBoard.prototype.parseMove = function(data){
   let temp = data.target.response;
   if(temp=='Bad Request'){
     alert("Choose a valid Position to move your piece!");
+    this.game.currentState=1;
   return;
 }
   let temparray= temp.split("-");
