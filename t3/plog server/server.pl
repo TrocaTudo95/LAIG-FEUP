@@ -116,7 +116,7 @@ parse_input(init_board,Board):-
 	parse_input(possible_moves(Position),List):-
 		possible_moves(Position,List).
 
-	parse_input(make_move(Piece,FinalPosition,Board,Player1,Player2),[NewBoard,NewPlayer1,NewPlayer2]):-
+	parse_input(make_move(Piece,FinalPosition,Board,Player1,Player2),NewBoard-NewPlayer1-NewPlayer2):-
 		member(Piece, Player1),
 		find_pos(Board, Piece, Pos),
 		verify_empty_pos(FinalPosition,Board),

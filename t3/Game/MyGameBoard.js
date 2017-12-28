@@ -7,6 +7,8 @@ function MyGameBoard(scene){
   this.player2=[];
   this.prologBoard=[];
   this.selectedPiece=null;
+  this.possibleMoves=[];
+  this.positionToMove=null;
 
   this.board = new MyBoard(this.scene);
   this.pieces=[];
@@ -101,7 +103,7 @@ MyGameBoard.prototype.selectPiece = function(id) {
       break;
     }
   }
-console.log("u choosed the piece: " + this.selectedPiece.id);
+this.possible_moves();
 };
 
 

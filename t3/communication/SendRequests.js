@@ -32,6 +32,12 @@ MyGameBoard.prototype.calculate_score = function(){
   this.getPrologRequest(request, this.getScore);
 };
 
+MyGameBoard.prototype.make_play =function(){
+let request= 'make_move(p'+this.selectedPiece.id+','+this.positionToMove+','+this.encodeBoard()+','+this.player1Encode+','+
+this.player2Encode+')';
+this.getPrologRequest(request, this.parseMove);
+}
+
 MyGameBoard.prototype.getBoard = function(data){
   let temp = data.target.response;
 			  temp = temp.slice(3,temp.length -2);
@@ -39,8 +45,10 @@ MyGameBoard.prototype.getBoard = function(data){
 
 };
 
-MyGameBoard.prototype.getPossibleMoves = function(){
-
+MyGameBoard.prototype.getPossibleMoves = function(data){
+let temp = data.target.response;
+temp =temp.slice(1,temp.length -1);
+this.possibleMoves= temp.split(",");
 };
 
 
