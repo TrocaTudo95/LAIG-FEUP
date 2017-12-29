@@ -178,8 +178,19 @@ for(j=0;j<this.pieces.length;j++){
 }
 
 
-this.pieces[ind].movePiece([this.board.circles[i].x,0.1,this.board.circles[i].z]);
-this.pieces[this.indexEatedPiece].movePiece([20,0.1,20]);
+this.pieces[ind].movePiece([this.board.circles[i].x,0.1,this.board.circles[i].z],5);
+if(this.pieces[this.indexEatedPiece].color == "red"){
+  this.pieces[this.indexEatedPiece].movePiece([-40,0.1,-40],10);
+}
+else if(this.pieces[this.indexEatedPiece].color == "blue"){
+  this.pieces[this.indexEatedPiece].movePiece([40,0.1,40],10);
+}
+else if(this.pieces[this.indexEatedPiece].color == "green"){
+  this.pieces[this.indexEatedPiece].movePiece([-40,0.1,40],10);
+}
+else if(this.pieces[this.indexEatedPiece].color == "yellow"){
+  this.pieces[this.indexEatedPiece].movePiece([40,0.1,-40],10);
+}
 this.indexMovingPiece=ind;
 this.currentState=3;
 
