@@ -90,9 +90,9 @@ MyPiece.prototype.bezier_distance= function(p1,p2,p3,p4)
       return result;
   }
 
-MyPiece.prototype.movePiece = function(p4){
+MyPiece.prototype.movePiece = function(p4,speed){
   this.done=false;
-  this.speed = 5;
+  this.speed = speed;
   this.p4=p4;
   var pM=this.ponto_medio(this.p1,this.p4);
   pM[1]=4;
