@@ -43,6 +43,10 @@ MyInterface.prototype.init = function(application) {
       this.scene.changeView(this.gui.view);
     }.bind(this))
 
+    this.menu = this.gui.addFolder('Menu');
+    this.menu.open();
+    this.menu.add(this.scene, 'NewGame').name('New Game');
+
 
 
     // add a group of controls (and open/expand by defult)
