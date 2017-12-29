@@ -105,8 +105,8 @@ MyGameBoard.prototype.encodeBoard =function() {
 MyGameBoard.prototype.getScore = function(data){
   let temp = data.target.response;
         let temparray= temp.split("-");
-        this.score1=parseInt(temparray[0]);
-        this.score2=parseInt(temparray[1]);
+        this.scorePlayer1=parseInt(temparray[0]);
+        this.scorePlayer2=parseInt(temparray[1]);
 
 };
 
