@@ -101,7 +101,8 @@ XMLscene.prototype.logPicking = function ()
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function() {
-    this.camera = new CGFcamera(0.4,0.1,500,vec3.fromValues(15, 15, 15),vec3.fromValues(0, 0, 0));
+    this.camera = new CGFcamera(0.4,0.1,500,vec3.fromValues(40, 10, 30),vec3.fromValues(0, 0, 0));
+
 }
 
 /* Handler called when the graph is finally loaded.
@@ -112,6 +113,7 @@ XMLscene.prototype.onGraphLoaded = function()
     this.camera.near = this.graph.near;
     this.camera.far = this.graph.far;
     this.axis = new CGFaxis(this,this.graph.referenceLength);
+
 
     this.setGlobalAmbientLight(this.graph.ambientIllumination[0], this.graph.ambientIllumination[1],
     this.graph.ambientIllumination[2], this.graph.ambientIllumination[3]);
@@ -138,11 +140,6 @@ XMLscene.prototype.onGraphLoaded = function()
 
     this.graph.update(time/1000);
 
-    //teste
-    if(this.game.pieces[8].done == false){
-    var p4=[0,0.1,0];
-    this.game.pieces[8].movePiece(p4,time/1000);
-}
 
 
     for(let i=0;i < this.game.possibleMoves.length;i++){
@@ -214,6 +211,7 @@ XMLscene.prototype.display = function() {
 	}
 
       this.pushMatrix();
+      this.changeView();
           if(this.graph.filename == "campo.xml"){
             this.translate(42,0.2,40);
             this.scale(0.22,1,0.22);
@@ -232,4 +230,33 @@ XMLscene.prototype.display = function() {
 
 XMLscene.prototype.changeGraph = function(filename){
   this.graph = new MySceneGraph(filename, this);
+}
+
+XMLscene.prototype.changeView = function(viewName){
+  if(viewName == "view1"){
+    this.camera.setPosition(vec3.fromValues(40,10,30));
+    this.camera.setTarget(vec3.fromValues(0,0,0));
+  }
+  else if(viewName == "view2"){
+    if(this.graph.filename == "casino.xml"){
+      this.camera.setPosition(vec3.fromValues(10,10,30));
+      this.camera.setTarget(vec3.fromValues(0,0,0));
+    }
+    else if(this.graph.filename == "campo.xml"){
+    this.camera.setPosition(vec3.fromValues(20,15,30));
+    this.camera.setTarget(vec3.fromValues(10,0,0));
+  }
+  }
+
+  else if(viewName == "view3"){
+    if(this.graph.filename == "casino.xml"){
+      this.camera.setPosition(vec3.fromValues(5,10,15));
+      this.camera.setTarget(vec3.fromValues(0,0,0));
+    }
+    else if(this.graph.filename == "campo.xml"){
+    this.camera.setPosition(vec3.fromValues(17,10,20));
+    this.camera.setTarget(vec3.fromValues(12,0,5));
+  }
+  }
+
 }

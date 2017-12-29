@@ -31,7 +31,20 @@ MyInterface.prototype.init = function(application) {
     this.gui.sceneList.onFinishChange(function(){
       this.removeFolder("Lights",this.gui);
   		this.scene.changeGraph(this.gui.scene + '.xml');
+      this.scene.changeView(this.gui.view);
   	}.bind(this))
+
+
+    this.views = this.gui.addFolder("Views");
+    this.views.open();
+    this.gui.view = 'view1';
+    this.gui.viewList = this.views.add(this.gui, 'view', ['view1', 'view2','view3']);
+    this.gui.viewList.onFinishChange(function(){
+      this.scene.changeView(this.gui.view);
+    }.bind(this))
+
+
+
     // add a group of controls (and open/expand by defult)
 
     return true;
@@ -80,6 +93,7 @@ switch (event.keyCode)
       alert("Choose another piece to move!");
     }
       break;
+
 
   }
 };
