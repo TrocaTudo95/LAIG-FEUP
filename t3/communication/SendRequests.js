@@ -47,19 +47,29 @@ MyGameBoard.prototype.parseMove = function(data){
   let temp = data.target.response;
   if(temp=='Bad Request'){
     alert("Choose a valid Position to move your piece!");
-    this.game.currentState=1;
+    this.currentState=1;
   return;
 }
   let temparray= temp.split("-");
     this.encodedBoard=temparray[0];
   temparray[0] = temparray[0].slice(3,temparray[0].length -2);
   this.prologBoard= temparray[0].split("),p(");
+  if(this.currentPlayer==1){
   this.player1Encode=temparray[1];
   this.player2Encode=temparray[2];
   temparray[1]=temparray[1].slice(1,temparray[1].length-1);
   temparray[2]=temparray[2].slice(1,temparray[2].length-1);
   this.player1 = temparray[1].split(",");
   this.player2 = temparray[2].split(",");
+}
+else{
+  this.player1Encode=temparray[2];
+  this.player2Encode=temparray[1];
+  temparray[2]=temparray[2].slice(1,temparray[2].length-1);
+  temparray[1]=temparray[1].slice(1,temparray[1].length-1);
+  this.player1 = temparray[2].split(",");
+  this.player2 = temparray[1].split(",");
+}
   this.CapturedPiece= parseInt(temparray[3]);
 
 }
