@@ -18,6 +18,7 @@ function MyGameBoard(scene){
   this.indexEatedPiece=null;
 //////////////////
   this.board = new MyBoard(this.scene);
+  this.scoreboard = new MyScoreBoard(this.scene);
   this.pieces=[];
   this.pieces.push(new MyPiece(scene,"blue",1,1,20,46));
   //2
@@ -227,6 +228,15 @@ MyGameBoard.prototype.display = function() {
   this.scene.pushMatrix();
   this.board.display();
   this.scene.popMatrix();
+
+  this.scene.pushMatrix();
+  this.scoreboard.points=[14,12];  // player1,player2
+  this.scene.translate(-50,0,35);
+  this.scene.rotate(90*Math.PI/180,0,1,0);
+  this.scene.scale(7,5,1);
+  this.scoreboard.display();
+  this.scene.popMatrix();
+
 
   for(let i=0; i<this.pieces.length;i++){
     this.scene.pushMatrix();
