@@ -14,11 +14,11 @@ function MyBoard(scene) {
 			//4
 			this.circles.push(new BoardPiece(scene,6,4,-20,46));
 			//5
-			this.circles.push(new BoardPiece(scene,6,5,-13.5,34.5));
+      this.circles.push(new BoardPiece(scene,6,5,13.5,34.5));
 			//6
 			this.circles.push(new BoardPiece(scene,6,6,0,34.5));
 			//7
-			this.circles.push(new BoardPiece(scene,6,7,13.5,34.5));
+      this.circles.push(new BoardPiece(scene,6,7,-13.5,34.5));
 			//8
 			this.circles.push(new BoardPiece(scene,6,8,6.5,23));
 			//9
@@ -34,57 +34,59 @@ function MyBoard(scene) {
 			//14
 			this.circles.push(new BoardPiece(scene,6,14,46,-20));
 			//15
-			this.circles.push(new BoardPiece(scene,6,15,34.5,-13.5));
+      this.circles.push(new BoardPiece(scene,6,15,34.5,13.5));
 			//16
 			this.circles.push(new BoardPiece(scene,6,16,34.5,0));
 			//17
-			this.circles.push(new BoardPiece(scene,6,17,34.5,13.5));
+      this.circles.push(new BoardPiece(scene,6,17,34.5,-13.5));
 			//18
 			this.circles.push(new BoardPiece(scene,6,18,23,6.5));
 			//19
 			this.circles.push(new BoardPiece(scene,6,19,23,-6.5));
 			//20
 			this.circles.push(new BoardPiece(scene,6,20,11,0));
-			//21
-			this.circles.push(new BoardPiece(scene,6,21,20,-46));
-			//22
-			this.circles.push(new BoardPiece(scene,6,22,6.5,-46));
-			//23
-			this.circles.push(new BoardPiece(scene,6,23,-6.5,-46));
-			//24
-			this.circles.push(new BoardPiece(scene,6,24,-20,-46));
-			//25
-			this.circles.push(new BoardPiece(scene,6,25,-13.5,-34.5));
-			//26
-			this.circles.push(new BoardPiece(scene,6,26,0,-34.5));
-			//27
-			this.circles.push(new BoardPiece(scene,6,27,13.5,-34.5));
-			//28
-			this.circles.push(new BoardPiece(scene,6,28,6.5,-23));
-			//29
-			this.circles.push(new BoardPiece(scene,6,29,-6.5,-23));
-			//30
-			this.circles.push(new BoardPiece(scene,6,30,0,-11));
-			//31
-			this.circles.push(new BoardPiece(scene,6,31,-46,20));
+
+      this.circles.push(new BoardPiece(scene,6,21,-46,20));
 			//32
-			this.circles.push(new BoardPiece(scene,6,32,-46,6.5));
+			this.circles.push(new BoardPiece(scene,6,22,-46,6.5));
 			//33
-			this.circles.push(new BoardPiece(scene,6,33,-46,-6.5));
+			this.circles.push(new BoardPiece(scene,6,23,-46,-6.5));
 			//34
-			this.circles.push(new BoardPiece(scene,6,34,-46,-20));
+			this.circles.push(new BoardPiece(scene,6,24,-46,-20));
 			//35
-			this.circles.push(new BoardPiece(scene,6,35,-34.5,-13.5));
+      this.circles.push(new BoardPiece(scene,6,25,-34.5,13.5));
 			//36
-			this.circles.push(new BoardPiece(scene,6,36,-34.5,0));
+			this.circles.push(new BoardPiece(scene,6,26,-34.5,0));
 			//37
-			this.circles.push(new BoardPiece(scene,6,37,-34.5,13.5));
+      this.circles.push(new BoardPiece(scene,6,27,-34.5,-13.5));
 			//38
-			this.circles.push(new BoardPiece(scene,6,38,-23,6.5));
+			this.circles.push(new BoardPiece(scene,6,28,-23,6.5));
 			//39
-			this.circles.push(new BoardPiece(scene,6,39,-23,-6.5));
+			this.circles.push(new BoardPiece(scene,6,29,-23,-6.5));
 			//40
-			this.circles.push(new BoardPiece(scene,6,40,-11,0));
+			this.circles.push(new BoardPiece(scene,6,30,-11,0));
+			//21
+			this.circles.push(new BoardPiece(scene,6,31,20,-46));
+			//22
+			this.circles.push(new BoardPiece(scene,6,32,6.5,-46));
+			//23
+			this.circles.push(new BoardPiece(scene,6,33,-6.5,-46));
+			//24
+			this.circles.push(new BoardPiece(scene,6,34,-20,-46));
+			//25
+			this.circles.push(new BoardPiece(scene,6,35,13.5,-34.5));
+			//26
+			this.circles.push(new BoardPiece(scene,6,36,0,-34.5));
+			//27
+      this.circles.push(new BoardPiece(scene,6,37,-13.5,-34.5));
+			//28
+			this.circles.push(new BoardPiece(scene,6,38,6.5,-23));
+			//29
+			this.circles.push(new BoardPiece(scene,6,39,-6.5,-23));
+			//30
+			this.circles.push(new BoardPiece(scene,6,40,0,-11));
+			//31
+
 			//41 (center point)
 			this.circles.push(new BoardPiece(scene,6,50,0,0));
 

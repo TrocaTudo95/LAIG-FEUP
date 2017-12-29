@@ -32,7 +32,7 @@ XMLscene.prototype.init = function(application) {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
-    this.setUpdatePeriod(500);
+    this.setUpdatePeriod(10);
 
     this.axis = new CGFaxis(this);
     this.setPickEnabled(true);
@@ -139,17 +139,8 @@ XMLscene.prototype.onGraphLoaded = function()
   	    this.prevTime=currTime;
 
     this.graph.update(time/1000);
+    this.game.update(time/1000);
 
-
-
-    for(let i=0;i < this.game.possibleMoves.length;i++){
-      let posS = this.game.possibleMoves[i];
-      let pos = parseInt(posS)-1;
-      if(this.game.possibleMoves[i] == "50"){
-        pos=40;
-      }
-      this.game.board.circles[pos].possibleMove = true;
-    }
 
 
 }
