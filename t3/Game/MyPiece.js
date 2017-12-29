@@ -113,6 +113,7 @@ MyPiece.prototype.update = function(deltaTime){
       this.y = this.p4[1];
       this.z = this.p4[2];
       this.done = true;
+      this.p1=[this.x,0.1,this.z];
       return;
 
   }
@@ -120,7 +121,6 @@ MyPiece.prototype.update = function(deltaTime){
   this.x=Math.pow((1-this.t),3)*this.p1[0] + 3*this.t*Math.pow((1-this.t),2)*this.p2[0]+3*Math.pow(this.t,2)*(1-this.t)*this.p3[0]+Math.pow(this.t,3)*this.p4[0];
   this.y=Math.pow((1-this.t),3)*this.p1[1] + 3*this.t*Math.pow((1-this.t),2)*this.p2[1]+3*Math.pow(this.t,2)*(1-this.t)*this.p3[1]+Math.pow(this.t,3)*this.p4[1];
   this.z=Math.pow((1-this.t),3)*this.p1[2] + 3*this.t*Math.pow((1-this.t),2)*this.p2[2]+3*Math.pow(this.t,2)*(1-this.t)*this.p3[2]+Math.pow(this.t,3)*this.p4[2];
-
   }
 
 }

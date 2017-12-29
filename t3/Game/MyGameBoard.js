@@ -109,6 +109,12 @@ MyGameBoard.prototype = Object.create(CGFobject.prototype);
 MyGameBoard.prototype.constructor=MyGameBoard;
 
 MyGameBoard.prototype.selectPiece = function(id) {
+  if(this.gameOver){
+    alert("Game Ended! Press Start Game to start a new game");
+    this.currentState=10;
+    return;
+  }
+
   let temp= id -100;
   let temp_piece= "p"+temp;
   let ind;
@@ -144,6 +150,7 @@ MyGameBoard.prototype.selectPositionMove =function(id) {
 };
 
 MyGameBoard.prototype.end_turn = function(){
+  this.checkGameOver();
   if (this.currentPlayer==1){
   this.currentPlayer=2;
     }
@@ -204,6 +211,7 @@ this.makeMove();
 if(this.currentState==3 && !this.pieces[this.indexMovingPiece].done){
   this.pieces[this.indexMovingPiece].update(deltaTime);
   this.pieces[this.indexEatedPiece].update(deltaTime);
+    console.log([  this.pieces[this.indexEatedPiece].x,  this.pieces[this.indexEatedPiece].y,  this.pieces[this.indexEatedPiece].z]);
 }
 else if(this.currentState==3 && this.pieces[this.indexMovingPiece].done){
   this.end_turn();

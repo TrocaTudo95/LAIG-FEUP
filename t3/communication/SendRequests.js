@@ -23,7 +23,9 @@ MyGameBoard.prototype.possible_moves = function(){
 }
 
 MyGameBoard.prototype.checkGameOver= function(){
-  
+  let request='game_over('+this.encodedBoard+','+this.player1Encode+','+
+  this.player2Encode+')';
+  this.getPrologRequest(request,this.getGameOver);
 }
 
 MyGameBoard.prototype.init_players =function(){
@@ -77,7 +79,19 @@ else{
   temparray[3]=temparray[3].slice(1,temparray[2].length);
   this.CapturedPiece= parseInt(temparray[3]);
 
+};
+
+MyGameBoard.prototype.getGameOver =function(data){
+  let temp = data.target.response;
+  if(temp=="0")
+  this.gameOver=false;
+  else if(temp=="1")
+  this.gameOver=true;
 }
+
+
+
+
 
 MyGameBoard.prototype.getBoard = function(data){
   let temp = data.target.response;
