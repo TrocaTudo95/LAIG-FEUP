@@ -212,7 +212,6 @@ this.makeMove();
 if(this.currentState==3 && !this.pieces[this.indexMovingPiece].done){
   this.pieces[this.indexMovingPiece].update(deltaTime);
   this.pieces[this.indexEatedPiece].update(deltaTime);
-    console.log([  this.pieces[this.indexEatedPiece].x,  this.pieces[this.indexEatedPiece].y,  this.pieces[this.indexEatedPiece].z]);
 }
 else if(this.currentState==3 && this.pieces[this.indexMovingPiece].done){
   this.end_turn();
