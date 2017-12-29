@@ -70,6 +70,7 @@ else{
   this.player1 = temparray[2].split(",");
   this.player2 = temparray[1].split(",");
 }
+  temparray[3]=temparray[3].slice(1,temparray[2].length);
   this.CapturedPiece= parseInt(temparray[3]);
 
 }

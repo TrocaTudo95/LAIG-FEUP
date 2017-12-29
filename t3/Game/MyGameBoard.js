@@ -166,7 +166,17 @@ for(i=0; i<this.board.circles.length;i++){
         break;
 }
 
+let j=0;
+for(j=0;j<this.pieces.length;j++){
+  if(this.CapturedPiece==this.pieces[j].id){
+    this.indexEatedPiece=j;
+    break;
+  }
+}
+
+
 this.pieces[ind].movePiece([this.board.circles[i].x,0.1,this.board.circles[i].z]);
+this.pieces[this.indexEatedPiece].movePiece(20,0.1,20);
 this.indexMovingPiece=ind;
 this.currentState=3;
 
@@ -179,6 +189,7 @@ this.makeMove();
 
 if(this.currentState==3 && !this.pieces[this.indexMovingPiece].done){
   this.pieces[this.indexMovingPiece].update(deltaTime);
+  this.pieces[this.indexEatedPiece].update(deltaTime);
 }
 else if(this.currentState==3 && this.pieces[this.indexMovingPiece].done){
   this.end_turn();
