@@ -242,7 +242,7 @@ XMLscene.prototype.changeView = function(viewName){
   else if(viewName == "view3"){
     if(this.graph.filename == "casino.xml"){
       this.camera.setPosition(vec3.fromValues(5,10,15));
-      this.camera.setTarget(vec3.fromValues(0,0,0));
+      this.camera.setTarget(vec3.fromValues(-2,0,-5));
     }
     else if(this.graph.filename == "campo.xml"){
     this.camera.setPosition(vec3.fromValues(17,10,20));
