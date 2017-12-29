@@ -22,6 +22,10 @@ MyGameBoard.prototype.possible_moves = function(){
   this.getPrologRequest(request, this.getPossibleMoves);
 }
 
+MyGameBoard.prototype.checkGameOver= function(){
+  
+}
+
 MyGameBoard.prototype.init_players =function(){
 this.getPrologRequest('init_players', this.getPlayers);
 };
