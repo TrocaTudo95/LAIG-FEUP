@@ -119,7 +119,7 @@ parse_input(init_board,Board):-
 
 a:-parse_input(make_move(p7,10,[p(p1,1),p(p2,2),p(p3,3),p(p4,4),p(p5,5),p(p6,6),p(p7,7),p(p8,8),p(p9,9),p(p11,11),p(p21,21),p(p15,15),p(0,10),p(p25,25),p(p12,12),p(p18,18),p(p28,28),p(p22,22),p(p16,16),p(0,20),p(0,50),p(0,30),p(p26,26),p(p13,13),p(p19,19),p(p29,29),p(p23,23),p(p17,17),p(0,40),p(p27,27),p(p14,14),p(p24,24),p(p38,38),p(p39,39),p(p35,35),p(p36,36),p(p37,37),p(p31,31),p(p32,32),p(p33,33),p(p34,34)],[p1,p2,p3,p4,p5,p6,p7,p8,p9,p31,p32,p33,p34,p35,p36,p37,p38,p39],[p11,p12,p13,p14,p15,p16,p17,p18,p19,p21,p22,p23,p24,p25,p26,p27,p28,p29]),A-B-C-D).
 
-b:-parse_input(game_over([p(p1,1),p(p2,2),p(p3,3),p(p4,4),p(0,5),p(p6,6),p(p7,7),p(0,8),p(p9,9),p(p11,11),p(p21,21),p(p15,15),p(p5,10),p(p25,25),p(p12,12),p(p18,18),p(p28,28),p(p22,22),p(p16,16),p(0,20),p(0,50),p(0,30),p(p26,26),p(p13,13),p(p19,19),p(p29,29),p(p23,23),p(p17,17),p(0,40),p(p27,27),p(p14,14),p(p24,24),p(p38,38),p(p39,39),p(p35,35),p(p36,36),p(p37,37),p(p31,31),p(p32,32),p(p33,33),p(p34,34)],[p1,p2,p3,p4,p5,p6,p7,p9,p31,p32,p33,p34,p35,p36,p37,p38,p39],[p11,p12,p13,p14,p15,p16,p17,p18,p19,p21,p22,p23,p24,p25,p26,p27,p28,p29]),R).
+b:-parse_input(game_over([p(p1,1),p(p2,2),p(0,3),p(0,4),p(0,5),p(0,6),p(0,7),p(p3,8),p(p4,9),p(0,11),p(p21,21),p(0,15),p(0,10),p(0,25),p(p12,12),p(p11,18),p(0,28),p(0,22),p(0,16),p(0,20),p(p22,50),p(0,30),p(0,26),p(0,13),p(0,19),p(0,29),p(p23,23),p(p17,17),p(0,40),p(p27,27),p(p14,14),p(p24,24),p(0,38),p(p34,39),p(0,35),p(0,36),p(0,37),p(p31,31),p(0,32),p(p33,33),p(0,34)],[p1,p2,p3,p4,p31,p33,p34],[p11,p12,p14,p17,p21,p22,p23,p24,p27]),R).
 
 
 	parse_input(make_move(Piece,FinalPosition,Board,Player1,Player2),NewBoard-NewPlayer1-NewPlayer2-CapturedPiece):-
@@ -133,7 +133,8 @@ b:-parse_input(game_over([p(p1,1),p(p2,2),p(p3,3),p(p4,4),p(0,5),p(p6,6),p(p7,7)
 
 
 		parse_input(game_over(Board,Player1,Player2),R):-
-			(check_game_over(Board, Player1, Player2)-> R=0; R=1).
+			((\+ isnt_game_over(Board,Player1);
+		  \+ isnt_game_over(Board,Player2))-> R=1; R=0).
 
 
 		parse_input(calculate_score(Board,Player1,Player2),Score1-Score2):-
