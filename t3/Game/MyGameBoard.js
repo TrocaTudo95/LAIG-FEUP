@@ -239,8 +239,7 @@ MyGameBoard.prototype.display = function() {
 
   this.scene.pushMatrix();
   this.scoreboard.points=[this.scorePlayer1,this.scorePlayer2];  // player1,player2
-  this.scene.translate(-50,0,35);
-  this.scene.rotate(90*Math.PI/180,0,1,0);
+  this.scene.translate(-37,0,-50);
   this.scene.scale(7,5,1);
   this.scoreboard.display();
   this.scene.popMatrix();
