@@ -107,13 +107,15 @@ MyPiece.prototype.movePiece = function(p4,speed){
 MyPiece.prototype.update = function(deltaTime){
 
   this.t += (deltaTime * this.speed) / this.distance;
+
   if(this.t >= 1){  // if animation is over
 
       this.x = this.p4[0];
       this.y = this.p4[1];
       this.z = this.p4[2];
       this.done = true;
-      this.p1=[this.x,0.1,this.z];
+      this.p1=[this.x,this.y,this.z];
+      this.t=0;
       return;
 
   }
