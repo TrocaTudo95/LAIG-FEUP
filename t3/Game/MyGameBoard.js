@@ -9,6 +9,7 @@ function MyGameBoard(scene){
   this.prologBoard=[];
   this.scorePlayer1=54;
   this.scorePlayer2=54;
+  this.listOfPlays=[];
   //round variables
   this.selectedPiece=null;
   this.possibleMoves=[];
@@ -238,7 +239,7 @@ MyGameBoard.prototype.display = function() {
   this.scene.popMatrix();
 
   this.scene.pushMatrix();
-  this.scoreboard.points=[14,12];  // player1,player2
+  this.scoreboard.points=[this.scorePlayer1,this.scorePlayer2];  // player1,player2
   this.scene.translate(-50,0,35);
   this.scene.rotate(90*Math.PI/180,0,1,0);
   this.scene.scale(7,5,1);
