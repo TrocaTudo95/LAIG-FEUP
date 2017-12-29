@@ -251,3 +251,7 @@ XMLscene.prototype.changeView = function(viewName){
   }
 
 }
+
+XMLscene.prototype.NewGame = function(){
+  this.game = new MyGameBoard(this);
+}
