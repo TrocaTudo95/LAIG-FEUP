@@ -7,6 +7,8 @@ function MyGameBoard(scene){
   this.player1 = [];
   this.player2=[];
   this.prologBoard=[];
+  this.scorePlayer1=54;
+  this.scorePlayer2=54;
   //round variables
   this.selectedPiece=null;
   this.possibleMoves=[];
@@ -118,9 +120,9 @@ if(this.currentPlayer==1)
 
  if(ind==-1){
    if(this.currentPlayer==1)
-   alert("This piece does not Belong you player1, your pieces are the green and the blue!");
+   alert("This piece does not Belong you player1, your pieces are the red and the blue!");
    else
-     alert("This piece does not Belong you player2, your pieces are the red and the yellow!");
+     alert("This piece does not Belong you player2, your pieces are the green and the yellow!");
 
      return;
  }
@@ -159,6 +161,7 @@ MyGameBoard.prototype.end_turn = function(){
 
 MyGameBoard.prototype.makeMove =function() {
 
+this.calculate_score();
 let ind= this.pieces.indexOf(this.selectedPiece);
 let i;
 for(i=0; i<this.board.circles.length;i++){
@@ -176,7 +179,7 @@ for(j=0;j<this.pieces.length;j++){
 
 
 this.pieces[ind].movePiece([this.board.circles[i].x,0.1,this.board.circles[i].z]);
-this.pieces[this.indexEatedPiece].movePiece(20,0.1,20);
+this.pieces[this.indexEatedPiece].movePiece([20,0.1,20]);
 this.indexMovingPiece=ind;
 this.currentState=3;
 
