@@ -187,18 +187,18 @@ for(j=0;j<this.pieces.length;j++){
 }
 
 
-this.pieces[ind].movePiece([this.board.circles[i].x,0.1,this.board.circles[i].z],5);
+this.pieces[ind].movePiece([this.board.circles[i].x,0.1,this.board.circles[i].z],15);
 if(this.pieces[this.indexEatedPiece].color == "red"){
-  this.pieces[this.indexEatedPiece].movePiece([-40,0.1,-40],10);
+  this.pieces[this.indexEatedPiece].movePiece([-40,0.1,-40],30);
 }
 else if(this.pieces[this.indexEatedPiece].color == "blue"){
-  this.pieces[this.indexEatedPiece].movePiece([40,0.1,40],10);
+  this.pieces[this.indexEatedPiece].movePiece([40,0.1,40],30);
 }
 else if(this.pieces[this.indexEatedPiece].color == "green"){
-  this.pieces[this.indexEatedPiece].movePiece([-40,0.1,40],10);
+  this.pieces[this.indexEatedPiece].movePiece([-40,0.1,40],30);
 }
 else if(this.pieces[this.indexEatedPiece].color == "yellow"){
-  this.pieces[this.indexEatedPiece].movePiece([40,0.1,-40],10);
+  this.pieces[this.indexEatedPiece].movePiece([40,0.1,-40],30);
 }
 this.indexMovingPiece=ind;
 this.currentState=3;
@@ -210,7 +210,7 @@ if(this.currentState==2 && this.CapturedPiece!=null)
 this.makeMove();
 
 
-if(this.currentState==3 && !this.pieces[this.indexMovingPiece].done){
+if(this.currentState==3 && !(this.pieces[this.indexMovingPiece].done && this.pieces[this.indexEatedPiece].done)){
   this.pieces[this.indexMovingPiece].update(deltaTime);
   this.pieces[this.indexEatedPiece].update(deltaTime);
 }
