@@ -17,6 +17,7 @@ function MyGameBoard(scene){
   this.CapturedPiece=null;
   this.indexMovingPiece=null;
   this.indexEatedPiece=null;
+  this.undoing=false;
 //////////////////
   this.board = new MyBoard(this.scene);
   this.scoreboard = new MyScoreBoard(this.scene);
@@ -168,6 +169,13 @@ MyGameBoard.prototype.end_turn = function(){
   this.indexEatedPiece=null;
 };
 
+MyGameBoard.prototype.addPlayToHistory = function(pos1,pos2){
+let play= new Play(this.encodedBoard,this.player1Encode,this.player2Encode,this.player1,this.player2,
+this.selectedPiece.id,this.indexEatedPiece,pos1,pos2,this.scorePlayer1,this.scorePlayer2,this.currentPlayer);
+this.listOfPlays.push(play);
+};
+
+
 MyGameBoard.prototype.makeMove =function() {
 
 this.calculate_score();
@@ -186,6 +194,9 @@ for(j=0;j<this.pieces.length;j++){
   }
 }
 
+this.addPlayToHistory([this.pieces[ind].x,this.pieces[ind].y,this.pieces[ind].z],[this.pieces[this.indexEatedPiece].x,this.pieces[this.indexEatedPiece].y,this.pieces[this.indexEatedPiece].z]);
+
+
 
 this.pieces[ind].movePiece([this.board.circles[i].x,0.1,this.board.circles[i].z],15);
 if(this.pieces[this.indexEatedPiece].color == "red"){
@@ -202,8 +213,27 @@ else if(this.pieces[this.indexEatedPiece].color == "yellow"){
 }
 this.indexMovingPiece=ind;
 this.currentState=3;
-
 };
+
+
+MyGameBoard.prototype.undo = function(){
+  this.undoing=true;
+  let play= this.listOfPlays[this.listOfPlays.length-1];
+  this.encodedBoard=play.board;
+  this.player1Encode=play.player1encoded;
+  this.player2Encode=play.player2encoded;
+  this.player1=play.player1;
+  this.player2=play.player2;
+  this.indexMovingPiece=play.selectedPieceid-1;
+  this.indexEatedPiece=play.eatedpieceid;
+  this.scorePlayer1=play.score1;
+  this.scorePlayer2=play.score2;
+  this.currentPlayer=play.currentPlayer;
+  this.pieces[this.indexMovingPiece].movePiece(play.playedPiecePos,30);
+  this.pieces[this.indexEatedPiece].movePiece(play.eatedPiecePos,30);
+  this.currentState=3;
+
+}
 
 MyGameBoard.prototype.update = function(deltaTime){
 if(this.currentState==2 && this.CapturedPiece!=null)
@@ -215,7 +245,12 @@ if(this.currentState==3 && !(this.pieces[this.indexMovingPiece].done && this.pie
   this.pieces[this.indexEatedPiece].update(deltaTime);
 }
 else if(this.currentState==3 && this.pieces[this.indexMovingPiece].done){
+  if(!this.undoing)
   this.end_turn();
+  else {
+    this.currentState=0;
+    this.undoing=false;
+  }
 }
 
 // if(this.currentState==1){

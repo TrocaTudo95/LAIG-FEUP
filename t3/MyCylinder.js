@@ -17,7 +17,6 @@
     this.slices = parseFloat(args[4]);
     this.scene=scene;
     this.cylinder = new MyCylinderNoTops(scene, args); //make the cylinder with or without tops 
-    console.log(this.slices);
 
   if (this.topCap == 1)
         this.topCircle = new Circle(this.scene, this.slices);
