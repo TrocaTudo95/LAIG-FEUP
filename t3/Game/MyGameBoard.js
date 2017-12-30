@@ -149,6 +149,11 @@ this.currentState=1;
 MyGameBoard.prototype.selectPositionMove =function(id) {
   this.positionToMove=id;
   this.currentState=2;
+  this.previousBoard=this.encodedBoard;
+  this.previousPlayer1encode=this.player1Encode;
+  this.previousPlayer2encode=this.player2Encode;
+  this.previousPlayer1=this.player1;
+  this.previousPlayer2=this.player2;
   this.make_play();
 };
 
@@ -170,7 +175,7 @@ MyGameBoard.prototype.end_turn = function(){
 };
 
 MyGameBoard.prototype.addPlayToHistory = function(pos1,pos2){
-let play= new Play(this.encodedBoard,this.player1Encode,this.player2Encode,this.player1,this.player2,
+let play= new Play(this.previousBoard,this.previousPlayer1encode,this.previousPlayer2encode,this.previousPlayer1,this.previousPlayer2,
 this.selectedPiece.id,this.indexEatedPiece,pos1,pos2,this.scorePlayer1,this.scorePlayer2,this.currentPlayer);
 this.listOfPlays.push(play);
 };
@@ -232,6 +237,7 @@ MyGameBoard.prototype.undo = function(){
   this.pieces[this.indexMovingPiece].movePiece(play.playedPiecePos,30);
   this.pieces[this.indexEatedPiece].movePiece(play.eatedPiecePos,30);
   this.currentState=3;
+  this.listOfPlays.splice(0,this.listOfPlays.length-1);
 
 }
 
