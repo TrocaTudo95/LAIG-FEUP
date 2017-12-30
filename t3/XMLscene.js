@@ -36,6 +36,8 @@ XMLscene.prototype.init = function(application) {
 
     this.axis = new CGFaxis(this);
     this.setPickEnabled(true);
+    this.currentCamera='view1';
+    this.cameraAnimation= new CameraAnimation(this,this.currentCamera,this.currentCamera);
 
      this.game= new MyGameBoard(this);
 
@@ -140,6 +142,7 @@ XMLscene.prototype.onGraphLoaded = function()
 
     this.graph.update(time/1000);
     this.game.update(time/1000);
+    this.cameraAnimation.updateAnimation(time/1000);
 
 
 
@@ -225,28 +228,33 @@ XMLscene.prototype.changeGraph = function(filename){
 
 XMLscene.prototype.changeView = function(viewName){
   if(viewName == "view1"){
-    this.camera.setPosition(vec3.fromValues(40,10,30));
-    this.camera.setTarget(vec3.fromValues(0,0,0));
+    this.cameraAnimation = new CameraAnimation(this,this.currentCamera,viewName);
+    this.cameraAnimation.done = false;
+    this.currentCamera="view1";
   }
   else if(viewName == "view2"){
     if(this.graph.filename == "casino.xml"){
-      this.camera.setPosition(vec3.fromValues(10,10,30));
-      this.camera.setTarget(vec3.fromValues(0,0,0));
+      this.cameraAnimation = new CameraAnimation(this,this.currentCamera,viewName);
+      this.cameraAnimation.done = false;
+      this.currentCamera="view2";
     }
     else if(this.graph.filename == "campo.xml"){
-    this.camera.setPosition(vec3.fromValues(20,15,30));
-    this.camera.setTarget(vec3.fromValues(10,0,0));
-  }
+      this.cameraAnimation = new CameraAnimation(this,this.currentCamera,viewName);
+      this.cameraAnimation.done = false;
+      this.currentCamera="view2";
+    }
   }
 
   else if(viewName == "view3"){
     if(this.graph.filename == "casino.xml"){
-      this.camera.setPosition(vec3.fromValues(5,10,15));
-      this.camera.setTarget(vec3.fromValues(-2,0,-5));
+      this.cameraAnimation = new CameraAnimation(this,this.currentCamera,viewName);
+      this.cameraAnimation.done = false;
+      this.currentCamera="view3";
     }
     else if(this.graph.filename == "campo.xml"){
-    this.camera.setPosition(vec3.fromValues(17,10,20));
-    this.camera.setTarget(vec3.fromValues(12,0,5));
+      this.cameraAnimation = new CameraAnimation(this,this.currentCamera,viewName);
+      this.cameraAnimation.done = false;
+      this.currentCamera="view3";
   }
   }
 
