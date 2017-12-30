@@ -99,6 +99,16 @@ switch (event.keyCode)
       case (99):
       if(this.scene.game.currentState==1 ||  this.scene.game.currentState==2){
       this.scene.game.currentState=0;
+      for(let i=0;i < this.scene.game.possibleMoves.length;i++){
+        let posS = this.scene.game.possibleMoves[i];
+        let pos = parseInt(posS)-1;
+        if(this.scene.game.possibleMoves[i] == "50"){
+          pos=40;
+        }
+        this.scene.game.board.circles[pos].possibleMove = false;
+
+      }
+      this.scene.game.possibleMoves=[];
       alert("Choose another piece to move!");
     }
       break;

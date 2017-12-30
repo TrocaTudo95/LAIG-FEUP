@@ -210,8 +210,6 @@ for(j=0;j<this.pieces.length;j++){
 
 this.addPlayToHistory([this.pieces[ind].x,this.pieces[ind].y,this.pieces[ind].z],[this.pieces[this.indexEatedPiece].x,this.pieces[this.indexEatedPiece].y,this.pieces[this.indexEatedPiece].z]);
 
-
-
 this.pieces[ind].movePiece([this.board.circles[i].x,0.1,this.board.circles[i].z],15);
 if(this.pieces[this.indexEatedPiece].color == "red"){
   this.pieces[this.indexEatedPiece].movePiece([-40,0.1,-40],30);
@@ -238,15 +236,20 @@ MyGameBoard.prototype.undo = function(){
   this.player2Encode=play.player2encoded;
   this.player1=play.player1;
   this.player2=play.player2;
-  this.indexMovingPiece=play.selectedPieceid-1;
   this.indexEatedPiece=play.eatedpieceid;
   this.scorePlayer1=play.score1;
   this.scorePlayer2=play.score2;
   this.currentPlayer=play.currentPlayer;
-  this.pieces[this.indexMovingPiece].movePiece(play.playedPiecePos,30);
+  for(let i=0;i < this.pieces.length;i++){
+    if(this.pieces[i].id == play.selectedPieceid){
+      this.pieces[i].movePiece(play.playedPiecePos,30);
+      this.indexMovingPiece=i;
+    }
+
+  }
   this.pieces[this.indexEatedPiece].movePiece(play.eatedPiecePos,30);
   this.currentState=3;
-  this.listOfPlays.splice(0,this.listOfPlays.length-1);
+  this.listOfPlays.splice(this.listOfPlays.length-1,1);
 
 }
 
