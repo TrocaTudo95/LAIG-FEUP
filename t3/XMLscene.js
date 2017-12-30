@@ -268,3 +268,14 @@ XMLscene.prototype.Undo = function(){
   if(this.game.listOfPlays.length>0)
     this.game.undo();
 }
+XMLscene.prototype.changeMode = function(mode){
+  if(mode == 'PlayerVsPlayer'){
+    console.log('PlayerVsPlayer');
+  }
+  else if(mode == 'PlayerVsBot'){
+    console.log('PlayerVsBot');
+  }
+  else if(mode == 'BotvsBot'){
+    console.log('BotvsBot');
+  }
+}

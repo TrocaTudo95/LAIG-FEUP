@@ -165,6 +165,15 @@ MyGameBoard.prototype.end_turn = function(){
     else {
     this.currentPlayer=1;
   }
+    for(let i=0;i < this.possibleMoves.length;i++){
+      let posS = this.possibleMoves[i];
+      let pos = parseInt(posS)-1;
+      if(this.possibleMoves[i] == "50"){
+        pos=40;
+      }
+      this.board.circles[pos].possibleMove = false;
+    }
+
   this.currentState=0;
   this.selectedPiece=null;
   this.possibleMoves=[];
@@ -258,18 +267,18 @@ else if(this.currentState==3 && this.pieces[this.indexMovingPiece].done){
     this.undoing=false;
   }
 }
-
-// if(this.currentState==1){
-// for(let i=0;i < this.possibleMoves.length;i++){
-//   let posS = this.possibleMoves[i];
-//   let pos = parseInt(posS)-1;
-//   if(this.possibleMoves[i] == "50"){
-//     pos=40;
-//   }
-//   this.board.circles[pos].possibleMove = true;
-// }
-// }
-
+if(this.possibleMoves.length != 0){
+  if(this.currentState==1){
+      for(let i=0;i < this.possibleMoves.length;i++){
+        let posS = this.possibleMoves[i];
+        let pos = parseInt(posS)-1;
+        if(this.possibleMoves[i] == "50"){
+          pos=40;
+        }
+        this.board.circles[pos].possibleMove = true;
+      }
+    }
+}
 
 };
 
