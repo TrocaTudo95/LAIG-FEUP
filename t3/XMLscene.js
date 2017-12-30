@@ -263,3 +263,8 @@ XMLscene.prototype.changeView = function(viewName){
 XMLscene.prototype.NewGame = function(){
   this.game = new MyGameBoard(this);
 }
+
+XMLscene.prototype.Undo = function(){
+  if(this.game.listOfPlays.length>0)
+    this.game.undo();
+}

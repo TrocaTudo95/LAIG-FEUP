@@ -46,6 +46,7 @@ MyInterface.prototype.init = function(application) {
     this.menu = this.gui.addFolder('Menu');
     this.menu.open();
     this.menu.add(this.scene, 'NewGame').name('New Game');
+    this.menu.add(this.scene, 'Undo').name('Undo');
 
 
 
@@ -60,7 +61,6 @@ MyInterface.prototype.init = function(application) {
 MyInterface.prototype.addLightsGroup = function(lights) {
 
     var group = this.gui.addFolder("Lights");
-    group.open();
 
     // add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
     // e.g. this.option1=true; this.option2=false;
