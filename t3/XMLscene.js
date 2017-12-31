@@ -39,7 +39,7 @@ XMLscene.prototype.init = function(application) {
     this.currentCamera='view1';
     this.cameraAnimation= new CameraAnimation(this,this.currentCamera,this.currentCamera);
 
-     this.game= new MyGameBoard(this,true);
+     this.game= new MyGameBoard(this,false);
 
 }
 
@@ -261,7 +261,12 @@ XMLscene.prototype.changeView = function(viewName){
 }
 
 XMLscene.prototype.NewGame = function(){
-  this.game = new MyGameBoard(this);
+  if(!this.game.botMode){
+    this.game = new MyGameBoard(this,false);
+  }
+  else{
+  this.game = new MyGameBoard(this,true);
+}
 }
 
 XMLscene.prototype.Undo = function(){
@@ -270,12 +275,21 @@ XMLscene.prototype.Undo = function(){
 }
 XMLscene.prototype.changeMode = function(mode){
   if(mode == 'PlayerVsPlayer'){
-    console.log('PlayerVsPlayer');
+    this.game = new MyGameBoard(this,false);
   }
   else if(mode == 'PlayerVsBot'){
-    console.log('PlayerVsBot');
+    this.game = new MyGameBoard(this,true);
   }
-  else if(mode == 'BotvsBot'){
-    console.log('BotvsBot');
+}
+XMLscene.prototype.changeDifficulty = function(difficulty){
+if(this.game.botMode){
+  if(difficulty == 'easy'){
+    this.game= new MyGameBoard(this,true);
+    this.game.bot_difficulty= 1;
   }
+  else if(difficulty == 'hard'){
+    this.game= new MyGameBoard(this,true);
+    this.game.bot_difficulty= 2;
+  }
+}
 }

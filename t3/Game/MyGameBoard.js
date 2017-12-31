@@ -10,7 +10,7 @@ function MyGameBoard(scene,botMode){
   this.scorePlayer1=54;
   this.scorePlayer2=54;
   this.listOfPlays=[];
-  this.bot_difficulty=2;
+  this.bot_difficulty=1;
   //round variables
   this.selectedPiece=null;
   this.possibleMoves=[];
@@ -20,6 +20,7 @@ function MyGameBoard(scene,botMode){
   this.indexEatedPiece=null;
   this.undoing=false;
   this.botMode=botMode;
+  this.botTurn = false;
 //////////////////
   this.board = new MyBoard(this.scene);
   this.scoreboard = new MyScoreBoard(this.scene);
@@ -161,12 +162,15 @@ MyGameBoard.prototype.selectPositionMove =function(id) {
 
 MyGameBoard.prototype.end_turn = function(){
   this.checkGameOver();
-  if (this.currentPlayer==1){
-  this.currentPlayer=2;
-    }
-    else {
-    this.currentPlayer=1;
-  }
+  if(!this.botMode){
+    if (this.currentPlayer==1){
+      this.currentPlayer=2;
+      }
+      else {
+        this.currentPlayer=1;
+      }
+}
+
     for(let i=0;i < this.possibleMoves.length;i++){
       let posS = this.possibleMoves[i];
       let pos = parseInt(posS)-1;
@@ -227,7 +231,8 @@ else if(this.pieces[this.indexEatedPiece].color == "yellow"){
 }
 this.indexMovingPiece=ind;
 this.currentState=3;
-this.bot_play();
+if(this.botMode)
+  this.bot_play();
 };
 
 MyGameBoard.prototype.bot_turn=function(){
@@ -307,9 +312,11 @@ if(this.currentState==3 && !(this.pieces[this.indexMovingPiece].done && this.pie
 else if(this.currentState==3 && this.pieces[this.indexMovingPiece].done){
   if(!this.undoing){
     if(!this.botMode)
-  this.end_turn();
+    this.end_turn();
   else {
     this.bot_turn();
+    this.botTurn = true;
+
   }
 }
   else {
@@ -317,6 +324,12 @@ else if(this.currentState==3 && this.pieces[this.indexMovingPiece].done){
     this.undoing=false;
   }
 }
+
+if(this.botTurn && this.pieces[this.indexMovingPiece].done){
+  this.end_turn();
+  this.botTurn = false;
+}
+
 if(this.possibleMoves.length != 0){
   if(this.currentState==1){
       for(let i=0;i < this.possibleMoves.length;i++){

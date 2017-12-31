@@ -48,9 +48,14 @@ MyInterface.prototype.init = function(application) {
     this.menu.add(this.scene, 'NewGame').name('New Game');
     this.menu.add(this.scene, 'Undo').name('Undo');
     this.gui.mode = 'PlayerVsPlayer';
-    this.gui.modeList = this.menu.add(this.gui, 'mode', ['PlayerVsPlayer', 'PlayerVsBot','BotvsBot']);
+    this.gui.modeList = this.menu.add(this.gui, 'mode', ['PlayerVsPlayer', 'PlayerVsBot']);
     this.gui.modeList.onFinishChange(function(){
       this.scene.changeMode(this.gui.mode);
+    }.bind(this))
+    this.gui.difficulty = 'easy';
+    this.gui.diffList = this.menu.add(this.gui, 'difficulty', ['easy', 'hard']);
+    this.gui.diffList.onFinishChange(function(){
+      this.scene.changeDifficulty(this.gui.difficulty);
     }.bind(this))
 
 
