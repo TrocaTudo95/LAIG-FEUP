@@ -313,6 +313,18 @@ bot_play(Board,[H|T],Player,Bot,NewPlayer,NewBot,NBoard, 0):-
   bot_play(Board,T,Player,Bot,NewPlayer,NewBot,NBoard, 0).
 
 
+  bot_play(Board,[H|T],Player,Bot,NewPlayer,NewBot,NBoard, 0,Piece,FinalPosition,CapturedPiece):-
+    (find_pos(Board,H,Position),
+    possible_moves(Position,List),
+    verify_more_plays(Board,Position,H,List,PosMove,0),
+    get_piece_between(Board, H, PosMove, CapturedPiece, CapturedPiecePos),
+    update_board(Board, H, PosMove, CapturedPiece, CapturedPiecePos, NBoard),
+    update_player(Player, Bot, CapturedPiece, NewPlayer, NewBot)
+    Piece is H,
+    FinalPosition is PosMove);
+    bot_play(Board,T,Player,Bot,NewPlayer,NewBot,NBoard, 0,Piece,FinalPosition,CapturedPiece).
+
+
 create_list_plays([],_,_,[],[],[]).
 create_list_plays([H|T],Board,Bot,[PosMove | NewList],[NewValue | NewValues_List],[H | NewPieces_List]):-
   find_pos(Board,H,Position),
@@ -349,3 +361,11 @@ bot_play(Board,Pieces,Player,Bot,NewPlayer,NewBot,NewBoard, 1):-
   get_piece_between(Board,Piece,FinalPosition,CapturedPiece,CapturedPiecePos),
   update_board(Board,Piece,FinalPosition,CapturedPiece,CapturedPiecePos,NewBoard),
   update_player(Player,Bot,CapturedPiece,NewPlayer,NewBot).
+
+
+  bot_play(Board,Pieces,Player,Bot,NewPlayer,NewBot,NewBoard, 1,Piece,FinalPosition,CapturedPiece):-
+    create_list_plays(Pieces,Board,Bot,NewList,NewValues_list,NewPieces_list),
+    get_max_play(NewValues_list,NewList,NewPieces_list,NewValues_list,FinalPosition,Piece),
+    get_piece_between(Board,Piece,FinalPosition,CapturedPiece,CapturedPiecePos),
+    update_board(Board,Piece,FinalPosition,CapturedPiece,CapturedPiecePos,NewBoard),
+    update_player(Player,Bot,CapturedPiece,NewPlayer,NewBot).

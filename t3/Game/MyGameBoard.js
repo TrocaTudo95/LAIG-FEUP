@@ -10,6 +10,7 @@ function MyGameBoard(scene){
   this.scorePlayer1=54;
   this.scorePlayer2=54;
   this.listOfPlays=[];
+  this.bot_difficulty=1;
   //round variables
   this.selectedPiece=null;
   this.possibleMoves=[];
@@ -225,6 +226,7 @@ else if(this.pieces[this.indexEatedPiece].color == "yellow"){
 }
 this.indexMovingPiece=ind;
 this.currentState=3;
+this.bot_play();
 };
 
 

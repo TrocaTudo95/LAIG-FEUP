@@ -49,6 +49,21 @@ MyGameBoard.prototype.make_play =function(){
 this.getPrologRequest(request, this.parseMove);
 };
 
+MyGameBoard.prototype.bot_play=function(){
+    let request;
+    request ='bot_play(' + this.encodedBoard +','+this.player2Encode+','+this.player1Encode+','+this.bot_difficulty+')';
+
+  this.getPrologRequest(request, this.getBotMove);
+
+};
+
+
+MyGameBoard.prototype.getBotMove =function(data){
+let temp = data.target.response;
+console.log(temp);
+};
+
+
 MyGameBoard.prototype.parseMove = function(data){
   let temp = data.target.response;
   if(temp=='Bad Request'){

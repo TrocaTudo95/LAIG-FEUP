@@ -143,6 +143,12 @@ b:-parse_input(game_over([p(p1,1),p(p2,2),p(0,3),p(0,4),p(0,5),p(0,6),p(0,7),p(p
 		 	Score3=0,
 	    calculate_score(Board, Player2, Score3, Score2).
 
+			parse_input(bot_move(Board,Player1,Player2,1),NewBoard-NewPlayer1-NewPlayer2-Piece-FinalPosition-CapturedPiece):-
+				bot_play(Board,Player1,Player2,Player1,NewPlayer2,NewPlayer1,NewBoard,0,Piece,FinalPosition,CapturedPiece).
+
+			parse_input(bot_move(Board,Player1,Player2,2),NewBoard-NewPlayer1-NewPlayer2-Piece-FinalPosition-CapturedPiece):-
+				bot_play(Board,Player1,Player2,Player1,NewPlayer2,NewPlayer1,NewBoard,1,Piece,FinalPosition,CapturedPiece).
+
 
 
 test(_,[],N) :- N =< 0.
