@@ -39,7 +39,7 @@ XMLscene.prototype.init = function(application) {
     this.currentCamera='view1';
     this.cameraAnimation= new CameraAnimation(this,this.currentCamera,this.currentCamera);
 
-     this.game= new MyGameBoard(this);
+     this.game= new MyGameBoard(this,true);
 
 }
 

@@ -1,4 +1,4 @@
-function MyGameBoard(scene){
+function MyGameBoard(scene,botMode){
   CGFobject.call(this,scene);
   this.scene=scene;
   this.player1Encode="";
@@ -10,7 +10,7 @@ function MyGameBoard(scene){
   this.scorePlayer1=54;
   this.scorePlayer2=54;
   this.listOfPlays=[];
-  this.bot_difficulty=1;
+  this.bot_difficulty=2;
   //round variables
   this.selectedPiece=null;
   this.possibleMoves=[];
@@ -19,6 +19,7 @@ function MyGameBoard(scene){
   this.indexMovingPiece=null;
   this.indexEatedPiece=null;
   this.undoing=false;
+  this.botMode=botMode;
 //////////////////
   this.board = new MyBoard(this.scene);
   this.scoreboard = new MyScoreBoard(this.scene);
@@ -229,6 +230,45 @@ this.currentState=3;
 this.bot_play();
 };
 
+MyGameBoard.prototype.bot_turn=function(){
+this.currentState=3;
+let i;
+for(i=0; i<this.board.circles.length;i++){
+  if(this.board.circles[i].id==this.positionToMove)
+        break;
+}
+
+let j=0;
+for(j=0;j<this.pieces.length;j++){
+  if(this.BotindexMovingPiece==this.pieces[j].id){
+    this.indexMovingPiece=j;
+    break;
+  }
+}
+  let z=0;
+  for(z=0;z<this.pieces.length;z++){
+    if(this.BotindexEatedPiece==this.pieces[z].id){
+      this.indexEatedPiece=z;
+      break;
+    }
+  }
+
+  this.pieces[this.indexMovingPiece].movePiece([this.board.circles[i].x,0.1,this.board.circles[i].z],15);
+  if(this.pieces[this.indexEatedPiece].color == "red"){
+    this.pieces[this.indexEatedPiece].movePiece([-40,0.1,-40],30);
+  }
+  else if(this.pieces[this.indexEatedPiece].color == "blue"){
+    this.pieces[this.indexEatedPiece].movePiece([40,0.1,40],30);
+  }
+  else if(this.pieces[this.indexEatedPiece].color == "green"){
+    this.pieces[this.indexEatedPiece].movePiece([-40,0.1,40],30);
+  }
+  else if(this.pieces[this.indexEatedPiece].color == "yellow"){
+    this.pieces[this.indexEatedPiece].movePiece([40,0.1,-40],30);
+  }
+  };
+
+
 
 MyGameBoard.prototype.undo = function(){
   this.undoing=true;
@@ -265,8 +305,13 @@ if(this.currentState==3 && !(this.pieces[this.indexMovingPiece].done && this.pie
   this.pieces[this.indexEatedPiece].update(deltaTime);
 }
 else if(this.currentState==3 && this.pieces[this.indexMovingPiece].done){
-  if(!this.undoing)
+  if(!this.undoing){
+    if(!this.botMode)
   this.end_turn();
+  else {
+    this.bot_turn();
+  }
+}
   else {
     this.currentState=0;
     this.undoing=false;

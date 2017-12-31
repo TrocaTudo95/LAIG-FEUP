@@ -319,9 +319,9 @@ bot_play(Board,[H|T],Player,Bot,NewPlayer,NewBot,NBoard, 0):-
     verify_more_plays(Board,Position,H,List,PosMove,0),
     get_piece_between(Board, H, PosMove, CapturedPiece, CapturedPiecePos),
     update_board(Board, H, PosMove, CapturedPiece, CapturedPiecePos, NBoard),
-    update_player(Player, Bot, CapturedPiece, NewPlayer, NewBot)
-    Piece is H,
-    FinalPosition is PosMove);
+    update_player(Player, Bot, CapturedPiece, NewPlayer, NewBot),
+    Piece = H,
+    FinalPosition = PosMove);
     bot_play(Board,T,Player,Bot,NewPlayer,NewBot,NBoard, 0,Piece,FinalPosition,CapturedPiece).
 
 

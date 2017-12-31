@@ -51,7 +51,7 @@ this.getPrologRequest(request, this.parseMove);
 
 MyGameBoard.prototype.bot_play=function(){
     let request;
-    request ='bot_play(' + this.encodedBoard +','+this.player2Encode+','+this.player1Encode+','+this.bot_difficulty+')';
+    request ='bot_move(' + this.encodedBoard +','+this.player2Encode+','+this.player1Encode+','+this.bot_difficulty+')';
 
   this.getPrologRequest(request, this.getBotMove);
 
@@ -61,6 +61,19 @@ MyGameBoard.prototype.bot_play=function(){
 MyGameBoard.prototype.getBotMove =function(data){
 let temp = data.target.response;
 console.log(temp);
+let temparray= temp.split("-");
+  this.encodedBoard=temparray[0];
+temparray[0] = temparray[0].slice(3,temparray[0].length -2);
+this.prologBoard= temparray[0].split("),p(");
+this.player2Encode=temparray[1];
+this.player1Encode=temparray[2];
+temparray[1]=temparray[1].slice(1,temparray[1].length-1);
+temparray[2]=temparray[2].slice(1,temparray[2].length-1);
+this.player2 = temparray[1].split(",");
+this.player1 = temparray[2].split(",");
+this.BotindexMovingPiece=parseInt(temparray[3].slice(1,temparray[3].length));
+this.positionToMove=parseInt(temparray[4]);
+this.BotindexEatedPiece=parseInt(temparray[5].slice(1,temparray[5].length));
 };
 
 
