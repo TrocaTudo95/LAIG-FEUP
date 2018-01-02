@@ -189,9 +189,9 @@ MyGameBoard.prototype.end_turn = function(){
   this.indexEatedPiece=null;
 };
 
-MyGameBoard.prototype.addPlayToHistory = function(pos1,pos2){
+MyGameBoard.prototype.addPlayToHistory = function(pos1,pos2,p1,p2){
 let play= new Play(this.previousBoard,this.previousPlayer1encode,this.previousPlayer2encode,this.previousPlayer1,this.previousPlayer2,
-this.selectedPiece.id,this.indexEatedPiece,pos1,pos2,this.scorePlayer1,this.scorePlayer2,this.currentPlayer);
+this.selectedPiece.id,this.indexEatedPiece,pos1,pos2,this.scorePlayer1,this.scorePlayer2,this.currentPlayer,p1,p2);
 this.listOfPlays.push(play);
 };
 
@@ -214,8 +214,8 @@ for(j=0;j<this.pieces.length;j++){
   }
 }
 
-this.addPlayToHistory([this.pieces[ind].x,this.pieces[ind].y,this.pieces[ind].z],[this.pieces[this.indexEatedPiece].x,this.pieces[this.indexEatedPiece].y,this.pieces[this.indexEatedPiece].z]);
-
+this.addPlayToHistory([this.pieces[ind].x,this.pieces[ind].y,this.pieces[ind].z],[this.pieces[this.indexEatedPiece].x,this.pieces[this.indexEatedPiece].y,this.pieces[this.indexEatedPiece].z],this.pieces[ind].position,this.pieces[this.indexEatedPiece].position);
+this.pieces[ind].position=this.board.circles[i].id;
 this.pieces[ind].movePiece([this.board.circles[i].x,0.1,this.board.circles[i].z],15);
 if(this.pieces[this.indexEatedPiece].color == "red"){
   this.pieces[this.indexEatedPiece].movePiece([-40,0.1,-40],30);
@@ -259,6 +259,7 @@ for(j=0;j<this.pieces.length;j++){
   }
 
   this.pieces[this.indexMovingPiece].movePiece([this.board.circles[i].x,0.1,this.board.circles[i].z],15);
+  this.pieces[this.indexMovingPiece].position=this.board.circles[i].id;
   if(this.pieces[this.indexEatedPiece].color == "red"){
     this.pieces[this.indexEatedPiece].movePiece([-40,0.1,-40],30);
   }
@@ -290,13 +291,25 @@ MyGameBoard.prototype.undo = function(){
   for(let i=0;i < this.pieces.length;i++){
     if(this.pieces[i].id == play.selectedPieceid){
       this.pieces[i].movePiece(play.playedPiecePos,30);
+      this.pieces[i].position= play.selectedPiecePosition;
       this.indexMovingPiece=i;
     }
 
   }
   this.pieces[this.indexEatedPiece].movePiece(play.eatedPiecePos,30);
+  this.pieces[this.indexEatedPiece].position=play.eatedPiecePosistion;
   this.currentState=3;
   this.listOfPlays.splice(this.listOfPlays.length-1,1);
+
+  for(let i=0;i <this.possibleMoves.length;i++){
+    let posS = this.possibleMoves[i];
+    let pos = parseInt(posS)-1;
+    if(this.possibleMoves[i] == "50"){
+      pos=40;
+    }
+    this.boardcircles[pos].possibleMove = false;
+
+  }
 
 }
 

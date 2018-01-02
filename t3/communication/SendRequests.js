@@ -18,7 +18,7 @@ MyGameBoard.prototype.init_board = function(){
 
 MyGameBoard.prototype.possible_moves = function(){
   let tempNum= this.selectedPiece -100;
-  let request='possible_moves('+this.selectedPiece.id+ ')';
+  let request='possible_moves('+this.encodedBoard+',p'+this.selectedPiece.id+')';
   this.getPrologRequest(request, this.getPossibleMoves);
 }
 

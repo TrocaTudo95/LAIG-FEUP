@@ -55,9 +55,7 @@ play(Board, Player1, Player2, Player, Round, Turn):-
   NewRound is Round+1,
   possible_moves(Position,PossiblePlays),
   FirstPos = Pos,
-  (verify_more_plays(NewBoard,Position,Piece,PossiblePlays, FirstPos) ->
-    play_again(NewBoard, Piece, Round, Turn, NewPlayer1, NewPlayer2, FirstPos);
-    game(NewBoard, NewPlayer1, NewPlayer2, NewRound)).
+    game(NewBoard, NewPlayer1, NewPlayer2, NewRound).
 
 play_vs_bot(Board,Player,Bot,Round, Turn, Level):-
   displays(Round, Player, Bot, Board, Turn),
