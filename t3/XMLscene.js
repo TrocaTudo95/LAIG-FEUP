@@ -40,6 +40,7 @@ XMLscene.prototype.init = function(application) {
     this.cameraAnimation= new CameraAnimation(this,this.currentCamera,this.currentCamera);
 
      this.game= new MyGameBoard(this,false);
+     this.bot_difficulty=1;
 
 }
 
@@ -279,17 +280,16 @@ XMLscene.prototype.changeMode = function(mode){
   }
   else if(mode == 'PlayerVsBot'){
     this.game = new MyGameBoard(this,true);
+    this.game.bot_difficulty=this.bot_difficulty;
   }
 }
 XMLscene.prototype.changeDifficulty = function(difficulty){
-if(this.game.botMode){
   if(difficulty == 'easy'){
-    this.game= new MyGameBoard(this,true);
-    this.game.bot_difficulty= 1;
+    this.bot_difficulty= 1;
+    this.game.bot_difficulty=this.bot_difficulty;
   }
   else if(difficulty == 'hard'){
-    this.game= new MyGameBoard(this,true);
-    this.game.bot_difficulty= 2;
+    this.bot_difficulty= 2;
+    this.game.bot_difficulty=this.bot_difficulty;
   }
-}
 }
